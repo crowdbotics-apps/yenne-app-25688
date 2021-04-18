@@ -6,6 +6,8 @@ from home.api.v1.viewsets import (
     LoginViewSet,
     HomePageViewSet,
     CustomTextViewSet,
+    VerifyOTPAPIView,
+    ResendOTPAPIView
 )
 
 router = DefaultRouter()
@@ -16,4 +18,6 @@ router.register("homepage", HomePageViewSet)
 
 urlpatterns = [
     path("", include(router.urls)),
+    path("account/verify/<int:verification_code>/", VerifyOTPAPIView.as_view()),
+    path("account/reset/", ResendOTPAPIView.as_view()),
 ]

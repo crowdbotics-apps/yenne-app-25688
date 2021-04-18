@@ -1,3 +1,5 @@
+import random
+
 from django.contrib.auth import get_user_model
 from django.http import HttpRequest
 from django.utils.translation import ugettext_lazy as _
@@ -5,10 +7,13 @@ from allauth.account import app_settings as allauth_settings
 from allauth.account.forms import ResetPasswordForm
 from allauth.utils import email_address_exists, generate_unique_username
 from allauth.account.adapter import get_adapter
+from allauth.account.models import EmailAddress
 from allauth.account.utils import setup_user_email
 from rest_framework import serializers
 from rest_auth.serializers import PasswordResetSerializer
-
+from rest_framework.authtoken.models import Token
+from user_profile.models import Profile
+from user_profile.api.v1.serializers import ProfileSerializer
 from home.models import CustomText, HomePage
 
 User = get_user_model()
@@ -17,7 +22,7 @@ User = get_user_model()
 class SignupSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'name', 'email', 'password')
+        fields = ('id', 'username', 'email', 'password')
         extra_kwargs = {
             'password': {
                 'write_only': True,
@@ -48,15 +53,14 @@ class SignupSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user = User(
             email=validated_data.get('email'),
-            name=validated_data.get('name'),
-            username=generate_unique_username([
-                validated_data.get('name'),
-                validated_data.get('email'),
-                'user'
-            ])
+            username=validated_data.get('username'),
         )
         user.set_password(validated_data.get('password'))
+        user.verification_code = random.randint(1000, 9999)
         user.save()
+
+        # create profile
+        Profile.objects.create(user=user)
         request = self._get_request()
         setup_user_email(request, user, [])
         return user
@@ -87,3 +91,34 @@ class UserSerializer(serializers.ModelSerializer):
 class PasswordSerializer(PasswordResetSerializer):
     """Custom serializer for rest_auth to solve reset password error"""
     password_reset_form_class = ResetPasswordForm
+
+
+class TokenSerializer(serializers.ModelSerializer):
+    token = serializers.SerializerMethodField()
+    profile = serializers.SerializerMethodField()
+    verified = serializers.SerializerMethodField()
+    username = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Token
+        fields = ('token', 'username', 'profile', 'verified')
+
+    def get_username(self, _):
+        return self.instance.user.username
+
+    def get_token(self, instance):
+        return instance.key
+
+    def get_verified(self, instance):
+        user = self.instance.user
+        address_qs = EmailAddress.objects.filter(email=user.email)
+        if address_qs.exists():
+            return address_qs.first().verified
+        return False
+
+    def get_profile(self, _):
+        user = self.instance.user
+        if not hasattr(user, 'profile'):
+            Profile.objects.create(user=user)
+        serializer = ProfileSerializer(self.instance.user.profile)
+        return serializer.data

@@ -1,0 +1,214 @@
+{
+    "strict": {
+        "text-font-family": "Poppins-Medium",
+        "text-heading-1-font-family": "Poppins-SemiBold",
+        "text-heading-2-font-family": "Poppins-SemiBold",
+        "text-heading-3-font-family": "Poppins-SemiBold",
+        "text-heading-4-font-family": "Poppins-SemiBold",
+        "text-heading-5-font-family": "Poppins-SemiBold",
+        "text-heading-6-font-family": "Poppins-SemiBold",
+        "text-subtitle-1-font-family": "Poppins-Medium",
+        "text-subtitle-2-font-family": "Poppins-Medium",
+        "text-paragraph-1-font-family": "Poppins-Regular",
+        "text-paragraph-2-font-family": "Poppins-Regular",
+        "text-caption-1-font-family": "Poppins-Regular",
+        "text-caption-2-font-family": "Poppins-Regular",
+        "text-label-font-family": "Poppins-SemiBold"
+    },
+    "components": {
+        "Card": {
+            "appearances": {
+                "outline": {
+                    "mapping": {
+                        "bodyPaddingHorizontal": -16,
+                        "bodyPaddingVertical": -16
+                    }
+                }
+            }
+        },
+        "Select": {
+            "meta": {},
+            "appearances": {
+                "default": {
+                    "mapping": {},
+                    "variantGroups": {
+                        "status": {
+                            "basic": {
+                                "backgroundColor": "#F2F4F7",
+                                "borderColor": "#F2F4F7",
+                                "state": {
+                                    "focused": {
+                                        "backgroundColor": "#F2F4F7",
+                                        "borderColor": "color-basic-500"
+                                    },
+                                    "hover": {
+                                        "backgroundColor": "#F2F4F7",
+                                        "borderColor": "color-basic-500"
+                                    },
+                                    "active": {
+                                        "backgroundColor": "#F2F4F7",
+                                        "borderColor": "color-basic-500"
+                                    }
+                                }
+                            },
+                            "info": {
+                                "borderWidth": 0
+                            }
+                        },
+                        "size": {
+                            "medium": {
+                                "borderRadius": 20
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "Input": {
+            "meta": {},
+            "appearances": {
+                "default": {
+                    "mapping": {},
+                    "variantGroups": {
+                        "status": {
+                            "basic": {
+                                "backgroundColor": "#F2F4F7",
+                                "borderColor": "#F2F4F7",
+                                "state": {
+                                    "focused": {
+                                        "backgroundColor": "#F2F4F7",
+                                        "borderColor": "color-basic-500"
+                                    },
+                                    "hover": {
+                                        "backgroundColor": "#F2F4F7",
+                                        "borderColor": "color-basic-500"
+                                    },
+                                    "active": {
+                                        "backgroundColor": "#F2F4F7",
+                                        "borderColor": "color-basic-500"
+                                    },
+                                    "disabled": {
+                                        "backgroundColor": "#e2e2e2",
+                                        "textColor": "#6e6e6e"
+                                    }
+                                }
+                            },
+                            "info": {
+                                "borderWidth": 0
+                            }
+                        },
+                        "size": {
+                            "medium": {
+                                "borderRadius": 10
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "Datepicker": {
+            "meta": {},
+            "appearances": {
+                "default": {
+                    "mapping": {
+                        "paddingHorizontal": 8,
+                        "textMarginHorizontal": 8,
+                        "textFontFamily": "text-font-family",
+                        "iconWidth": 24,
+                        "iconHeight": 24,
+                        "iconMarginHorizontal": 8,
+                        "labelMarginBottom": 4,
+                        "labelFontSize": "text-label-font-size",
+                        "labelFontWeight": "text-label-font-weight",
+                        "labelFontFamily": "text-label-font-family",
+                        "captionMarginTop": 4,
+                        "captionFontSize": "text-caption-1-font-size",
+                        "captionFontWeight": "text-caption-1-font-weight",
+                        "captionFontFamily": "text-caption-1-font-family",
+                        "captionIconWidth": 10,
+                        "captionIconHeight": 10,
+                        "captionIconMarginRight": 8
+                    },
+                    "variantGroups": {
+                        "status": {
+                            "basic": {
+                                "borderColor": "#e2e2e2",
+                                "backgroundColor": "#ffff",
+                                "borderRadius": 10,
+                                "textColor": "text-hint-color",
+                                "labelColor": "text-hint-color",
+                                "captionColor": "text-hint-color",
+                                "placeholderColor": "text-hint-color",
+                                "iconTintColor": "text-hint-color",
+                                "captionIconTintColor": "text-hint-color",
+                                "state": {
+                                    "active": {
+                                        "borderColor": "#e2e2e2",
+                                        "backgroundColor": "background-basic-color-1",
+                                        "textColor": "text-basic-color"
+                                    },
+                                    "disabled": {
+                                        "borderColor": "border-basic-color-4",
+                                        "backgroundColor": "background-basic-color-2",
+                                        "textColor": "text-basic-color",
+                                        "iconTintColor": "text-disabled-color"
+                                    }
+                                }
+                            }
+                        },
+                        "size": {
+                            "small": {
+                                "borderRadius": 10
+                            },
+                            "medium": {
+                                "borderRadius": 10
+                            },
+                            "large": {
+                                "borderRadius": 10
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "Button": {
+            "appearances": {
+                "filled": {
+                    "color": "blue",
+                    "variantGroups": {
+                        "status": {
+                            "primary": {
+                                "textColor": "black",
+                                "textFontWeight": "100",
+                                "state": {
+                                    "disabled": {
+                                        "backgroundColor": "#b3b1b1",
+                                        "textColor": "#ffff"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "Text": {
+            "appearances": {
+                "default": {
+                    "variantGroups": {
+                        "status": {
+                            "primary": {
+                                "category": {
+                                    "h5": {
+                                        "color": "red"
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+    }
+}

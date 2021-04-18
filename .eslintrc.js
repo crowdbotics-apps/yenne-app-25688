@@ -1,15 +1,28 @@
 module.exports = {
   root: true,
-  extends: "@react-native-community",
+  extends: '@react-native-community',
   rules: {
-    "prettier/prettier": [
-      "error",
+    'prettier/prettier': [
+      'error',
       {
-        semi: false,
-        parser: "babel",
-        trailingComma: "none",
-        arrowParens: "avoid"
-      }
-    ]
-  }
-}
+        parser: 'babel',
+        arrowParens: 'avoid',
+      },
+    ],
+  },
+  settings: {
+    'import/resolver': {
+      node: {
+        paths: ['src'],
+        alias: {
+          src: './src',
+          features: './src/features',
+          components: './src/components',
+          config: './src/config',
+          utils: './src/utils',
+          navigator: './src/navigator',
+        },
+      },
+    },
+  },
+};

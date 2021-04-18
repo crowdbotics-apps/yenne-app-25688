@@ -48,6 +48,7 @@ const validate = (mod, prop) => {
 };
 
 export const getModules = (manifest) => {
+  console.warn(manifest);
   let modules = [];
   for (const [name, definition] of Object.entries(manifest)) {
     if (definition && validate(definition, "title")) {

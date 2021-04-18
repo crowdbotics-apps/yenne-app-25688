@@ -1,6 +1,6 @@
 module.exports = {
-  semi: false,
   parser: "babel",
-  trailingComma: "none",
-  arrowParens: "avoid"
+  arrowParens: "avoid",
+  singleQuote: true,
+  trailingComma: 'all',
 }

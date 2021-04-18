@@ -1,72 +1,27 @@
-import React from "react";
-import { Provider } from "react-redux";
-import "react-native-gesture-handler";
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from '@react-navigation/stack';
-import { configureStore, createReducer, combineReducers } from "@reduxjs/toolkit";
+import React, { useEffect } from 'react';
+import { mapping } from '@eva-design/eva';
+import { ApplicationProvider } from '@ui-kitten/components';
+import { Provider as ReduxProvider } from 'react-redux';
+import RootNavigator from './src/navigator/RootNavigator';
+import { store } from './src/store';
+import { setupHttpConfig } from './src/utils/http';
+import { crowdboticsTheme } from './src/config/crowdboticsTheme';
+import { default as customMapping } from './src/config/mapping.json';
 
-import { screens } from "@screens";
-import { hooks, slices, navigators, initialRoute } from "@modules";
-
-const Stack = createStackNavigator();
-
-const getNavigation = (modules, screens, initialRoute) => {
-  const Navigation = () => {
-    const routes = modules.concat(screens).map(([name, navigator]) => {
-      return (
-        <Stack.Screen key={name} name={name} component={navigator} />
-      )
-    });
-    return (
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName={initialRoute}>
-          {routes}
-        </Stack.Navigator>
-      </NavigationContainer>
-    )
-  }
-  return Navigation;
-}
-
-const getStore = slices => {
-  const reducers = Object.fromEntries(slices.map(([name, slice]) => [name, slice.reducer]));
-
-  const appState = {
-    name: "yenne_app_25688Identifier",
-    url: "https://yenne_app_25688Identifier.botics.co",
-    version: "1.0.0"
-  }
-
-  const appReducer = createReducer(appState, _ => {
-    return appState;
-  })
-
-  const reducer = combineReducers({
-    app: appReducer,
-    ...reducers
-  });
-
-  return configureStore({
-    reducer: reducer,
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware()
-  });
-}
-
-
-const App = () => {
-  const Navigation = getNavigation(navigators, screens, initialRoute);
-  const store = getStore(slices);
-
-  let effects = {};
-  hooks.map(([_, hook]) => {
-    effects[hook.name] = hook();
-  });
+export default function App() {
+  useEffect(() => {
+    setupHttpConfig();
+  }, []);
 
   return (
-    <Provider store={store}>
-      <Navigation />
-    </Provider>
+    <ReduxProvider store={store}>
+      <ApplicationProvider
+        mapping={mapping}
+        customMapping={customMapping}
+        theme={crowdboticsTheme}
+      >
+        <RootNavigator />
+      </ApplicationProvider>
+    </ReduxProvider>
   );
-};
-
-export default App;
+}
