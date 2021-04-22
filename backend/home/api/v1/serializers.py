@@ -22,7 +22,7 @@ User = get_user_model()
 class SignupSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'username', 'email', 'password')
+        fields = ('id', 'email', 'password')
         extra_kwargs = {
             'password': {
                 'write_only': True,
@@ -53,7 +53,11 @@ class SignupSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user = User(
             email=validated_data.get('email'),
-            username=validated_data.get('username'),
+            username=generate_unique_username([
+                validated_data.get('name'),
+                validated_data.get('email'),
+                'user'
+            ])
         )
         user.set_password(validated_data.get('password'))
         user.verification_code = random.randint(1000, 9999)
@@ -97,11 +101,15 @@ class TokenSerializer(serializers.ModelSerializer):
     token = serializers.SerializerMethodField()
     profile = serializers.SerializerMethodField()
     verified = serializers.SerializerMethodField()
+    hasUsername = serializers.SerializerMethodField()
     username = serializers.SerializerMethodField()
 
     class Meta:
         model = Token
-        fields = ('token', 'username', 'profile', 'verified')
+        fields = ('token', 'username', 'profile', 'verified', 'hasUsername')
+
+    def get_hasUsername(self, _):
+        return self.instance.user.has_username
 
     def get_username(self, _):
         return self.instance.user.username

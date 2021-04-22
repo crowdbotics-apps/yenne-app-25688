@@ -1,5 +1,34 @@
 import * as constant from './constants';
 
+export const updateUsername = payload => ({
+  type: constant.UPDATE_USERNAME,
+  payload,
+});
+
+export const updateUsernameSuccess = payload => ({
+  type: constant.UPDATE_USERNAME_SUCCESS,
+  payload,
+});
+export const updateUsernameError = payload => ({
+  type: constant.UPDATE_USERNAME_ERROR,
+  payload,
+});
+
+export const usernameExist = payload => ({
+  type: constant.USERNAME_EXIST,
+  payload,
+});
+
+export const usernameExistSuccess = payload => ({
+  type: constant.USERNAME_EXIST_SUCCESS,
+  payload,
+});
+
+export const usernameExistError = payload => ({
+  type: constant.USERNAME_EXIST_ERROR,
+  payload,
+});
+
 export const resendCode = payload => ({
   type: constant.RESET_CODE,
   payload,

@@ -89,6 +89,33 @@ class VerifyOTPAPIView(APIView):
         return Response(data=TokenSerializer(Token.objects.filter(user=user).first()).data, status=status.HTTP_200_OK)
 
 
+class UsernameAvailableAPIView(APIView):
+    authentication_classes = [TokenAuthentication, SessionAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, format=None):
+        exist = User.objects.exclude(id=request.user.id).filter(username=request.data.get('username')).exists()
+        return Response(data=exist, status=status.HTTP_200_OK)
+
+
+class UpdateUsernameAPIView(APIView):
+    authentication_classes = [TokenAuthentication, SessionAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, format=None):
+        exist = User.objects.exclude(id=request.user.id).filter(username=request.data.get('username')).exists()
+        if exist:
+            raise serializers.ValidationError(
+                "The username exist, please try again with a unique name."
+            )
+        else:
+            user = request.user
+            user.username = request.data.get('username')
+            user.has_username = 1
+            user.save()
+        return Response(data={'username': user.username}, status=status.HTTP_200_OK)
+
+
 class ResendOTPAPIView(APIView):
     authentication_classes = [TokenAuthentication, SessionAuthentication]
     permission_classes = [IsAuthenticated, ]

@@ -16,7 +16,7 @@ import {
   useTheme,
   StyleService,
 } from '@ui-kitten/components';
-import { connect, useDispatch, useSelector } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {
   verifyCode,
@@ -33,12 +33,12 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
+import routes from '../../navigator/routes';
+
 const VerifyCode = ({
   navigation,
   verifyCode,
-  resetCodeError,
   resendCode,
-  clearSignUpError,
   verifyCodeError,
   loading,
   serverError,
@@ -46,7 +46,6 @@ const VerifyCode = ({
   const styles = useStyleSheet(themedStyles);
   const [modalVisible, setModalVisible] = React.useState(false);
   const [showResendModal, setShowResendModal] = React.useState(false);
-  const [codeResent, setCodeResent] = React.useState(false);
   const selector = useSelector(state => state.auth);
   const [first, setFirst] = useState('');
   const [second, setSecond] = useState('');
@@ -57,7 +56,6 @@ const VerifyCode = ({
   useEffect(() => {
     if (selector.resetSuccess) {
       setShowResendModal(true);
-      setCodeResent(true);
     }
   }, [selector.resetSuccess]);
 
@@ -66,7 +64,7 @@ const VerifyCode = ({
       setModalVisible(true);
       setTimeout(() => {
         setModalVisible(false);
-        navigation.navigate('Main');
+        navigation.navigate(routes.termsAndConditions);
         verifyCodeError('');
       }, 3000);
     }

@@ -31,6 +31,9 @@ export const LOGOUT_USER_ERROR = 'LOGOUT_USER_ERROR';
 
 export const TOKEN_KEY = '@token';
 export const USER_VERIFIED = '@verified';
+export const TERMS_AGREED = '@terms';
+export const USERNAME = '@username';
+export const HAS_USERNAME = '@hasUsername';
 
 export const VERIFY_CODE = 'VERIFY_CODE';
 export const VERIFY_CODE_SUCCESS = 'VERIFY_CODE_SUCCESS';
@@ -39,3 +42,11 @@ export const VERIFY_CODE_ERROR = 'VERIFY_CODE_ERROR';
 export const RESET_CODE = 'RESET_CODE';
 export const RESET_CODE_SUCCESS = 'RESET_CODE_SUCCESS';
 export const RESET_CODE_ERROR = 'RESET_CODE_ERROR';
+
+export const USERNAME_EXIST = 'USERNAME_EXIST';
+export const USERNAME_EXIST_SUCCESS = 'USERNAME_EXIST_SUCCESS';
+export const USERNAME_EXIST_ERROR = 'USERNAME_EXIST_ERROR';
+
+export const UPDATE_USERNAME = 'UPDATE_USERNAME';
+export const UPDATE_USERNAME_SUCCESS = 'UPDATE_USERNAME_SUCCESS';
+export const UPDATE_USERNAME_ERROR = 'UPDATE_USERNAME_ERROR';

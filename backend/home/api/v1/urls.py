@@ -7,7 +7,8 @@ from home.api.v1.viewsets import (
     HomePageViewSet,
     CustomTextViewSet,
     VerifyOTPAPIView,
-    ResendOTPAPIView
+    ResendOTPAPIView,
+    UsernameAvailableAPIView,UpdateUsernameAPIView
 )
 
 router = DefaultRouter()
@@ -19,5 +20,7 @@ router.register("homepage", HomePageViewSet)
 urlpatterns = [
     path("", include(router.urls)),
     path("account/verify/<int:verification_code>/", VerifyOTPAPIView.as_view()),
-    path("account/reset/", ResendOTPAPIView.as_view()),
+    path("account/resend/code/", ResendOTPAPIView.as_view()),
+    path("account/username-available", UsernameAvailableAPIView.as_view()),
+    path("account/update-username/", UpdateUsernameAPIView.as_view())
 ]

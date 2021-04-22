@@ -18,10 +18,43 @@ const initialState = {
   verified: false,
   resetLoading: false,
   resetSuccess: false,
+  agreeToTerms: false,
+  usernameExist: undefined,
+  usernameExistLoading: false,
+  usernameSet: undefined,
+  updateUsernameLoading: false,
 };
 
 export const authReducer = (state = initialState, action) => {
   switch (action.type) {
+    case constants.UPDATE_USERNAME:
+      return { ...state, updateUsernameLoading: true };
+
+    case constants.UPDATE_USERNAME_SUCCESS:
+      return { ...state, updateUsernameLoading: false, usernameSet: true };
+
+    case constants.UPDATE_USERNAME_ERROR:
+      return {
+        ...state,
+        updateUsernameLoading: false,
+        loginError: action.payload.err,
+      };
+
+    case constants.USERNAME_EXIST:
+      return { ...state, usernameExistLoading: true };
+    case constants.USERNAME_EXIST_SUCCESS:
+      return {
+        ...state,
+        usernameExistLoading: false,
+        usernameExist: action.payload.exist,
+      };
+    case constants.USERNAME_EXIST_ERROR:
+      return {
+        ...state,
+        usernameExistLoading: false,
+        usernameExist: undefined,
+      };
+
     case constants.VERIFY_CODE:
       return { ...state, appLoading: true, verified: false };
     case constants.VERIFY_CODE_SUCCESS:
@@ -133,7 +166,21 @@ export const authReducer = (state = initialState, action) => {
     case constants.LOGOUT_USER:
       return { ...state, logOutLoading: true };
     case constants.LOGOUT_USER_SUCCESS:
-      return { ...state, logOutLoading: false, user: {}, loggedIn: false };
+      return {
+        ...state,
+        logOutLoading: false,
+        user: {},
+        loggedIn: false,
+        verifyError: undefined,
+        verified: false,
+        resetLoading: false,
+        resetSuccess: false,
+        agreeToTerms: false,
+        usernameExist: undefined,
+        usernameExistLoading: false,
+        usernameSet: undefined,
+        updateUsernameLoading: false,
+      };
     case constants.LOGOUT_USER_ERROR:
       return { ...state, logOutLoading: false };
 

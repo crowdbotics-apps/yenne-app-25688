@@ -1,18 +1,17 @@
 import React, { useEffect } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import AuthStackNavigator from './AuthStackNavigator';
 // import TabNavigator from './TabNavigator';
 import { getLoggedUser } from 'features/auth/redux/actions';
 import TermsAndConditions from '../features/TermsAndConditions/TermsAndConditionsScreen';
-
+import HomeScreen from '../features/home';
+import routes from './routes';
 const Stack = createStackNavigator();
 
 const AppStackNavigator = () => {
   const dispatch = useDispatch();
-  const selector = useSelector(state => state.auth);
-  // console.warn(selector);
 
   useEffect(() => {
     dispatch(getLoggedUser());
@@ -20,11 +19,12 @@ const AppStackNavigator = () => {
 
   return (
     <Stack.Navigator headerMode="none">
-      {/* {!selector.loggedIn ? ( */}
-      <Stack.Screen name="Auth" component={AuthStackNavigator} />
-      {/* ) : ( */}
-      <Stack.Screen name="Main" component={TermsAndConditions} />
-      {/* )} */}
+      <Stack.Screen name={routes.auth} component={AuthStackNavigator} />
+      <Stack.Screen
+        name={routes.termsAndConditions}
+        component={TermsAndConditions}
+      />
+      <Stack.Screen name={routes.home} component={HomeScreen} />
     </Stack.Navigator>
   );
 };

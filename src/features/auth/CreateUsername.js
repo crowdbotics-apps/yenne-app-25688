@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   ActivityIndicator,
@@ -16,63 +16,73 @@ import {
   useTheme,
 } from '@ui-kitten/components';
 import { connect, useDispatch, useSelector } from 'react-redux';
-
-import { login, clearLoginError } from './redux/actions';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import Entypo from 'react-native-vector-icons/Entypo';
+import {
+  usernameExist,
+  clearLoginError,
+  updateUsername,
+} from './redux/actions';
 import AppHeader from '../../components/AppHeader';
 import TextInputField from '../../components/Form/TextInputField';
 import { isLoggedIn } from '../../utils/helpers';
 import routes from '../../navigator/routes';
 
-const EmailLogin = ({ navigation, login, loading, serverError }) => {
+const CreateUsername = ({
+  navigation,
+  usernameExist,
+  loading,
+  serverError,
+  updateUsername,
+}) => {
   const styles = useStyleSheet(themedStyles);
   const [inputs, setInputs] = React.useState({});
   const [errors, setErrors] = React.useState({});
   const dispatch = useDispatch();
   const selector = useSelector(state => state.auth);
-  const theme = useTheme();
   const [mounted, setMounted] = useState(false);
-  const nextScreen = async () => {
-    const { verified, hasUsername } = await isLoggedIn();
-
-    if (!verified) {
-      if (!mounted) {
-        setMounted(true);
-        return navigation.navigate(routes.verifyCode);
-      }
-    }
-    if (!hasUsername) {
-      return navigation.navigate(routes.createUsername);
-    }
-    return navigation.navigate(routes.home);
-  };
-  React.useEffect(() => {
-    if (selector.loggedIn) {
-      nextScreen();
-    }
-  }, [selector.loggedIn]);
+  const theme = useTheme();
 
   const onChangeText = (field, value) => {
     dispatch(clearLoginError());
     setInputs({ ...inputs, [field]: value });
     setErrors({ ...errors, [field]: '' });
+    if (value.length > 2) {
+      usernameExist({ username: value });
+    }
   };
+
+  useEffect(() => {
+    if (selector.usernameSet) {
+      navigation.navigate(routes.home);
+      setMounted(true);
+    }
+  }, [selector.usernameSet]);
 
   const onSubmit = () => {
     let errors = {};
-    if (!inputs.email) {
-      errors.email = 'Email is a required field';
+    if (!inputs.username) {
+      errors.username = 'Username is a required field';
     }
-    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(inputs.email)) {
-      errors.email = 'Invalid email address';
-    }
-    if (!inputs.password) {
-      errors.password = 'Password is a required field';
-    }
+
     if (Object.keys(errors).length > 0) {
       setErrors(errors);
     } else {
-      dispatch(login(inputs));
+      dispatch(updateUsername({ username: inputs.username }));
     }
+  };
+
+  const renderRightAccessory = () => {
+    if (selector.usernameExist === undefined) {
+      return;
+    }
+    if (selector.usernameExistLoading) {
+      return <ActivityIndicator size="small" color="#000" />;
+    }
+    if (selector.usernameExist === true) {
+      return <Entypo name="circle-with-cross" color="red" size={20} />;
+    }
+    return <AntDesign name="checkcircle" color="#6FCF97" size={20} />;
   };
 
   return (
@@ -87,39 +97,24 @@ const EmailLogin = ({ navigation, login, loading, serverError }) => {
           keyboardShouldPersistTaps="always"
         >
           <StatusBar backgroundColor="#7C03E9" barStyle="light-content" />
-          <AppHeader showBackButton={true} />
+          <AppHeader />
           <View style={styles.logo}>
-            <Text category="h5">Login</Text>
+            <Text category="h5">Create username</Text>
           </View>
           <View style={styles.form}>
             <TextInputField
-              onChangeText={text => onChangeText('email', text)}
-              label="Email"
-              error={errors.email}
-              value={inputs.email}
-              keyboardType="email-address"
-            />
-            <TextInputField
-              onChangeText={text => onChangeText('password', text)}
-              label="Password"
-              secureTextEntry={true}
-              error={errors.password}
-              value={inputs.password}
+              onChangeText={text => onChangeText('username', text)}
+              label="Username"
+              error={errors.username}
+              value={inputs.username}
               autoCapitalize="none"
+              renderRightAccessory={renderRightAccessory}
             />
 
             <Text status="danger" style={{ marginBottom: 1 }}>
-              {serverError}
+              {JSON.stringify(serverError)}
             </Text>
 
-            <TouchableOpacity
-              style={styles.forgotPassword}
-              onPress={() => {
-                navigation.navigate('ForgotPasswordScreen');
-              }}
-            >
-              <Text style={styles.forgotPasswordText}>Forgot Password? </Text>
-            </TouchableOpacity>
             <View>
               <Button
                 accessoryLeft={() =>
@@ -132,19 +127,18 @@ const EmailLogin = ({ navigation, login, loading, serverError }) => {
                 style={styles.button}
                 onPress={onSubmit}
               >
-                LOGIN
+                GET STARTED
               </Button>
             </View>
             <View style={styles.bottomTextContent}>
-              <Text appearance="hint">Don't have an account?</Text>
               <TouchableOpacity
-                onPress={() => navigation.navigate('EmailSignUpScreen')}
+                onPress={() => navigation.navigate(routes.home)}
               >
                 <Text
                   appearance="alternative"
-                  style={{ color: theme['color-primary-100'] }}
+                  //   style={{ color: theme['color-primary-100'] }}
                 >
-                  Sign Up
+                  CANCEL
                 </Text>
               </TouchableOpacity>
             </View>
@@ -156,11 +150,15 @@ const EmailLogin = ({ navigation, login, loading, serverError }) => {
 };
 
 const mapStateToProps = state => ({
-  loading: state.auth.signUpLoading,
+  loading: state.auth.updateUsernameLoading,
   serverError: state.auth.loginError,
 });
 
-export default connect(mapStateToProps, { login, clearLoginError })(EmailLogin);
+export default connect(mapStateToProps, {
+  usernameExist,
+  clearLoginError,
+  updateUsername,
+})(CreateUsername);
 
 export const themedStyles = StyleService.create({
   container: {

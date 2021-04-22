@@ -4,19 +4,26 @@ import { SafeAreaView, StatusBar } from 'react-native';
 import { StyleService, useStyleSheet } from '@ui-kitten/components';
 import AppLogo from '../../components/AppLogo';
 import { isLoggedIn } from '../../utils/helpers';
+import routes from '../../navigator/routes';
 
 const SplashScreen = ({ navigation }) => {
   const styles = useStyleSheet(themedStyles);
   const nextScreen = async () => {
-    const { hasToken, verified } = await isLoggedIn();
+    const { hasToken, verified, termsAgreed, hasUsername } = await isLoggedIn();
 
     if (!hasToken) {
-      return navigation.navigate('AuthOptionScreen');
+      return navigation.navigate(routes.authOption);
     }
     if (!verified) {
-      return navigation.navigate('VerifyCodeScreen');
+      return navigation.navigate(routes.verifyCode);
     }
-    return navigation.navigate('Main');
+    if (!termsAgreed) {
+      return navigation.navigate(routes.termsAndConditions);
+    }
+    if (!hasUsername) {
+      return navigation.navigate(routes.createUsername);
+    }
+    return navigation.navigate(routes.home);
   };
   useEffect(() => {
     setTimeout(() => {

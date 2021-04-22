@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { View, ScrollView, StatusBar, ActivityIndicator } from 'react-native';
+import React, { useState } from 'react';
+import { View, ScrollView, StatusBar } from 'react-native';
 import CheckBox from 'react-native-check-box';
 import {
   Text,
   useStyleSheet,
-  useTheme,
   StyleService,
   Button,
 } from '@ui-kitten/components';
-import { connect, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import {
   verifyCode,
   verifyCodeError,
@@ -17,27 +16,24 @@ import {
   clearSignUpError,
 } from '../auth/redux/actions';
 import CancelButton from '../../components/CancelButton';
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from 'react-native-responsive-screen';
-const VerifyCode = ({
-  navigation,
-  verifyCode,
-  resetCodeError,
-  resendCode,
-  clearSignUpError,
-  verifyCodeError,
-  loading,
-  serverError,
-}) => {
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import { StorageUtils } from '../../utils/storage';
+import * as constants from '../auth/redux/constants';
+import routes from '../../navigator/routes';
+
+const TermsAndConditionsScreen = ({ navigation, loading }) => {
   const styles = useStyleSheet(themedStyles);
-  const selector = useSelector(state => state.auth);
 
   const [isSelected, setSelection] = useState(false);
-  const theme = useTheme();
+  const [error, setError] = useState('');
+
   const onSubmit = () => {
-    console.warn('clicked');
+    if (!isSelected) {
+      return setError('You must agree with the terms and conditions');
+    }
+    setError('');
+    StorageUtils.setStringValue(constants.TERMS_AGREED, 'true');
+    navigation.navigate(routes.createUsername);
   };
   return (
     <View style={styles.container}>
@@ -347,15 +343,11 @@ const VerifyCode = ({
             />
             <Text style={styles.label}>I agree with Terms and Conditions</Text>
           </View>
+          <View>
+            {error ? <Text style={styles.errorText}>{error}</Text> : null}
+          </View>
           <View style={[styles.buttonContent, { justifyContent: 'center' }]}>
             <Button
-              accessoryLeft={() =>
-                loading ? (
-                  <ActivityIndicator size="small" color="#ffff" />
-                ) : (
-                  <></>
-                )
-              }
               style={[styles.button]}
               disabled={loading}
               onPress={onSubmit}
@@ -380,18 +372,21 @@ export default connect(mapStateToProps, {
   clearSignUpError,
   resetCodeError,
   verifyCodeError,
-})(VerifyCode);
+})(TermsAndConditionsScreen);
 
 export const themedStyles = StyleService.create({
   container: {
     flex: 1,
+  },
+  errorText: {
+    color: 'red',
   },
   checkboxContainer: {
     flexDirection: 'row',
     marginBottom: 20,
   },
   scrollView: {
-    height: hp('55.12568306010928%'),
+    height: hp('50.12568306010928%'),
     minHeight: hp('50.12568306010928%'),
   },
   label: {

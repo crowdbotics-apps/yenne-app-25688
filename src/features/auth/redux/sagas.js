@@ -22,8 +22,26 @@ function login(auth) {
     .post('rest-auth/login/', auth)
     .then(res => res)
     .catch(err => {
-      console.warn(err);
+      console.log(err);
       throw 'Email or password is incorrect!';
+    });
+}
+function updateUsername(data) {
+  return request
+    .post('api/v1/account/update-username/', data)
+    .then(res => res)
+    .catch(err => {
+      alert(err.response.data);
+      throw err.response.data;
+    });
+}
+function usernameExists(data) {
+  return request
+    .post('api/v1/account/username-available', data)
+    .then(res => res)
+    .catch(err => {
+      console.log(err);
+      throw 'Error occurred, please try again';
     });
 }
 
@@ -38,7 +56,7 @@ function verifyCode(data) {
 
 function resetCode() {
   return request
-    .post('api/v1/account/reset/')
+    .post('api/v1/account/resend/code/')
     .then(res => res)
     .catch(err => {
       throw err.response.data.join();
@@ -83,6 +101,7 @@ function* handleSignUp({ auth }) {
   try {
     const result = yield call(signUp, auth);
     StorageUtils.setStringValue(constants.TOKEN_KEY, result.data.token);
+    StorageUtils.removeValue(constants.TERMS_AGREED);
     StorageUtils.setStringValue(
       constants.USER_VERIFIED,
       result.data.verified.toString(),
@@ -102,6 +121,28 @@ function* handleSignUp({ auth }) {
   }
 }
 
+function* handleUpdateUsername({ payload }) {
+  try {
+    const result = yield call(updateUsername, payload);
+    StorageUtils.setStringValue(constants.USERNAME, result.data.username);
+    yield put(actions.updateUsernameSuccess({}));
+  } catch (err) {
+    yield put(actions.updateUsernameError(err));
+  }
+}
+function* handleUsernameExists({ payload }) {
+  try {
+    const result = yield call(usernameExists, payload);
+    yield put(
+      actions.usernameExistSuccess({
+        exist: result.data,
+      }),
+    );
+  } catch (err) {
+    yield put(actions.usernameExistError(err));
+  }
+}
+
 function* handleLogin({ auth }) {
   try {
     const result = yield call(login, auth);
@@ -111,6 +152,10 @@ function* handleLogin({ auth }) {
       constants.USER_VERIFIED,
       result.data.verified.toString(),
     );
+    if (result.data.hasUsername !== 0) {
+      StorageUtils.setStringValue(constants.HAS_USERNAME, 'true');
+    }
+
     setAuthorizationToken(result.data.token);
     yield put(
       actions.loginSuccess({
@@ -208,13 +253,13 @@ function* handleFacebookSignUp({ auth, onSuccess }) {
   }
 }
 
-function logOutApi() {
-  return request.post('/logout/');
-}
-
 function* handleLogOut() {
   try {
-    yield call(logOutApi);
+    StorageUtils.removeValue(constants.TOKEN_KEY);
+    StorageUtils.removeValue(constants.USER_VERIFIED);
+    StorageUtils.removeValue(constants.USERNAME);
+
+    StorageUtils.removeValue(constants.HAS_USERNAME);
     yield call(StorageUtils.removeValue, '@token');
     request.defaults.headers.Authorization = '';
     yield put(actions.logOutSuccess());
@@ -233,4 +278,6 @@ export default [
   takeLatest(constants.LOGOUT_USER, handleLogOut),
   takeLatest(constants.VERIFY_CODE, handleVerifyCode),
   takeLatest(constants.RESET_CODE, handleResetCode),
+  takeLatest(constants.USERNAME_EXIST, handleUsernameExists),
+  takeLatest(constants.UPDATE_USERNAME, handleUpdateUsername),
 ];

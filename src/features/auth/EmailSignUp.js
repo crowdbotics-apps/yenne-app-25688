@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   ActivityIndicator,
@@ -30,10 +30,16 @@ const EmailSignUp = ({
   const [modalVisible, setModalVisible] = React.useState(false);
   const dispatch = useDispatch();
   const selector = useSelector(state => state.auth);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     if (selector.loggedIn && !selector.verifyError) {
-      if (!selector.verified) setModalVisible(true);
+      if (!selector.verified) {
+        if (!mounted) {
+          setModalVisible(true);
+          setMounted(true);
+        }
+      }
     }
   }, [selector.loggedIn]);
 
@@ -51,9 +57,7 @@ const EmailSignUp = ({
     if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(inputs.email)) {
       errors.email = 'Invalid email address';
     }
-    if (!inputs.username) {
-      errors.username = 'Username is a required field';
-    }
+
     if (!inputs.password) {
       errors.password = 'Password is a required field';
     }
@@ -102,12 +106,6 @@ const EmailSignUp = ({
             </Text>
           </View>
           <View style={styles.form}>
-            <TextInputField
-              onChangeText={text => onChangeText('username', text)}
-              label="Username"
-              error={errors.username}
-              value={inputs.username}
-            />
             <TextInputField
               onChangeText={text => onChangeText('email', text)}
               label="Email"

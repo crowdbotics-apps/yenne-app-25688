@@ -4,13 +4,19 @@ import * as constants from '../features/auth/redux/constants';
 export const isLoggedIn = async () => {
   // StorageUtils.removeValue(constants.TOKEN_KEY)
   // StorageUtils.removeValue(constants.USER_VERIFIED)
- 
+
   const token = await StorageUtils.getStringValue(constants.TOKEN_KEY);
   const verified = await StorageUtils.getStringValue(constants.USER_VERIFIED);
+  const termsAgreed = await StorageUtils.getStringValue(constants.TERMS_AGREED);
+  const username = await StorageUtils.getStringValue(constants.USERNAME);
+  const hasUsername = await StorageUtils.getStringValue(constants.HAS_USERNAME);
 
   return {
     hasToken: !!token,
     verified: verified,
+    termsAgreed: !!termsAgreed,
+    username,
+    hasUsername,
   };
 };
 export const getDisplayNameFromFieldName = name => {
