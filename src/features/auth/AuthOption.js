@@ -8,7 +8,7 @@ import {
   Divider,
 } from '@ui-kitten/components';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-// import { LoginManager, AccessToken } from 'react-native-fbsdk';
+import { LoginManager, AccessToken } from 'react-native-fbsdk-next';
 import {
   appleAuth,
   AppleButton,
@@ -60,23 +60,23 @@ const AuthOptionScreen = ({
   const [selectedPage, setSelectedPage] = React.useState(0);
 
   const signInWithFacebook = () => {
-    // LoginManager.logInWithPermissions(['public_profile']).then(
-    //   result => {
-    //     if (result.isCancelled) {
-    //       console.log('Login cancelled');
-    //     } else {
-    //       AccessToken.getCurrentAccessToken().then(data => {
-    //         //onSuccess({ access_token: data?.accessToken });
-    //         facebookSignUp({ access_token: data?.accessToken }, () =>
-    //           getLoggedUser(),
-    //         );
-    //       });
-    //     }
-    //   },
-    //   function (error) {
-    //     console.log('Login fail with error: ' + error);
-    //   },
-    // );
+    LoginManager.logInWithPermissions(['public_profile']).then(
+      result => {
+        if (result.isCancelled) {
+          console.log('Login cancelled');
+        } else {
+          AccessToken.getCurrentAccessToken().then(data => {
+            //onSuccess({ access_token: data?.accessToken });
+            facebookSignUp({ access_token: data?.accessToken }, () =>
+              getLoggedUser(),
+            );
+          });
+        }
+      },
+      function (error) {
+        console.log('Login fail with error: ' + error);
+      },
+    );
   };
 
   const onAppleButtonPress = async () => {
@@ -264,14 +264,12 @@ const themedStyles = StyleService.create({
   googleButton: {
     backgroundColor: 'text-white-color',
     borderColor: 'color-info-900',
-    borderRadius: 20,
-    color: 'red',
     justifyContent: 'center',
     alignContent: 'center',
     alignItems: 'center',
     marginHorizontal: 20,
     width: wp('90%'),
-    borderWidth: 1,
+    borderWidth: 0,
   },
   socialButton: {
     backgroundColor: 'text-white-color',

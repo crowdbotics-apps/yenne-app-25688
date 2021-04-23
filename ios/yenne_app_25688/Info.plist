@@ -38,7 +38,17 @@
 				<string>com.googleusercontent.apps.1019078873013-qeemg0n9p4bu10ujgupnkiev6ja1ed5r</string>
 			</array>
 		</dict>
+		<dict>
+      <key>CFBundleURLSchemes</key>
+      <array>
+        <string>fb3005435869701612</string>
+      </array>
+    </dict>
 	</array>
+	<key>FacebookAppID</key>
+  		<string>3005435869701612</string>
+    <key>FacebookDisplayName</key>
+  		<string>Yenne</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
