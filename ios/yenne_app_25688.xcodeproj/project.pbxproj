@@ -75,7 +75,6 @@
 		00E356EE1AD99517003FC87E /* yenne_app_25688Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = yenne_app_25688Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* yenne_app_25688Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = yenne_app_25688Tests.m; sourceTree = "<group>"; };
-		0680759A1B1D9C3A54A6BA26 /* Pods-yenne_app_25688-yenne_app_25688Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yenne_app_25688-yenne_app_25688Tests.release.xcconfig"; path = "Target Support Files/Pods-yenne_app_25688-yenne_app_25688Tests/Pods-yenne_app_25688-yenne_app_25688Tests.release.xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* yenne_app_25688.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = yenne_app_25688.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = yenne_app_25688/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = yenne_app_25688/AppDelegate.m; sourceTree = "<group>"; };
@@ -83,6 +82,7 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = yenne_app_25688/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = yenne_app_25688/main.m; sourceTree = "<group>"; };
 		1445FBB1B639FC147DD9B09D /* libPods-yenne_app_25688.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-yenne_app_25688.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		17B309EFC3D12155BCC820F6 /* Pods-yenne_app_25688.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yenne_app_25688.debug.xcconfig"; path = "Target Support Files/Pods-yenne_app_25688/Pods-yenne_app_25688.debug.xcconfig"; sourceTree = "<group>"; };
 		2A7D4FAD262AA81100B2F364 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Medium.ttf"; path = "../../../../Downloads/Poppins/Poppins-Medium.ttf"; sourceTree = "<group>"; };
 		2A7D5027262AAC0100B2F364 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Regular.ttf"; path = "../src/assets/fonts/Poppins-Regular.ttf"; sourceTree = "<group>"; };
 		2A7D5028262AAC0B00B2F364 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-SemiBold.ttf"; path = "../src/assets/fonts/Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
@@ -128,10 +128,10 @@
 		2AD095E22628634F00A7BFAD /* Nunito-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Nunito-Bold.ttf"; path = "../src/assets/fonts/Nunito-Bold.ttf"; sourceTree = "<group>"; };
 		2AD095E32628634F00A7BFAD /* Montserrat-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Italic.ttf"; path = "../src/assets/fonts/Montserrat-Italic.ttf"; sourceTree = "<group>"; };
 		2AD4041B26287EEA00E6A900 /* libswiftWebKit.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libswiftWebKit.tbd; path = usr/lib/swift/libswiftWebKit.tbd; sourceTree = SDKROOT; };
+		3A13E4D748CDE312F69976CC /* Pods-yenne_app_25688-yenne_app_25688Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yenne_app_25688-yenne_app_25688Tests.release.xcconfig"; path = "Target Support Files/Pods-yenne_app_25688-yenne_app_25688Tests/Pods-yenne_app_25688-yenne_app_25688Tests.release.xcconfig"; sourceTree = "<group>"; };
+		603B561A1F4C94ECEAD9699C /* Pods-yenne_app_25688-yenne_app_25688Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yenne_app_25688-yenne_app_25688Tests.debug.xcconfig"; path = "Target Support Files/Pods-yenne_app_25688-yenne_app_25688Tests/Pods-yenne_app_25688-yenne_app_25688Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		66BE5E2923E7F4D0E1DD4335 /* Pods-yenne_app_25688.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yenne_app_25688.release.xcconfig"; path = "Target Support Files/Pods-yenne_app_25688/Pods-yenne_app_25688.release.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = yenne_app_25688/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		8F6A5A317E82AE51191732C1 /* Pods-yenne_app_25688.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yenne_app_25688.debug.xcconfig"; path = "Target Support Files/Pods-yenne_app_25688/Pods-yenne_app_25688.debug.xcconfig"; sourceTree = "<group>"; };
-		92C01BABA37B85532DE72F16 /* Pods-yenne_app_25688.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yenne_app_25688.release.xcconfig"; path = "Target Support Files/Pods-yenne_app_25688/Pods-yenne_app_25688.release.xcconfig"; sourceTree = "<group>"; };
-		ACE9643013ACF33313C7424F /* Pods-yenne_app_25688-yenne_app_25688Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yenne_app_25688-yenne_app_25688Tests.debug.xcconfig"; path = "Target Support Files/Pods-yenne_app_25688-yenne_app_25688Tests/Pods-yenne_app_25688-yenne_app_25688Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		BA6007493B71EEC5CA273C42 /* libPods-yenne_app_25688-yenne_app_25688Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-yenne_app_25688-yenne_app_25688Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -249,14 +249,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		7AB5A4E91A1A0AD236869DE9 /* Pods */ = {
+		30E247087D3B80C174E140A5 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				8F6A5A317E82AE51191732C1 /* Pods-yenne_app_25688.debug.xcconfig */,
-				92C01BABA37B85532DE72F16 /* Pods-yenne_app_25688.release.xcconfig */,
-				ACE9643013ACF33313C7424F /* Pods-yenne_app_25688-yenne_app_25688Tests.debug.xcconfig */,
-				0680759A1B1D9C3A54A6BA26 /* Pods-yenne_app_25688-yenne_app_25688Tests.release.xcconfig */,
+				17B309EFC3D12155BCC820F6 /* Pods-yenne_app_25688.debug.xcconfig */,
+				66BE5E2923E7F4D0E1DD4335 /* Pods-yenne_app_25688.release.xcconfig */,
+				603B561A1F4C94ECEAD9699C /* Pods-yenne_app_25688-yenne_app_25688Tests.debug.xcconfig */,
+				3A13E4D748CDE312F69976CC /* Pods-yenne_app_25688-yenne_app_25688Tests.release.xcconfig */,
 			);
+			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -276,7 +277,7 @@
 				00E356EF1AD99517003FC87E /* yenne_app_25688Tests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
-				7AB5A4E91A1A0AD236869DE9 /* Pods */,
+				30E247087D3B80C174E140A5 /* Pods */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -616,7 +617,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ACE9643013ACF33313C7424F /* Pods-yenne_app_25688-yenne_app_25688Tests.debug.xcconfig */;
+			baseConfigurationReference = 603B561A1F4C94ECEAD9699C /* Pods-yenne_app_25688-yenne_app_25688Tests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -643,7 +644,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0680759A1B1D9C3A54A6BA26 /* Pods-yenne_app_25688-yenne_app_25688Tests.release.xcconfig */;
+			baseConfigurationReference = 3A13E4D748CDE312F69976CC /* Pods-yenne_app_25688-yenne_app_25688Tests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -667,7 +668,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8F6A5A317E82AE51191732C1 /* Pods-yenne_app_25688.debug.xcconfig */;
+			baseConfigurationReference = 17B309EFC3D12155BCC820F6 /* Pods-yenne_app_25688.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -697,7 +698,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 92C01BABA37B85532DE72F16 /* Pods-yenne_app_25688.release.xcconfig */;
+			baseConfigurationReference = 66BE5E2923E7F4D0E1DD4335 /* Pods-yenne_app_25688.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

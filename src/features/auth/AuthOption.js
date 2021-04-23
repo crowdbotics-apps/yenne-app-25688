@@ -1,21 +1,23 @@
 import React from 'react';
-import {
-  View,
-  Dimensions,
-  TouchableOpacity,
-  ActivityIndicator,
-} from 'react-native';
+import { View, TouchableOpacity, ActivityIndicator } from 'react-native';
 import {
   Text,
   StyleService,
   useStyleSheet,
   Button,
-  useTheme,
   Divider,
 } from '@ui-kitten/components';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import { LoginManager, AccessToken } from 'react-native-fbsdk';
-import { appleAuth } from '@invertase/react-native-apple-authentication';
+// import { LoginManager, AccessToken } from 'react-native-fbsdk';
+import {
+  appleAuth,
+  AppleButton,
+} from '@invertase/react-native-apple-authentication';
+import {
+  GoogleSignin,
+  GoogleSigninButton,
+  statusCodes,
+} from '@react-native-google-signin/google-signin';
 import { connect } from 'react-redux';
 import {
   widthPercentageToDP as wp,
@@ -23,6 +25,7 @@ import {
 } from 'react-native-responsive-screen';
 import { facebookSignUp, getLoggedUser } from './redux/actions';
 import AppHeader from '../../components/AppHeader';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const Icon = ({ name }) => {
   return (
@@ -31,6 +34,20 @@ const Icon = ({ name }) => {
     </View>
   );
 };
+
+GoogleSignin.configure({
+  scopes: ['email', 'profile'], // what API you want to access on behalf of the user, default is email and profile
+  webClientId:
+    '1019078873013-t9l37q1jk67rok4fpudbgfqm7fuso3rt.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
+  offlineAccess: true, // if you want to access Google API on behalf of the user FROM YOUR SERVER
+  hostedDomain: '', // specifies a hosted domain restriction
+  loginHint: '', // [iOS] The user's ID, or email address, to be prefilled in the authentication UI if possible. [See docs here](https://developers.google.com/identity/sign-in/ios/api/interface_g_i_d_sign_in.html#a0a68c7504c31ab0b728432565f6e33fd)
+  forceCodeForRefreshToken: true, // [Android] related to `serverAuthCode`, read the docs link below *.
+  accountName: '', // [Android] specifies an account name on the device that should be used
+  iosClientId:
+    '1019078873013-qeemg0n9p4bu10ujgupnkiev6ja1ed5r.apps.googleusercontent.com', // [iOS] optional, if you want to specify the client ID of type iOS (otherwise, it is taken from GoogleService-Info.plist)
+  googleServicePlistPath: '', // [iOS] optional, if you renamed your GoogleService-Info file, new name here, e.g. GoogleService-Info-Staging
+});
 
 const AuthOptionScreen = ({
   navigation,
@@ -43,23 +60,23 @@ const AuthOptionScreen = ({
   const [selectedPage, setSelectedPage] = React.useState(0);
 
   const signInWithFacebook = () => {
-    LoginManager.logInWithPermissions(['public_profile']).then(
-      result => {
-        if (result.isCancelled) {
-          console.log('Login cancelled');
-        } else {
-          AccessToken.getCurrentAccessToken().then(data => {
-            //onSuccess({ access_token: data?.accessToken });
-            facebookSignUp({ access_token: data?.accessToken }, () =>
-              getLoggedUser(),
-            );
-          });
-        }
-      },
-      function (error) {
-        console.log('Login fail with error: ' + error);
-      },
-    );
+    // LoginManager.logInWithPermissions(['public_profile']).then(
+    //   result => {
+    //     if (result.isCancelled) {
+    //       console.log('Login cancelled');
+    //     } else {
+    //       AccessToken.getCurrentAccessToken().then(data => {
+    //         //onSuccess({ access_token: data?.accessToken });
+    //         facebookSignUp({ access_token: data?.accessToken }, () =>
+    //           getLoggedUser(),
+    //         );
+    //       });
+    //     }
+    //   },
+    //   function (error) {
+    //     console.log('Login fail with error: ' + error);
+    //   },
+    // );
   };
 
   const onAppleButtonPress = async () => {
@@ -81,8 +98,27 @@ const AuthOptionScreen = ({
     }
   };
 
+  const signIn = async () => {
+    try {
+      await GoogleSignin.hasPlayServices();
+      const userInfo = await GoogleSignin.signIn();
+      alert(JSON.stringify(userInfo));
+      // this.setState({ userInfo });
+    } catch (error) {
+      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        // user cancelled the login flow
+      } else if (error.code === statusCodes.IN_PROGRESS) {
+        // operation (e.g. sign in) is in progress already
+      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        // play services not available or outdated
+      } else {
+        // some other error happened
+      }
+    }
+  };
+
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <AppHeader />
       <View style={styles.signUpContent}>
         <View style={styles.menuContent}>
@@ -144,16 +180,23 @@ const AuthOptionScreen = ({
             {selectedPage === 0 ? 'Sign up' : 'Login'} via AppleID
           </Button>
 
-          <Button
+          <GoogleSigninButton
+            style={[styles.googleButton]}
+            size={GoogleSigninButton.Size.Wide}
+            color={GoogleSigninButton.Color.Light}
+            onPress={signIn}
+            // disabled={this.state.isSigninInProgress}
+          />
+          {/* <Button
             accessoryLeft={() => <Icon name="google" color="black" />}
             style={[styles.button, styles.socialButton]}
             onPress={() => {}}
           >
             {selectedPage === 0 ? 'Sign up' : 'Login'} via Google
-          </Button>
+          </Button> */}
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -178,7 +221,7 @@ const themedStyles = StyleService.create({
     width: '100%',
     alignItems: 'center',
     alignContent: 'center',
-    marginTop: hp('3%'),
+    paddingVertical: 20,
   },
   divider: { flex: 1, backgroundColor: 'color-basic-600' },
   dividerText: {
@@ -218,9 +261,22 @@ const themedStyles = StyleService.create({
     fontSize: 16,
     fontWeight: '100',
   },
+  googleButton: {
+    backgroundColor: 'text-white-color',
+    borderColor: 'color-info-900',
+    borderRadius: 20,
+    color: 'red',
+    justifyContent: 'center',
+    alignContent: 'center',
+    alignItems: 'center',
+    marginHorizontal: 20,
+    width: wp('90%'),
+    borderWidth: 1,
+  },
   socialButton: {
     backgroundColor: 'text-white-color',
     borderColor: 'color-info-900',
+    borderRadius: 50,
   },
   ghostButton: {
     color: 'color-primary-100',
