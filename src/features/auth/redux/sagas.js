@@ -234,20 +234,61 @@ function* handleUploadImage({ id, picture }) {
 }
 
 function facebookSignUp(auth) {
-  return request.post('/facebook/', auth);
+  return request.post(
+    `api/v1/account/facebook-auth/${auth.access_token}`,
+    auth,
+  );
 }
 
 function* handleFacebookSignUp({ auth, onSuccess }) {
   try {
-    let user = yield call(facebookSignUp, auth);
-    request.defaults.headers.Authorization = 'token ' + user.data.key;
-    StorageUtils.setStringValue('@token', user.data.key);
-    yield put(actions.facebookSignUpSuccess(user.data.user));
+    let result = yield call(facebookSignUp, auth);
+    StorageUtils.setStringValue(constants.TOKEN_KEY, result.data.token);
+    StorageUtils.setStringValue(constants.USER_VERIFIED, 'true');
+    setAuthorizationToken(result.data.token);
+    yield put(
+      actions.loginSuccess({
+        ...result.data,
+      }),
+    );
+    yield put(actions.facebookSignUpSuccess({}));
     onSuccess && onSuccess();
   } catch (e) {
     yield put(
       actions.facebookSignUpError(
         e.response?.data?.message || 'An error occurred when sign Up',
+      ),
+    );
+  }
+}
+
+function googleSignUp(auth) {
+  return request
+    .post(`api/v1/account/google-auth/${auth.access_token}`, auth)
+    .then(resp => resp)
+    .catch(err => {
+      alert(JSON.stringify(err.response))
+      throw err.response.data.join();
+    });
+}
+
+function* handleGoogleSignUp({ auth, onSuccess }) {
+  try {
+    let result = yield call(googleSignUp, auth);
+    StorageUtils.setStringValue(constants.TOKEN_KEY, result.data.token);
+    StorageUtils.setStringValue(constants.USER_VERIFIED, 'true');
+    setAuthorizationToken(result.data.token);
+    yield put(
+      actions.loginSuccess({
+        ...result.data,
+      }),
+    );
+    yield put(actions.googleSignUpSuccess({}));
+    onSuccess && onSuccess();
+  } catch (e) {
+    yield put(
+      actions.googleSignUpError(
+        e.response?.data?.message || 'An error occurred when signing Up',
       ),
     );
   }
@@ -280,4 +321,5 @@ export default [
   takeLatest(constants.RESET_CODE, handleResetCode),
   takeLatest(constants.USERNAME_EXIST, handleUsernameExists),
   takeLatest(constants.UPDATE_USERNAME, handleUpdateUsername),
+  takeLatest(constants.GOOGLE_SIGNUP, handleGoogleSignUp),
 ];

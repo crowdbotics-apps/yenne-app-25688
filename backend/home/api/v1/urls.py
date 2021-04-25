@@ -1,6 +1,6 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-
+from django.views.decorators.csrf import csrf_exempt
 from home.api.v1.viewsets import (
     SignupViewSet,
     LoginViewSet,
@@ -8,7 +8,9 @@ from home.api.v1.viewsets import (
     CustomTextViewSet,
     VerifyOTPAPIView,
     ResendOTPAPIView,
-    UsernameAvailableAPIView,UpdateUsernameAPIView
+    UsernameAvailableAPIView,
+    UpdateUsernameAPIView,
+    SignupWithGoogleAPIView, SignupWithFacebookAPIView
 )
 
 router = DefaultRouter()
@@ -22,5 +24,7 @@ urlpatterns = [
     path("account/verify/<int:verification_code>/", VerifyOTPAPIView.as_view()),
     path("account/resend/code/", ResendOTPAPIView.as_view()),
     path("account/username-available", UsernameAvailableAPIView.as_view()),
-    path("account/update-username/", UpdateUsernameAPIView.as_view())
+    path("account/update-username/", UpdateUsernameAPIView.as_view()),
+    path('account/google-auth/<str:token>', csrf_exempt(SignupWithGoogleAPIView.as_view())),
+    path('account/facebook-auth/<str:token>', csrf_exempt(SignupWithFacebookAPIView.as_view()))
 ]
