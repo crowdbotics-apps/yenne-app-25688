@@ -165,3 +165,20 @@ export const logOutSuccess = () => ({
 export const logOutError = () => ({
   type: constant.LOGOUT_USER_ERROR,
 });
+
+// GOOGLE SIGNIN
+export const googleSignUp = (auth, onSuccess) => ({
+  type: constant.GOOGLE_SIGNUP,
+  auth,
+  onSuccess,
+});
+
+export const googleSignUpSuccess = user => ({
+  type: constant.GOOGLE_SIGNUP_SUCCESS,
+  user,
+});
+
+export const googleSignUpError = error => ({
+  type: constant.GOOGLE_SIGNUP_ERROR,
+  error,
+});

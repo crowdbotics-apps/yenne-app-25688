@@ -1,3 +1,7 @@
+import requests
+import random
+
+from allauth.utils import generate_unique_username, email_address_exists
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from rest_framework import serializers
@@ -10,6 +14,8 @@ from django.core.mail import send_mail
 from django.conf import settings
 from rest_auth.registration.views import RegisterView, LoginView
 from rest_auth.views import PasswordResetView
+from rest_framework.permissions import AllowAny
+
 from users.models import User
 from allauth.account.models import EmailAddress
 from home.api.v1.serializers import (
@@ -69,6 +75,78 @@ class LoginViewToken(LoginView):
 
 class ResetPasswordViewToken(PasswordResetView):
     authentication_classes = ()
+
+
+class SignupWithGoogleAPIView(APIView):
+    permission_classes = (AllowAny,)
+
+    authentication_classes = ()
+    profile_url = 'https://oauth2.googleapis.com/tokeninfo'
+
+    def post(self, request, token):
+        resp = requests.get(
+            self.profile_url,
+            params={"id_token": token, "alt": "json"},
+        )
+        if resp.json().get('error'):
+            raise serializers.ValidationError(
+                resp.json().get('error', {}).get('message'))
+        email = resp.json().get('email')
+        if email and email_address_exists(email):
+            user = User.objects.get(email=email)
+        else:
+            user = User(
+                email=email,
+                username=generate_unique_username([
+                    resp.json().get('given_name'),
+                    email,
+                    'user'
+                ])
+            )
+
+            user.verification_code = random.randint(1000, 9999)
+            user.set_password(f'xxxxxxxx{user.verification_code}')
+            user.save()
+            EmailAddress.objects.get_or_create(user=user, email=user.email, verified=True, primary=True)
+        token, _ = Token.objects.get_or_create(user=user)
+
+        return Response(data=TokenSerializer(token).data, status=status.HTTP_201_CREATED)
+
+
+class SignupWithFacebookAPIView(APIView):
+    permission_classes = (AllowAny,)
+
+    authentication_classes = ()
+    profile_url = 'https://graph.facebook.com/me'
+
+    def post(self, request, token):
+        resp = requests.get(
+            self.profile_url,
+            params={"access_token": token, "fields": "email", "alt": "json"},
+        )
+        if resp.json().get('error'):
+            raise serializers.ValidationError(
+                resp.json().get('error', {}).get('message'))
+        email = resp.json().get('email')
+        if email and email_address_exists(email):
+            user = User.objects.get(email=email)
+        else:
+            user = User(
+                email=email,
+                username=generate_unique_username([
+                    '',
+                    email,
+                    'user'
+                ])
+            )
+
+            user.verification_code = random.randint(1000, 9999)
+            user.set_password(f'xxxxxxxx{user.verification_code}')
+            user.save()
+            EmailAddress.objects.get_or_create(user=user, email=user.email, verified=True, primary=True)
+        token, _ = Token.objects.get_or_create(user=user)
+
+        return Response(data=TokenSerializer(token).data, status=status.HTTP_201_CREATED)
 
 
 class VerifyOTPAPIView(APIView):

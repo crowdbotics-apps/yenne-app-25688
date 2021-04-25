@@ -23,9 +23,10 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import { facebookSignUp, getLoggedUser } from './redux/actions';
+import { facebookSignUp, getLoggedUser, googleSignUp } from './redux/actions';
 import AppHeader from '../../components/AppHeader';
 import { ScrollView } from 'react-native-gesture-handler';
+import routes from '../../navigator/routes';
 
 const Icon = ({ name }) => {
   return (
@@ -54,22 +55,23 @@ const AuthOptionScreen = ({
   getLoggedUser,
   facebookSignUp,
   loading,
+  googleSignUp,
+  googleSignUpLoading,
   error,
 }) => {
   const styles = useStyleSheet(themedStyles);
   const [selectedPage, setSelectedPage] = React.useState(0);
 
   const signInWithFacebook = () => {
-    LoginManager.logInWithPermissions(['public_profile']).then(
+    LoginManager.logInWithPermissions(['public_profile', 'email']).then(
       result => {
         if (result.isCancelled) {
           console.log('Login cancelled');
         } else {
           AccessToken.getCurrentAccessToken().then(data => {
-            //onSuccess({ access_token: data?.accessToken });
-            facebookSignUp({ access_token: data?.accessToken }, () =>
-              getLoggedUser(),
-            );
+            facebookSignUp({ access_token: data?.accessToken }, () => {
+              navigation.navigate(routes.home);
+            });
           });
         }
       },
@@ -100,11 +102,16 @@ const AuthOptionScreen = ({
 
   const signIn = async () => {
     try {
-      await GoogleSignin.hasPlayServices();
+      await GoogleSignin.hasPlayServices({
+        showPlayServicesUpdateDialog: true,
+      });
       const userInfo = await GoogleSignin.signIn();
-      alert(JSON.stringify(userInfo));
-      // this.setState({ userInfo });
+      console.warn(userInfo);
+      googleSignUp({ access_token: userInfo?.idToken }, () => {
+        navigation.navigate(routes.home);
+      });
     } catch (error) {
+      console.warn(error);
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
         // user cancelled the login flow
       } else if (error.code === statusCodes.IN_PROGRESS) {
@@ -159,6 +166,7 @@ const AuthOptionScreen = ({
         </View>
 
         <View style={styles.signUpBtnContent}>
+          {error ? <Text>{error}</Text> : null}
           <Button
             onPress={signInWithFacebook}
             accessoryLeft={() =>
@@ -185,7 +193,7 @@ const AuthOptionScreen = ({
             size={GoogleSigninButton.Size.Wide}
             color={GoogleSigninButton.Color.Light}
             onPress={signIn}
-            // disabled={this.state.isSigninInProgress}
+            disabled={googleSignUpLoading}
           />
           {/* <Button
             accessoryLeft={() => <Icon name="google" color="black" />}
@@ -202,12 +210,15 @@ const AuthOptionScreen = ({
 
 const mapStateToProps = state => ({
   loading: state.auth.fbSignUpLoading,
-  error: state.auth.signUpErrorMsg,
+  googleSignUpLoading: state.auth.googleSignUpLoading,
+  error: state.auth.socialAuthError,
 });
 
-export default connect(mapStateToProps, { facebookSignUp, getLoggedUser })(
-  AuthOptionScreen,
-);
+export default connect(mapStateToProps, {
+  facebookSignUp,
+  googleSignUp,
+  getLoggedUser,
+})(AuthOptionScreen);
 
 const themedStyles = StyleService.create({
   container: {
@@ -262,14 +273,7 @@ const themedStyles = StyleService.create({
     fontWeight: '100',
   },
   googleButton: {
-    backgroundColor: 'text-white-color',
-    borderColor: 'color-info-900',
-    justifyContent: 'center',
-    alignContent: 'center',
-    alignItems: 'center',
-    marginHorizontal: 20,
     width: wp('90%'),
-    borderWidth: 0,
   },
   socialButton: {
     backgroundColor: 'text-white-color',
