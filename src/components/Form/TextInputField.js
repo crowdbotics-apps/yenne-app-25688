@@ -10,6 +10,8 @@ const TextInputField = ({ label, onChangeText, value, ...rest }) => {
     <View style={styles.input}>
       <OutlinedTextField
         value={value}
+        style={styles.inputText}
+        placeholderTextColor="#666"
         onChangeText={onChangeText}
         tintColor={theme['color-primary-500']}
         label={label}
@@ -22,5 +24,6 @@ const styles = StyleSheet.create({
   input: {
     padding: 3,
   },
+  inputText: { color: '#333' },
 });
 export default TextInputField;

@@ -29,6 +29,10 @@ export const GOOGLE_SIGNUP = 'GOOGLE_SIGNUP';
 export const GOOGLE_SIGNUP_SUCCESS = 'GOOGLE_SIGNUP_SUCCESS';
 export const GOOGLE_SIGNUP_ERROR = 'GOOGLE_SIGNUP_ERROR';
 
+export const APPLE_ID_SIGNUP = 'APPLE_ID_SIGNUP';
+export const APPLE_ID_SIGNUP_SUCCESS = 'APPLE_ID_SIGNUP_SUCCESS';
+export const APPLE_ID_SIGNUP_ERROR = 'APPLE_ID_SIGNUP_ERROR';
+
 export const LOGOUT_USER = 'LOGOUT_USER';
 export const LOGOUT_USER_SUCCESS = 'LOGOUT_USER_SUCCESS';
 export const LOGOUT_USER_ERROR = 'LOGOUT_USER_ERROR';
@@ -38,6 +42,7 @@ export const USER_VERIFIED = '@verified';
 export const TERMS_AGREED = '@terms';
 export const USERNAME = '@username';
 export const HAS_USERNAME = '@hasUsername';
+export const APPLE_ID_EMAIL = '@appleidemail';
 
 export const VERIFY_CODE = 'VERIFY_CODE';
 export const VERIFY_CODE_SUCCESS = 'VERIFY_CODE_SUCCESS';

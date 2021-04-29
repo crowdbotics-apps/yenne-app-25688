@@ -3,9 +3,7 @@ import {
   View,
   ActivityIndicator,
   TouchableOpacity,
-  KeyboardAvoidingView,
   ScrollView,
-  Platform,
   StatusBar,
 } from 'react-native';
 
@@ -127,7 +125,6 @@ const VerifyCode = ({
 
   const handleResendCode = () => {
     resendCode();
-    setCodeResent(false);
   };
 
   return (

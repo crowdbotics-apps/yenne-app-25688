@@ -2,6 +2,7 @@ import requests
 import random
 
 from allauth.utils import generate_unique_username, email_address_exists
+from allauth.account.adapter import get_adapter
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from rest_framework import serializers
@@ -75,6 +76,40 @@ class LoginViewToken(LoginView):
 
 class ResetPasswordViewToken(PasswordResetView):
     authentication_classes = ()
+
+
+class SignupWithAppleAPIView(APIView):
+    permission_classes = (AllowAny,)
+
+    def post(self, request, token):
+        email = request.data.get('email')
+        email = get_adapter().clean_email(email)
+        if email and email_address_exists(email):
+            user = User.objects.get(email=email)
+        else:
+            user_qs = User.objects.filter(apple_id_token=token)
+            if user_qs.exists():
+                user = user_qs.first()
+            else:
+                user = User(
+                    email=email or f'apple-id-{request.data.get("nonce")[5]}{token[4]}@yenne-dev.com',
+                    username=generate_unique_username([
+                        '',
+                        email,
+                        'user'
+                    ])
+                )
+                user.apple_id_token = token
+                user.apple_nonce = request.data.get('nonce', '')
+
+
+            user.verification_code = random.randint(1000, 9999)
+            user.set_password(f'xxxxxxxx{user.verification_code}')
+            user.save()
+            EmailAddress.objects.get_or_create(user=user, email=user.email, verified=True, primary=True)
+        token, _ = Token.objects.get_or_create(user=user)
+
+        return Response(data=TokenSerializer(token).data, status=status.HTTP_201_CREATED)
 
 
 class SignupWithGoogleAPIView(APIView):

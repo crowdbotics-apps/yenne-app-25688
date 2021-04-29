@@ -1,9 +1,9 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 
 import { StyleService, useStyleSheet } from '@ui-kitten/components';
 import Logo from 'images/Logo';
-import { Text } from '@ui-kitten/components';
+// import { Text } from '@ui-kitten/components';
 
 const AppLogo = () => {
   const styles = useStyleSheet(themedStyles);
@@ -28,8 +28,10 @@ const themedStyles = StyleService.create({
   },
   textContent: {
     color: 'text-white-color',
-    marginTop: 10,
-    marginBottom: 10,
+    marginTop: 5,
+    marginBottom: 0,
     overflow: 'visible',
+    fontWeight: 'bold',
+    fontSize: 32,
   },
 });

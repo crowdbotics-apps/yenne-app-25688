@@ -12,7 +12,7 @@ function signUp(auth) {
     .post('rest-auth/registration/', auth)
     .then(res => res)
     .catch(err => {
-      console.warn(Object.keys(err.response));
+      console.warn(Object.keys(err.response.data));
       throw Object.values(err.response.data).join();
     });
 }
@@ -262,12 +262,44 @@ function* handleFacebookSignUp({ auth, onSuccess }) {
   }
 }
 
+function appleIdSignUp(auth) {
+  return request
+    .post(`api/v1/account/appleid-auth/${auth.access_token}/`, auth)
+    .then(res => res)
+    .catch(err => {
+      alert(JSON.stringify(err.response.data));
+      throw err.response.data.join();
+    });
+}
+
+function* handleAppleIdSignUp({ auth, onSuccess }) {
+  try {
+    let result = yield call(appleIdSignUp, auth);
+    StorageUtils.setStringValue(constants.TOKEN_KEY, result.data.token);
+    StorageUtils.setStringValue(constants.USER_VERIFIED, 'true');
+    setAuthorizationToken(result.data.token);
+    yield put(
+      actions.loginSuccess({
+        ...result.data,
+      }),
+    );
+    yield put(actions.appleIdSignUpSuccess({}));
+    onSuccess && onSuccess();
+  } catch (e) {
+    yield put(
+      actions.appleIdSignUpError(
+        e.response?.data?.message || 'An error occurred when signing Up',
+      ),
+    );
+  }
+}
+
 function googleSignUp(auth) {
   return request
     .post(`api/v1/account/google-auth/${auth.access_token}`, auth)
     .then(resp => resp)
     .catch(err => {
-      alert(JSON.stringify(err.response))
+      alert(JSON.stringify(err.response.data.join()));
       throw err.response.data.join();
     });
 }
@@ -322,4 +354,5 @@ export default [
   takeLatest(constants.USERNAME_EXIST, handleUsernameExists),
   takeLatest(constants.UPDATE_USERNAME, handleUpdateUsername),
   takeLatest(constants.GOOGLE_SIGNUP, handleGoogleSignUp),
+  takeLatest(constants.APPLE_ID_SIGNUP, handleAppleIdSignUp),
 ];

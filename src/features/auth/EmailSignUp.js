@@ -16,6 +16,7 @@ import { signUp, clearSignUpError } from './redux/actions';
 import AppHeader from '../../components/AppHeader';
 import TextInputField from '../../components/Form/TextInputField';
 import AlertModal from '../../components/AlertModal';
+import routes from '../../navigator/routes';
 
 const EmailSignUp = ({
   navigation,
@@ -51,6 +52,10 @@ const EmailSignUp = ({
 
   const onSubmit = () => {
     let errors = {};
+
+    if (!inputs.username) {
+      errors.username = 'Username is a required field';
+    }
     if (!inputs.email) {
       errors.email = 'Email is a required field';
     }
@@ -82,7 +87,7 @@ const EmailSignUp = ({
 
   const handleRedirect = () => {
     setModalVisible(!modalVisible);
-    navigation.navigate('VerifyCodeScreen');
+    navigation.navigate(routes.verifyCode);
   };
 
   const theme = useTheme();
@@ -106,6 +111,13 @@ const EmailSignUp = ({
             </Text>
           </View>
           <View style={styles.form}>
+            <TextInputField
+              onChangeText={text => onChangeText('username', text)}
+              label="Username"
+              error={errors.username}
+              value={inputs.username}
+              autoCapitalize="none"
+            />
             <TextInputField
               onChangeText={text => onChangeText('email', text)}
               label="Email"

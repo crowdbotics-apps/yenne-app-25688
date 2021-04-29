@@ -10,7 +10,7 @@ from home.api.v1.viewsets import (
     ResendOTPAPIView,
     UsernameAvailableAPIView,
     UpdateUsernameAPIView,
-    SignupWithGoogleAPIView, SignupWithFacebookAPIView
+    SignupWithGoogleAPIView, SignupWithFacebookAPIView, SignupWithAppleAPIView
 )
 
 router = DefaultRouter()
@@ -26,5 +26,6 @@ urlpatterns = [
     path("account/username-available", UsernameAvailableAPIView.as_view()),
     path("account/update-username/", UpdateUsernameAPIView.as_view()),
     path('account/google-auth/<str:token>', csrf_exempt(SignupWithGoogleAPIView.as_view())),
-    path('account/facebook-auth/<str:token>', csrf_exempt(SignupWithFacebookAPIView.as_view()))
+    path('account/facebook-auth/<str:token>', csrf_exempt(SignupWithFacebookAPIView.as_view())),
+    path('account/appleid-auth/<str:token>', csrf_exempt(SignupWithAppleAPIView.as_view())),
 ]

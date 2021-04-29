@@ -13,6 +13,7 @@ const initialState = {
   uploadImageError: undefined,
   fbSignUpLoading: false,
   googleSignupLoading: false,
+  appleIdSignupLoading: false,
   socialAuthError: undefined,
   logOutLoading: false,
   verifyError: undefined,
@@ -181,6 +182,26 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
         googleSignupLoading: false,
+        socialAuthError: action.error,
+      };
+
+    case constants.APPLE_ID_SIGNUP:
+      return {
+        ...state,
+        appleIdSignupLoading: true,
+        socialAuthError: undefined,
+      };
+
+    case constants.APPLE_ID_SIGNUP_SUCCESS:
+      return {
+        ...state,
+        appleIdSignupLoading: false,
+        socialAuthError: undefined,
+      };
+    case constants.APPLE_ID_SIGNUP_ERROR:
+      return {
+        ...state,
+        appleIdSignupLoading: false,
         socialAuthError: action.error,
       };
 

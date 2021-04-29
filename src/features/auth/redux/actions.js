@@ -182,3 +182,20 @@ export const googleSignUpError = error => ({
   type: constant.GOOGLE_SIGNUP_ERROR,
   error,
 });
+
+// APPLE ID
+export const appleIdSignUp = (auth, onSuccess) => ({
+  type: constant.APPLE_ID_SIGNUP,
+  auth,
+  onSuccess,
+});
+
+export const appleIdSignUpSuccess = user => ({
+  type: constant.APPLE_ID_SIGNUP_SUCCESS,
+  user,
+});
+
+export const appleIdSignUpError = error => ({
+  type: constant.APPLE_ID_SIGNUP_ERROR,
+  error,
+});

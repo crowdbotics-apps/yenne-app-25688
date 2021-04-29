@@ -32,7 +32,7 @@ const EmailLogin = ({ navigation, login, loading, serverError }) => {
   const theme = useTheme();
   const [mounted, setMounted] = useState(false);
   const nextScreen = async () => {
-    const { verified, hasUsername } = await isLoggedIn();
+    const { verified, termsAgreed } = await isLoggedIn();
 
     if (!verified) {
       if (!mounted) {
@@ -40,9 +40,10 @@ const EmailLogin = ({ navigation, login, loading, serverError }) => {
         return navigation.navigate(routes.verifyCode);
       }
     }
-    if (!hasUsername) {
-      return navigation.navigate(routes.createUsername);
+    if (!termsAgreed) {
+      return navigation.navigate(routes.termsAndConditions);
     }
+
     return navigation.navigate(routes.home);
   };
   React.useEffect(() => {
@@ -98,6 +99,7 @@ const EmailLogin = ({ navigation, login, loading, serverError }) => {
               error={errors.email}
               value={inputs.email}
               keyboardType="email-address"
+              autoCapitalize="none"
             />
             <TextInputField
               onChangeText={text => onChangeText('password', text)}
