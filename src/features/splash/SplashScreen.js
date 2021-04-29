@@ -9,7 +9,7 @@ import routes from '../../navigator/routes';
 const SplashScreen = ({ navigation }) => {
   const styles = useStyleSheet(themedStyles);
   const nextScreen = async () => {
-    const { hasToken, verified, termsAgreed, hasUsername } = await isLoggedIn();
+    const { hasToken, verified, termsAgreed } = await isLoggedIn();
 
     if (!hasToken) {
       return navigation.navigate(routes.authOption);
@@ -20,15 +20,13 @@ const SplashScreen = ({ navigation }) => {
     if (!termsAgreed) {
       return navigation.navigate(routes.termsAndConditions);
     }
-    if (!hasUsername) {
-      return navigation.navigate(routes.createUsername);
-    }
+
     return navigation.navigate(routes.home);
   };
   useEffect(() => {
     setTimeout(() => {
       nextScreen();
-    }, 300);
+    }, 3000);
   }, []);
 
   return (

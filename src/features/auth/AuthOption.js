@@ -1,5 +1,10 @@
 import React from 'react';
-import { View, TouchableOpacity, ActivityIndicator } from 'react-native';
+import {
+  View,
+  TouchableOpacity,
+  ActivityIndicator,
+  Platform,
+} from 'react-native';
 import {
   Text,
   StyleService,
@@ -9,24 +14,25 @@ import {
 } from '@ui-kitten/components';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { LoginManager, AccessToken } from 'react-native-fbsdk-next';
-import {
-  appleAuth,
-  AppleButton,
-} from '@invertase/react-native-apple-authentication';
+import { appleAuth } from '@invertase/react-native-apple-authentication';
 import {
   GoogleSignin,
-  GoogleSigninButton,
   statusCodes,
 } from '@react-native-google-signin/google-signin';
 import { connect } from 'react-redux';
+import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
+import jwt_decode from 'jwt-decode';
 import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from 'react-native-responsive-screen';
-import { facebookSignUp, getLoggedUser, googleSignUp } from './redux/actions';
+  facebookSignUp,
+  getLoggedUser,
+  googleSignUp,
+  appleIdSignUp,
+} from './redux/actions';
 import AppHeader from '../../components/AppHeader';
 import { ScrollView } from 'react-native-gesture-handler';
 import routes from '../../navigator/routes';
+import * as constants from '../auth/redux/constants';
+import { StorageUtils } from '../../utils/storage';
 
 const Icon = ({ name }) => {
   return (
@@ -58,6 +64,7 @@ const AuthOptionScreen = ({
   googleSignUp,
   googleSignUpLoading,
   error,
+  appleIdSignUp,
 }) => {
   const styles = useStyleSheet(themedStyles);
   const [selectedPage, setSelectedPage] = React.useState(0);
@@ -83,20 +90,62 @@ const AuthOptionScreen = ({
 
   const onAppleButtonPress = async () => {
     // performs login request
-    const appleAuthRequestResponse = await appleAuth.performRequest({
-      requestedOperation: appleAuth.Operation.LOGIN,
-      requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
-    });
+    // start a login request
+    try {
+      const appleAuthRequestResponse = await appleAuth.performRequest({
+        requestedOperation: appleAuth.Operation.LOGIN,
+        requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
+      });
 
-    // get current authentication state for user
-    // /!\ This method must be tested on a real device. On the iOS simulator it always throws an error.
-    const credentialState = await appleAuth.getCredentialStateForUser(
-      appleAuthRequestResponse.user,
-    );
+      console.log('appleAuthRequestResponse', appleAuthRequestResponse);
 
-    // use credentialState response to ensure the user is authenticated
-    if (credentialState === appleAuth.State.AUTHORIZED) {
-      // user is authenticated
+      const {
+        user: newUser,
+        email,
+        nonce,
+        identityToken,
+        realUserStatus /* etc */,
+      } = appleAuthRequestResponse;
+
+      // user = newUser;
+
+      // fetchAndUpdateCredentialState(updateCredentialStateForUser).catch(error =>
+      //   updateCredentialStateForUser(`Error: ${error.code}`),
+      // );
+
+      if (identityToken) {
+        // e.g. sign in with Firebase Auth using `nonce` & `identityToken`
+        const { email: emailToken } = jwt_decode(identityToken);
+        const cacheEmail = StorageUtils.getStringValue(
+          constants.APPLE_ID_EMAIL,
+        );
+        const dataEmail = email || emailToken || cacheEmail;
+        if (dataEmail) {
+          StorageUtils.setStringValue(constants.APPLE_ID_EMAIL, dataEmail);
+        }
+        appleIdSignUp(
+          { email: dataEmail, access_token: identityToken, nonce },
+          () => {
+            navigation.navigate(routes.home);
+          },
+        );
+        console.log(nonce, identityToken);
+      } else {
+        // no token - failed sign-in?
+        alert('Apple id sign in failed');
+      }
+
+      if (realUserStatus === appleAuth.UserStatus.LIKELY_REAL) {
+        console.log("I'm a real person!");
+      }
+
+      console.warn(`Apple Authentication Completed, {}, ${email}`);
+    } catch (error) {
+      if (error.code === appleAuth.Error.CANCELED) {
+        console.warn('User canceled Apple Sign in.');
+      } else {
+        console.error(error);
+      }
     }
   };
 
@@ -180,28 +229,24 @@ const AuthOptionScreen = ({
           >
             {selectedPage === 0 ? 'Sign up' : 'Login'} via Facebook
           </Button>
-          <Button
-            style={[styles.button, styles.socialButton]}
-            accessoryLeft={() => <Icon name="apple" />}
-            onPress={onAppleButtonPress}
-          >
-            {selectedPage === 0 ? 'Sign up' : 'Login'} via AppleID
-          </Button>
+          {Platform.OS === 'ios' ? (
+            <Button
+              style={[styles.button, styles.socialButton]}
+              accessoryLeft={() => <Icon name="apple" />}
+              onPress={onAppleButtonPress}
+            >
+              {selectedPage === 0 ? 'Sign up' : 'Login'} via AppleID
+            </Button>
+          ) : null}
 
-          <GoogleSigninButton
-            style={[styles.googleButton]}
-            size={GoogleSigninButton.Size.Wide}
-            color={GoogleSigninButton.Color.Light}
-            onPress={signIn}
-            disabled={googleSignUpLoading}
-          />
-          {/* <Button
+          <Button
             accessoryLeft={() => <Icon name="google" color="black" />}
             style={[styles.button, styles.socialButton]}
-            onPress={() => {}}
+            onPress={signIn}
           >
+            {loading ? <ActivityIndicator size="small" color="#ffff" /> : null}
             {selectedPage === 0 ? 'Sign up' : 'Login'} via Google
-          </Button> */}
+          </Button>
         </View>
       </View>
     </ScrollView>
@@ -218,6 +263,7 @@ export default connect(mapStateToProps, {
   facebookSignUp,
   googleSignUp,
   getLoggedUser,
+  appleIdSignUp,
 })(AuthOptionScreen);
 
 const themedStyles = StyleService.create({
@@ -274,6 +320,14 @@ const themedStyles = StyleService.create({
   },
   googleButton: {
     width: wp('90%'),
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 20,
+      height: 0,
+    },
+    shadowOpacity: 0,
+    shadowRadius: 0,
+    elevation: 0,
   },
   socialButton: {
     backgroundColor: 'text-white-color',

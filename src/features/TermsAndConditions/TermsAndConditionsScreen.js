@@ -33,7 +33,7 @@ const TermsAndConditionsScreen = ({ navigation, loading }) => {
     }
     setError('');
     StorageUtils.setStringValue(constants.TERMS_AGREED, 'true');
-    navigation.navigate(routes.createUsername);
+    navigation.navigate(routes.home);
   };
   return (
     <View style={styles.container}>

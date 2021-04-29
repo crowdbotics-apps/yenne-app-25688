@@ -23,6 +23,8 @@ class User(AbstractUser):
     name = models.CharField(_("Name of User"), blank=True, null=True, max_length=255)
     verification_code = models.IntegerField(default=0,)
     has_username = models.SmallIntegerField(default=0)
+    apple_id_token = models.TextField(blank=True, null=True)
+    apple_nonce = models.TextField(blank=True, null=True)
 
     def get_absolute_url(self):
         return reverse("users:detail", kwargs={"username": self.username})
