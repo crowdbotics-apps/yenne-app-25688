@@ -12,8 +12,7 @@ function signUp(auth) {
     .post('rest-auth/registration/', auth)
     .then(res => res)
     .catch(err => {
-      console.warn(Object.keys(err.response.data));
-      throw Object.values(err.response.data).join();
+      throw Object.values(err.response?.data).join();
     });
 }
 
@@ -113,6 +112,21 @@ function* handleSignUp({ auth }) {
       }),
     );
   } catch (err) {
+    console.warn('error => ', err);
+    if (!err) {
+      const result = yield call(login, auth);
+
+      StorageUtils.setStringValue(constants.TOKEN_KEY, result.data.token);
+      StorageUtils.setStringValue(
+        constants.USER_VERIFIED,
+        result.data.verified.toString(),
+      );
+      yield put(
+        actions.loginSuccess({
+          ...result.data,
+        }),
+      );
+    }
     const error =
       getServerError(err.response?.data) || JSON.stringify(err.response || err);
     yield put(

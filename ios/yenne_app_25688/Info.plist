@@ -8,6 +8,8 @@
 	<string>yenne_app_25688</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIconName</key>
+	<string>AppIcon</string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -39,18 +41,18 @@
 			</array>
 		</dict>
 		<dict>
-      <key>CFBundleURLSchemes</key>
-      <array>
-        <string>fb3005435869701612</string>
-      </array>
-    </dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb3005435869701612</string>
+			</array>
+		</dict>
 	</array>
-	<key>FacebookAppID</key>
-  		<string>3005435869701612</string>
-    <key>FacebookDisplayName</key>
-  		<string>Yenne</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>FacebookAppID</key>
+	<string>3005435869701612</string>
+	<key>FacebookDisplayName</key>
+	<string>Yenne</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -141,11 +143,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>UIUserInterfaceStyle</key>
-    <string>Light</string>
-	<key>CFBundleIconName</key>
-	<string>AppIcon</string>
 </dict>
 </plist>

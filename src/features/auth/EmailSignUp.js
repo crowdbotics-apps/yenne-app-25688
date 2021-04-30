@@ -12,7 +12,7 @@ import { Text, useStyleSheet, Button, useTheme } from '@ui-kitten/components';
 import { connect, useDispatch, useSelector } from 'react-redux';
 
 import { themedStyles } from './EmailLogin';
-import { signUp, clearSignUpError } from './redux/actions';
+import { signUp, clearSignUpError, login } from './redux/actions';
 import AppHeader from '../../components/AppHeader';
 import TextInputField from '../../components/Form/TextInputField';
 import AlertModal from '../../components/AlertModal';
@@ -21,6 +21,7 @@ import routes from '../../navigator/routes';
 const EmailSignUp = ({
   navigation,
   signUp,
+  login,
   clearSignUpError,
   loading,
   serverError,
@@ -32,7 +33,11 @@ const EmailSignUp = ({
   const dispatch = useDispatch();
   const selector = useSelector(state => state.auth);
   const [mounted, setMounted] = useState(false);
-
+  useEffect(() => {
+    if (!loading && serverError && serverError === '{}') {
+      login(inputs);
+    }
+  }, [serverError]);
   useEffect(() => {
     if (selector.loggedIn && !selector.verifyError) {
       if (!selector.verified) {
@@ -198,6 +203,6 @@ const mapStateToProps = state => ({
   serverError: state.auth.signUpErrorMsg,
 });
 
-export default connect(mapStateToProps, { signUp, clearSignUpError })(
+export default connect(mapStateToProps, { signUp, clearSignUpError, login })(
   EmailSignUp,
 );

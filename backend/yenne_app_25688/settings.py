@@ -17,7 +17,7 @@ import logging
 env = environ.Env()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.bool("DEBUG", default=True)
+DEBUG = env.bool("DEBUG", default=False)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -171,7 +171,7 @@ ACCOUNT_CONFIRM_EMAIL_ON_GET = True
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 ACCOUNT_UNIQUE_EMAIL = True
 LOGIN_REDIRECT_URL = "users:redirect"
-DEFAULT_FROM_EMAIL = 'admin@example.com'
+DEFAULT_FROM_EMAIL = env.bool("DEFAULT_FROM_EMAIL", 'yennecustomerservice@rosewoodventures.com')
 
 ACCOUNT_ADAPTER = "users.adapters.AccountAdapter"
 SOCIALACCOUNT_ADAPTER = "users.adapters.SocialAccountAdapter"
@@ -192,17 +192,19 @@ REST_AUTH_REGISTER_SERIALIZERS = {
 AUTH_USER_MODEL = "users.User"
 
 EMAIL_HOST = env.str("EMAIL_HOST", "smtp.sendgrid.net")
-EMAIL_HOST_USER = env.str("SENDGRID_USERNAME", "")
+EMAIL_HOST_USER = env.str("SENDGRID_USERNAME", "apikey")
 EMAIL_HOST_PASSWORD = env.str("SENDGRID_PASSWORD", "")
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-
+SENDGRID_API_KEY=EMAIL_HOST_PASSWORD
+EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
+SENDGRID_SANDBOX_MODE_IN_DEBUG=True
 # AWS S3 config
 AWS_ACCESS_KEY_ID = env.str("AWS_ACCESS_KEY_ID", "")
 AWS_SECRET_ACCESS_KEY = env.str("AWS_SECRET_ACCESS_KEY", "")
 AWS_STORAGE_BUCKET_NAME = env.str("AWS_STORAGE_BUCKET_NAME", "")
 AWS_STORAGE_REGION = env.str("AWS_STORAGE_REGION", "")
-
+SENDGRID_ECHO_TO_STDOUT=True
 USE_S3 = (
         AWS_ACCESS_KEY_ID and
         AWS_SECRET_ACCESS_KEY and
@@ -235,7 +237,10 @@ SWAGGER_SETTINGS = {
 }
 
 if DEBUG or not (EMAIL_HOST_USER and EMAIL_HOST_PASSWORD):
+    print(EMAIL_HOST_PASSWORD, EMAIL_HOST_PASSWORD, '*'*123)
     # output email to console instead of sending
     if not DEBUG:
         logging.warning("You should setup `SENDGRID_USERNAME` and `SENDGRID_PASSWORD` env vars to send emails.")
     EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+else:
+    EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
