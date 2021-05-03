@@ -12,7 +12,10 @@ function signUp(auth) {
     .post('rest-auth/registration/', auth)
     .then(res => res)
     .catch(err => {
-      throw Object.values(err.response?.data).join();
+      if (typeof err.response?.data === 'string') {
+        throw err.response?.data;
+      }
+      throw Object.values(err.response?.data).join().toString();
     });
 }
 
@@ -49,7 +52,7 @@ function verifyCode(data) {
     .post(`api/v1/account/verify/${data.payload}/`)
     .then(res => res)
     .catch(err => {
-      throw err.response.data.join();
+      throw err.response.data.join().replace(',', '').toString();
     });
 }
 
@@ -58,7 +61,7 @@ function resetCode() {
     .post('api/v1/account/resend/code/')
     .then(res => res)
     .catch(err => {
-      throw err.response.data.join();
+      throw err.response.data.toString();
     });
 }
 

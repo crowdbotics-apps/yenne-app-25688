@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { Text, useStyleSheet, Button, useTheme } from '@ui-kitten/components';
 import { connect, useDispatch, useSelector } from 'react-redux';
-
+import { useRoute } from '@react-navigation/native';
 import { themedStyles } from './EmailLogin';
 import { signUp, clearSignUpError, login } from './redux/actions';
 import AppHeader from '../../components/AppHeader';
@@ -26,12 +26,14 @@ const EmailSignUp = ({
   loading,
   serverError,
 }) => {
+  const route = useRoute();
   const styles = useStyleSheet(themedStyles);
   const [inputs, setInputs] = React.useState({});
   const [errors, setErrors] = React.useState({});
   const [modalVisible, setModalVisible] = React.useState(false);
   const dispatch = useDispatch();
   const selector = useSelector(state => state.auth);
+
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
     if (!loading && serverError && serverError === '{}') {
@@ -39,7 +41,11 @@ const EmailSignUp = ({
     }
   }, [serverError]);
   useEffect(() => {
-    if (selector.loggedIn && !selector.verifyError) {
+    if (
+      selector.loggedIn &&
+      !selector.verifyError &&
+      route.name === routes.signUp
+    ) {
       if (!selector.verified) {
         if (!mounted) {
           setModalVisible(true);

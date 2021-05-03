@@ -182,9 +182,11 @@ const VerifyCode = ({
               Resend code
             </Text>
           </TouchableOpacity>
-          {error ? <Text style={styles.errorText}> {error}</Text> : null}
+          {error ? (
+            <Text style={styles.errorText}> {error.toString()}</Text>
+          ) : null}
           {serverError ? (
-            <Text style={styles.errorText}> {serverError}</Text>
+            <Text style={styles.errorText}> {serverError.toString()}</Text>
           ) : null}
           <Button
             accessoryLeft={() =>

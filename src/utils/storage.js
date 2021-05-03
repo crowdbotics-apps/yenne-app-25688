@@ -18,7 +18,6 @@ export const StorageUtils = {
   },
 
   setStringValue: async (key, value) => {
-    console.warn(key, value,'setting, key:value');
     try {
       await AsyncStorage.setItem(key, value);
     } catch (e) {

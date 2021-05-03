@@ -16,29 +16,29 @@ import {
   useTheme,
 } from '@ui-kitten/components';
 import { connect, useDispatch, useSelector } from 'react-redux';
-
+import { useRoute } from '@react-navigation/native';
 import { login, clearLoginError } from './redux/actions';
 import AppHeader from '../../components/AppHeader';
 import TextInputField from '../../components/Form/TextInputField';
 import { isLoggedIn } from '../../utils/helpers';
 import routes from '../../navigator/routes';
+import { StorageUtils } from '../../utils/storage';
+import * as constants from '../auth/redux/constants';
 
 const EmailLogin = ({ navigation, login, loading, serverError }) => {
   const styles = useStyleSheet(themedStyles);
   const [inputs, setInputs] = React.useState({});
   const [errors, setErrors] = React.useState({});
   const dispatch = useDispatch();
+  const route = useRoute();
   const selector = useSelector(state => state.auth);
   const theme = useTheme();
-  const [mounted, setMounted] = useState(false);
   const nextScreen = async () => {
-    const { verified, termsAgreed } = await isLoggedIn();
-
-    if (!verified) {
-      if (!mounted) {
-        setMounted(true);
-        return navigation.navigate(routes.verifyCode);
-      }
+    const { termsAgreed } = await isLoggedIn();
+    console.warn('is verified ', verified, 'agrred with terms ', termsAgreed);
+    const verified = await StorageUtils.getStringValue(constants.USER_VERIFIED);
+    if (verified) {
+      return navigation.navigate(routes.verifyCode);
     }
     if (!termsAgreed) {
       return navigation.navigate(routes.termsAndConditions);

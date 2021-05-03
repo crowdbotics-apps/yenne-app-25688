@@ -14,10 +14,10 @@ const SplashScreen = ({ navigation }) => {
     if (!hasToken) {
       return navigation.navigate(routes.authOption);
     }
+
     if (!verified) {
       return navigation.navigate(routes.verifyCode);
-    }
-    if (!termsAgreed) {
+    } else if (!termsAgreed) {
       return navigation.navigate(routes.termsAndConditions);
     }
 

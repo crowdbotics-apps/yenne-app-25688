@@ -10,11 +10,10 @@ export const isLoggedIn = async () => {
   const termsAgreed = await StorageUtils.getStringValue(constants.TERMS_AGREED);
   const username = await StorageUtils.getStringValue(constants.USERNAME);
   const hasUsername = await StorageUtils.getStringValue(constants.HAS_USERNAME);
-
   return {
     hasToken: !!token,
-    verified: verified,
-    termsAgreed: !!termsAgreed,
+    verified: verified === 'true',
+    termsAgreed: termsAgreed === 'true',
     username,
     hasUsername,
   };
