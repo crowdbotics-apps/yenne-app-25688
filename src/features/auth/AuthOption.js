@@ -45,7 +45,7 @@ const Icon = ({ name }) => {
 GoogleSignin.configure({
   scopes: ['email', 'profile'], // what API you want to access on behalf of the user, default is email and profile
   webClientId:
-    '1019078873013-t9l37q1jk67rok4fpudbgfqm7fuso3rt.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
+    '445580192151-ejtuvcr2sc1spm5k4p7igb6h4vq0sego.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
   offlineAccess: true, // if you want to access Google API on behalf of the user FROM YOUR SERVER
   hostedDomain: '', // specifies a hosted domain restriction
   loginHint: '', // [iOS] The user's ID, or email address, to be prefilled in the authentication UI if possible. [See docs here](https://developers.google.com/identity/sign-in/ios/api/interface_g_i_d_sign_in.html#a0a68c7504c31ab0b728432565f6e33fd)
