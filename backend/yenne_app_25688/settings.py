@@ -171,7 +171,7 @@ ACCOUNT_CONFIRM_EMAIL_ON_GET = True
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 ACCOUNT_UNIQUE_EMAIL = True
 LOGIN_REDIRECT_URL = "users:redirect"
-DEFAULT_FROM_EMAIL = env.bool("DEFAULT_FROM_EMAIL", 'yennecustomerservice@rosewoodventures.com')
+DEFAULT_FROM_EMAIL = "david.johnson@rosewoodventures.com"
 
 ACCOUNT_ADAPTER = "users.adapters.AccountAdapter"
 SOCIALACCOUNT_ADAPTER = "users.adapters.SocialAccountAdapter"
