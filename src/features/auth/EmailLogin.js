@@ -30,14 +30,11 @@ const EmailLogin = ({ navigation, login, loading, serverError }) => {
   const [inputs, setInputs] = React.useState({});
   const [errors, setErrors] = React.useState({});
   const dispatch = useDispatch();
-  const route = useRoute();
   const selector = useSelector(state => state.auth);
   const theme = useTheme();
   const nextScreen = async () => {
-    const { termsAgreed } = await isLoggedIn();
-    console.warn('is verified ', verified, 'agrred with terms ', termsAgreed);
-    const verified = await StorageUtils.getStringValue(constants.USER_VERIFIED);
-    if (verified) {
+    const { termsAgreed, verified } = await isLoggedIn();
+    if (!verified) {
       return navigation.navigate(routes.verifyCode);
     }
     if (!termsAgreed) {
