@@ -89,13 +89,19 @@ export const authReducer = (state = initialState, action) => {
         signUpLoading: false,
         user: action.user,
         signUpErrorMsg: undefined,
+        resetSuccess: false,
         loggedIn: action.user ? true : false,
       };
     case constants.SIGNUP_ERROR:
       return { ...state, signUpLoading: false, signUpErrorMsg: action.error };
 
     case constants.LOGIN:
-      return { ...state, signUpLoading: true, loginError: undefined };
+      return {
+        ...state,
+        signUpLoading: true,
+        loginError: undefined,
+        resetSuccess: false,
+      };
     case constants.LOGIN_SUCCESS:
       return {
         ...state,

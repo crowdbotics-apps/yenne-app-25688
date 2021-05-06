@@ -15,7 +15,10 @@ function signUp(auth) {
       if (typeof err.response?.data === 'string') {
         throw err.response?.data;
       }
-      throw Object.values(err.response?.data).join().toString();
+      if (err.response?.data) {
+        throw Object.values(err.response?.data).join().toString();
+      }
+      throw 'An error occured!';
     });
 }
 
@@ -52,7 +55,7 @@ function verifyCode(data) {
     .post(`api/v1/account/verify/${data.payload}/`)
     .then(res => res)
     .catch(err => {
-      throw err.response.data.join().replace(',', '').toString();
+      throw JSON.stringify(err.response.data?.join());
     });
 }
 
@@ -61,7 +64,11 @@ function resetCode() {
     .post('api/v1/account/resend/code/')
     .then(res => res)
     .catch(err => {
-      throw err.response.data.toString();
+      alert(JSON.stringify(err.response))
+      if (JSON.stringify(err?.response?.data).includes('Invalid token')) {
+        StorageUtils.removeValue(constants.TOKEN_KEY);
+      }
+      throw JSON.stringify(err.response.data);
     });
 }
 

@@ -3,7 +3,7 @@ import { appConfig } from '../config/app';
 
 export const request = axios.create({
   baseURL: appConfig.backendAPIEndPoint,
-  timeout: 1000,
+  timeout: 100000,
   headers: { 'Content-Type': 'application/json' },
 });
 
