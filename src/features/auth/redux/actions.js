@@ -199,3 +199,19 @@ export const appleIdSignUpError = error => ({
   type: constant.APPLE_ID_SIGNUP_ERROR,
   error,
 });
+
+// FORGOT PASSWORD
+export const forgotPassword = payload => ({
+  type: constant.FORGOT_PASSWORD,
+  payload,
+});
+
+export const forgotPasswordSuccess = payload => ({
+  type: constant.FORGOT_PASSWORD_SUCCESS,
+  payload,
+});
+
+export const forgotPasswordError = payload => ({
+  type: constant.FORGOT_PASSWORD_ERROR,
+  payload,
+});

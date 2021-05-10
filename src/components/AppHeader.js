@@ -37,7 +37,7 @@ const themedStyles = StyleService.create({
     minHeight: hp('100%'),
     marginLeft: 0,
     position: 'absolute',
-    top: hp('-67.00546448087431%'),
+    top: hp('-60.00546448087431%'),
   },
 });
 

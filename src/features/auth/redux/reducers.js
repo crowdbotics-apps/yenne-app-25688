@@ -25,6 +25,9 @@ const initialState = {
   usernameExistLoading: false,
   usernameSet: undefined,
   updateUsernameLoading: false,
+  forgotPasswordLoading: false,
+  passwordSent: false,
+  forgotPasswordError: undefined,
 };
 
 export const authReducer = (state = initialState, action) => {
@@ -63,6 +66,18 @@ export const authReducer = (state = initialState, action) => {
       return { ...state, appLoading: false, verified: true };
     case constants.VERIFY_CODE_ERROR:
       return { ...state, appLoading: false, verifyError: action.payload };
+
+    case constants.FORGOT_PASSWORD:
+      return { ...state, forgotPasswordLoading: true, passwordSent: false };
+    case constants.FORGOT_PASSWORD_SUCCESS:
+      return { ...state, forgotPasswordLoading: false, passwordSent: true };
+    case constants.FORGOT_PASSWORD_ERROR:
+      return {
+        ...state,
+        forgotPasswordLoading: false,
+        passwordSent: false,
+        forgotPasswordError: action.payload,
+      };
 
     case constants.RESET_CODE:
       return { ...state, resetLoading: true, verified: false };
@@ -114,10 +129,19 @@ export const authReducer = (state = initialState, action) => {
       return { ...state, signUpLoading: false, loginError: action.error };
 
     case constants.CLEAR_SIGNUP_ERROR:
-      return { ...state, signUpErrorMsg: undefined };
+      return {
+        ...state,
+        signUpErrorMsg: undefined,
+        forgotPasswordError: undefined,
+      };
 
     case constants.CLEAR_LOGIN_ERROR:
-      return { ...state, loginError: undefined };
+      return {
+        ...state,
+        loginError: undefined,
+        forgotPasswordError: undefined,
+        passwordSent: false,
+      };
 
     case constants.GET_LOGGED_USER:
       return { ...state, appLoading: true };
@@ -228,6 +252,9 @@ export const authReducer = (state = initialState, action) => {
         usernameExistLoading: false,
         usernameSet: undefined,
         updateUsernameLoading: false,
+        forgotPasswordLoading: false,
+        passwordSent: false,
+        forgotPasswordError: undefined,
       };
     case constants.LOGOUT_USER_ERROR:
       return { ...state, logOutLoading: false };

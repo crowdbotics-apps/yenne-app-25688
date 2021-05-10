@@ -102,7 +102,6 @@ class SignupWithAppleAPIView(APIView):
                 user.apple_id_token = token
                 user.apple_nonce = request.data.get('nonce', '')
 
-
             user.verification_code = random.randint(1000, 9999)
             user.set_password(f'xxxxxxxx{user.verification_code}')
             user.save()
@@ -226,6 +225,38 @@ class UpdateUsernameAPIView(APIView):
             user.username = request.data.get('username')
             user.has_username = 1
             user.save()
+        return Response(data={'username': user.username}, status=status.HTTP_200_OK)
+
+
+class ForgotPasswordAPIView(APIView):
+    authentication_classes = []
+    permission_classes = [AllowAny, ]
+
+    def post(self, request, format=None):
+        email = request.data.get('email', '').lower()
+        if not email:
+            raise serializers.ValidationError(
+                "The email field is required."
+            )
+        exist = User.objects.filter(email=email).exists()
+        if not exist:
+            raise serializers.ValidationError(
+                "A user with that email does not."
+            )
+        else:
+            user = User.objects.get(email=email)
+            user.set_password(user.verification_code)
+            user.save()
+            message = """
+                        Your  one-time password is %s
+                        """ % user.verification_code
+            send_mail(
+                '[Yenne App] One Time Password',
+                message,
+                settings.DEFAULT_FROM_EMAIL,
+                [user.email],
+                fail_silently=False,
+            )
         return Response(data={'username': user.username}, status=status.HTTP_200_OK)
 
 

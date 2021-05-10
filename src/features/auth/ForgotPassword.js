@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   View,
   ActivityIndicator,
-  TouchableOpacity,
   KeyboardAvoidingView,
   Platform,
   StatusBar,
   ScrollView,
+  TouchableOpacity,
 } from 'react-native';
 import {
   Text,
@@ -17,16 +17,28 @@ import {
 } from '@ui-kitten/components';
 import { connect, useDispatch } from 'react-redux';
 
-import { login, clearLoginError } from './redux/actions';
+import { forgotPassword, clearLoginError } from './redux/actions';
 import AppHeader from '../../components/AppHeader';
 import TextInputField from '../../components/Form/TextInputField';
+import AlertModal from '../../components/AlertModal';
+import { useRoute } from '@react-navigation/core';
+import routes from '../../navigator/routes';
 
-const ForgotPassword = ({ navigation, login, loading, serverError }) => {
+const ForgotPassword = ({
+  navigation,
+  forgotPassword,
+  loading,
+  serverError,
+  passwordSent,
+  clearLoginError,
+}) => {
   const styles = useStyleSheet(themedStyles);
   const [inputs, setInputs] = React.useState({});
   const [errors, setErrors] = React.useState({});
+  const [modalVisible, setModalVisible] = React.useState(false);
   const dispatch = useDispatch();
   const theme = useTheme();
+  const route = useRoute();
 
   const onChangeText = (field, value) => {
     dispatch(clearLoginError());
@@ -34,18 +46,22 @@ const ForgotPassword = ({ navigation, login, loading, serverError }) => {
     setErrors({ ...errors, [field]: '' });
   };
 
+  useEffect(() => {
+    if (route.name === routes.forgotPassword && passwordSent) {
+      setModalVisible(true);
+    }
+  }, [passwordSent]);
+
   const onSubmit = () => {
     let errors = {};
     if (!inputs.email) {
       errors.email = 'Email is a required field';
     }
-    if (!inputs.password) {
-      errors.password = 'Password is a required field';
-    }
+
     if (Object.keys(errors).length > 0) {
       setErrors(errors);
     } else {
-      login(inputs);
+      forgotPassword(inputs);
     }
   };
 
@@ -72,6 +88,7 @@ const ForgotPassword = ({ navigation, login, loading, serverError }) => {
               error={errors.email}
               value={inputs.email}
               keyboardType="email-address"
+              autoCapitalize="none"
             />
 
             <Text status="danger" style={{ marginBottom: 1 }}>
@@ -94,6 +111,24 @@ const ForgotPassword = ({ navigation, login, loading, serverError }) => {
               </Button>
             </View>
           </View>
+          <AlertModal
+            modalVisible={modalVisible}
+            setModalVisible={() => setModalVisible(!modalVisible)}
+            description="Single use password has been sent to your email"
+          >
+            <TouchableOpacity
+              onPress={() => {
+                clearLoginError();
+                setModalVisible(!modalVisible);
+              }}
+              style={[
+                styles.button,
+                { backgroundColor: theme['color-primary-500'], padding: 10 },
+              ]}
+            >
+              <Text style={{ textAlign: 'center', fontWeight: '500' }}>Ok</Text>
+            </TouchableOpacity>
+          </AlertModal>
         </ScrollView>
       </KeyboardAvoidingView>
     </View>
@@ -101,11 +136,12 @@ const ForgotPassword = ({ navigation, login, loading, serverError }) => {
 };
 
 const mapStateToProps = state => ({
-  loading: state.auth.signUpLoading,
-  serverError: state.auth.loginError,
+  loading: state.auth.forgotPasswordLoading,
+  serverError: state.auth.forgotPasswordError,
+  passwordSent: state.auth.passwordSent,
 });
 
-export default connect(mapStateToProps, { login, clearLoginError })(
+export default connect(mapStateToProps, { forgotPassword, clearLoginError })(
   ForgotPassword,
 );
 

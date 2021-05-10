@@ -64,7 +64,7 @@ function resetCode() {
     .post('api/v1/account/resend/code/')
     .then(res => res)
     .catch(err => {
-      alert(JSON.stringify(err.response))
+      alert(JSON.stringify(err.response));
       if (JSON.stringify(err?.response?.data).includes('Invalid token')) {
         StorageUtils.removeValue(constants.TOKEN_KEY);
       }
@@ -176,6 +176,7 @@ function* handleLogin({ auth }) {
       constants.USER_VERIFIED,
       result.data.verified.toString(),
     );
+    StorageUtils.setStringValue(constants.TERMS_AGREED, 'true');
     if (result.data.hasUsername !== 0) {
       StorageUtils.setStringValue(constants.HAS_USERNAME, 'true');
     }
@@ -285,10 +286,27 @@ function* handleFacebookSignUp({ auth, onSuccess }) {
     );
   }
 }
+function forgotPassword(data) {
+  return request
+    .post('api/v1/account/reset-password/', data)
+    .then(res => res)
+    .catch(err => {
+      throw err.response.data;
+    });
+}
+
+function* handleForgotPassword({ payload }) {
+  try {
+    yield call(forgotPassword, payload);
+    yield put(actions.forgotPasswordSuccess({}));
+  } catch (error) {
+    yield put(actions.forgotPasswordError(error));
+  }
+}
 
 function appleIdSignUp(auth) {
   return request
-    .post(`api/v1/account/appleid-auth/${auth.access_token}/`, auth)
+    .post('api/v1/account/appleid-auth/token', auth)
     .then(res => res)
     .catch(err => {
       alert(JSON.stringify(err.response.data));
@@ -323,7 +341,6 @@ function googleSignUp(auth) {
     .post(`api/v1/account/google-auth/${auth.access_token}`, auth)
     .then(resp => resp)
     .catch(err => {
-      alert(JSON.stringify(err.response.data.join()));
       throw err.response.data.join();
     });
 }
@@ -355,6 +372,7 @@ function* handleLogOut() {
     StorageUtils.removeValue(constants.TOKEN_KEY);
     StorageUtils.removeValue(constants.USER_VERIFIED);
     StorageUtils.removeValue(constants.USERNAME);
+    StorageUtils.removeValue(constants.TERMS_AGREED);
 
     StorageUtils.removeValue(constants.HAS_USERNAME);
     yield call(StorageUtils.removeValue, '@token');
@@ -379,4 +397,5 @@ export default [
   takeLatest(constants.UPDATE_USERNAME, handleUpdateUsername),
   takeLatest(constants.GOOGLE_SIGNUP, handleGoogleSignUp),
   takeLatest(constants.APPLE_ID_SIGNUP, handleAppleIdSignUp),
+  takeLatest(constants.FORGOT_PASSWORD, handleForgotPassword),
 ];

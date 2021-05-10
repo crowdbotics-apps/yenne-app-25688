@@ -22,8 +22,6 @@ import AppHeader from '../../components/AppHeader';
 import TextInputField from '../../components/Form/TextInputField';
 import { isLoggedIn } from '../../utils/helpers';
 import routes from '../../navigator/routes';
-import { StorageUtils } from '../../utils/storage';
-import * as constants from '../auth/redux/constants';
 
 const EmailLogin = ({ navigation, login, loading, serverError }) => {
   const styles = useStyleSheet(themedStyles);
