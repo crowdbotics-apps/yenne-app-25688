@@ -29,7 +29,8 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.1019078873013-t9l37q1jk67rok4fpudbgfqm7fuso3rt</string>
+				<string>com.googleusercontent.apps.4459140409-629nbi4cavcvpalgkmv8t00v4bajsm22</string>
+				<string>fb3015906808641433</string>
 			</array>
 		</dict>
 		<dict>
@@ -37,20 +38,22 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.1019078873013-qeemg0n9p4bu10ujgupnkiev6ja1ed5r</string>
+				<string>com.googleusercontent.apps.4459140409-btn1nusljjd6s8i2q5ijh35h5ueeib8e</string>
 			</array>
 		</dict>
 		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb3005435869701612</string>
+				<string>fb3015906808641433</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>FacebookAppID</key>
-	<string>3005435869701612</string>
+	<string>3015906808641433</string>
 	<key>FacebookDisplayName</key>
 	<string>Yenne</string>
 	<key>LSRequiresIPhoneOS</key>

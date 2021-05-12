@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">yenne_app_25688</string>
-    <string name="facebook_app_id">3005435869701612</string>
-    <string name="fb_login_protocol_scheme">fb3005435869701612</string>
-    <string name="ACCOUNT_KIT_CLIENT_TOKEN">7645600475e8a4f522f3ff4c837abbb3</string>
-    <string name="server_client_id">445580192151-at9hj0905flv16hjkpn4eh9rlfgej5c6.apps.googleusercontent.com</string>
+    <string name="facebook_app_id">3015906808641433</string>
+    <string name="fb_login_protocol_scheme">fb3015906808641433</string>
+    <string name="ACCOUNT_KIT_CLIENT_TOKEN">448c82ab2d576a3a7f47e2a32371f6a0</string>
+    <string name="server_client_id">4459140409-8v1h68aqeflci71uas3sckce3sdp70as.apps.googleusercontent.com</string>
 </resources>
