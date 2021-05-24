@@ -11,6 +11,7 @@ from home.api.v1.viewsets import (
     UsernameAvailableAPIView,
     UpdateUsernameAPIView,
     SignupWithGoogleAPIView, SignupWithFacebookAPIView, SignupWithAppleAPIView, ForgotPasswordAPIView,
+    UpdateAccountViewSet,
 )
 
 router = DefaultRouter()
@@ -18,9 +19,11 @@ router.register("signup", SignupViewSet, basename="signup")
 router.register("login", LoginViewSet, basename="login")
 router.register("customtext", CustomTextViewSet)
 router.register("homepage", HomePageViewSet)
+router.register("account/update-account", UpdateAccountViewSet)
 
 urlpatterns = [
     path("", include(router.urls)),
+    # path("account/update-account", csrf_exempt(UpdateAccountViewSet.as_view())),
     path("account/verify/<int:verification_code>/", VerifyOTPAPIView.as_view()),
     path("account/resend/code/", ResendOTPAPIView.as_view()),
     path("account/username-available", UsernameAvailableAPIView.as_view()),

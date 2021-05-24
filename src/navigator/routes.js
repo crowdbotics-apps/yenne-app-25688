@@ -9,6 +9,11 @@ export const routes = {
   verifyCode: 'VerifyCodeScreen',
   createUsername: 'CreateUsername',
   home: 'HomeScreen',
+  account: 'Account',
+  sendMoney: 'SendMoney',
+  receiveMoney: 'ReceiveMoney',
+  financialAccount: 'FinancialAccount',
+  addNewCard: 'AddNewCard',
 };
 
 export default routes;

@@ -4,7 +4,7 @@ import { request, setAuthorizationToken } from 'utils/http';
 import * as actions from './actions';
 import * as constants from './constants';
 import { navigate } from 'navigator/service';
-import { getServerError } from 'utils/helpers';
+import { getServerError, errorsToString } from 'utils/helpers';
 import { StorageUtils } from 'utils/storage';
 
 function signUp(auth) {
@@ -115,6 +115,11 @@ function* handleSignUp({ auth }) {
       constants.USER_VERIFIED,
       result.data.verified.toString(),
     );
+    StorageUtils.setStringValue(constants.EMAIL, result.data.email.toString());
+    StorageUtils.setStringValue(
+      constants.username,
+      result.data.username.toString(),
+    );
     setAuthorizationToken(result.data.token);
     yield put(
       actions.loginSuccess({
@@ -175,6 +180,11 @@ function* handleLogin({ auth }) {
     StorageUtils.setStringValue(
       constants.USER_VERIFIED,
       result.data.verified.toString(),
+    );
+    StorageUtils.setStringValue(constants.EMAIL, result.data.email.toString());
+    StorageUtils.setStringValue(
+      constants.username,
+      result.data.username.toString(),
     );
     StorageUtils.setStringValue(constants.TERMS_AGREED, 'true');
     if (result.data.hasUsername !== 0) {
@@ -345,6 +355,28 @@ function googleSignUp(auth) {
     });
 }
 
+function updateUserAccount({ values }) {
+  return request
+    .post('api/v1/account/update-account/', values)
+    .then(res => res)
+    .catch(err => {
+      alert(errorsToString(err.response.data));
+      throw errorsToString(err.response.data);
+    });
+}
+
+function* handleUpdateUserAccount(action) {
+  try {
+    const response = yield call(updateUserAccount, action.payload);
+    yield put(actions.updateUserAccountSuccess({ payload: response }));
+    action.onSuccess(response);
+  } catch (err) {
+    action.onError(err);
+  } finally {
+    yield put(actions.updateUserAccountSuccess());
+  }
+}
+
 function* handleGoogleSignUp({ auth, onSuccess }) {
   try {
     let result = yield call(googleSignUp, auth);
@@ -398,4 +430,5 @@ export default [
   takeLatest(constants.GOOGLE_SIGNUP, handleGoogleSignUp),
   takeLatest(constants.APPLE_ID_SIGNUP, handleAppleIdSignUp),
   takeLatest(constants.FORGOT_PASSWORD, handleForgotPassword),
+  takeEvery(constants.UPDATE_USER_ACCOUNT, handleUpdateUserAccount),
 ];

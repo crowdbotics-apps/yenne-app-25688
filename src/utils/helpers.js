@@ -1,6 +1,14 @@
 import { StorageUtils } from './storage';
 import * as constants from '../features/auth/redux/constants';
 
+export const userDetails = async () => {
+  const username = await StorageUtils.getStringValue(constants.USERNAME);
+  const email = await StorageUtils.getStringValue(constants.TOKEN_KEY);
+  return {
+    username: username || '',
+    email: email || '',
+  };
+};
 export const isLoggedIn = async () => {
   // StorageUtils.removeValue(constants.TOKEN_KEY)
   // StorageUtils.removeValue(constants.USER_VERIFIED)
@@ -31,6 +39,15 @@ export const getDisplayNameFromFieldName = name => {
   }
 };
 
+export function errorsToString(errorBag) {
+  const errors = [];
+  for (const key in errorBag) {
+    if (errorBag.hasOwnProperty(key)) {
+      errors.push(errorBag[key]);
+    }
+  }
+  return errors.join(', ');
+}
 export const getServerError = (errorObject, errorMessage) => {
   if (errorObject) {
     try {

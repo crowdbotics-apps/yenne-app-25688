@@ -235,6 +235,18 @@ export const authReducer = (state = initialState, action) => {
         socialAuthError: action.error,
       };
 
+    case constants.UPDATE_USER_ACCOUNT:
+      return {
+        ...state,
+        updatingAccount: true,
+      };
+
+    case constants.UPDATE_USER_ACCOUNT_SUCCESS:
+      return {
+        ...state,
+        updatingAccount: false,
+      };
+
     case constants.LOGOUT_USER:
       return { ...state, logOutLoading: true };
     case constants.LOGOUT_USER_SUCCESS:

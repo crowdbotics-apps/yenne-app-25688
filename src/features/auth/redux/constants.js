@@ -41,6 +41,7 @@ export const TOKEN_KEY = '@token';
 export const USER_VERIFIED = '@verified';
 export const TERMS_AGREED = '@terms';
 export const USERNAME = '@username';
+export const EMAIL = '@email';
 export const HAS_USERNAME = '@hasUsername';
 export const APPLE_ID_EMAIL = '@appleidemail';
 
@@ -63,3 +64,6 @@ export const USERNAME_EXIST_ERROR = 'USERNAME_EXIST_ERROR';
 export const UPDATE_USERNAME = 'UPDATE_USERNAME';
 export const UPDATE_USERNAME_SUCCESS = 'UPDATE_USERNAME_SUCCESS';
 export const UPDATE_USERNAME_ERROR = 'UPDATE_USERNAME_ERROR';
+
+export const UPDATE_USER_ACCOUNT = 'UPDATE_USER_ACCOUNT';
+export const UPDATE_USER_ACCOUNT_SUCCESS = 'UPDATE_USER_ACCOUNT_SUCCESS';
