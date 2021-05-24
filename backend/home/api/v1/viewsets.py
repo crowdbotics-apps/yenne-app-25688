@@ -24,9 +24,20 @@ from home.api.v1.serializers import (
     CustomTextSerializer,
     HomePageSerializer,
     UserSerializer,
-    TokenSerializer
+    TokenSerializer, UpdateAccountSerializer
 )
 from home.models import CustomText, HomePage
+
+
+class UpdateAccountViewSet(ModelViewSet):
+    serializer_class = UpdateAccountSerializer
+    authentication_classes = (
+        TokenAuthentication,
+        SessionAuthentication,
+    )
+    permission_classes = [IsAuthenticated, ]
+    queryset = User.objects.all()
+    # http_method_names = ["put"]
 
 
 class SignupViewSet(ModelViewSet):

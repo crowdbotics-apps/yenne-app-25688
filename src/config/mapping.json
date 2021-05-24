@@ -16,6 +16,24 @@
         "text-label-font-family": "Poppins-SemiBold"
     },
     "components": {
+        "Radio": {
+            "meta": {},
+            "appearances": {
+                "default": {
+                    "mapping": {},
+                    "variantGroups": {
+                        "status": {
+                            "basic": {
+                                "backgroundColor": "#9636ED",
+                                "borderColor": "transparent",
+                                "textColor": "#D5AEF8",
+                                "textFontWeight": "100"
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "Card": {
             "appearances": {
                 "outline": {
@@ -34,20 +52,22 @@
                     "variantGroups": {
                         "status": {
                             "basic": {
-                                "backgroundColor": "#F2F4F7",
-                                "borderColor": "#F2F4F7",
+                                "backgroundColor": "#9636ED",
+                                "borderColor": "transparent",
+                                "textColor": "#D5AEF8",
+                                "textFontWeight": "100",
                                 "state": {
                                     "focused": {
-                                        "backgroundColor": "#F2F4F7",
-                                        "borderColor": "color-basic-500"
+                                        "backgroundColor": "#9636ED",
+                                        "borderColor": "transparent"
                                     },
                                     "hover": {
-                                        "backgroundColor": "#F2F4F7",
-                                        "borderColor": "color-basic-500"
+                                        "backgroundColor": "#9636ED",
+                                        "borderColor": "transparent"
                                     },
                                     "active": {
-                                        "backgroundColor": "#F2F4F7",
-                                        "borderColor": "color-basic-500"
+                                        "backgroundColor": "#9636ED",
+                                        "borderColor": "transparent"
                                     }
                                 }
                             },

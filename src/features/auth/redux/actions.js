@@ -112,6 +112,17 @@ export const updateProfile = (id, profile, onSuccess) => ({
   onSuccess,
 });
 
+export const updateUserAccount = (payload, onSuccess, onError) => ({
+  type: constant.UPDATE_USER_ACCOUNT,
+  payload,
+  onSuccess,
+  onError,
+});
+
+export const updateUserAccountSuccess = () => ({
+  type: constant.UPDATE_USER_ACCOUNT_SUCCESS,
+});
+
 export const updateProfileSuccess = user => ({
   type: constant.UPDATE_PROFILE_SUCCESS,
   user,

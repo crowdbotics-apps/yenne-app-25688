@@ -17,7 +17,7 @@ import logging
 env = environ.Env()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.bool("DEBUG", default=True)
+DEBUG = env.bool("DEBUG", default=False)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -50,6 +50,8 @@ LOCAL_APPS = [
     'modules',
     'users.apps.UsersConfig',
     'user_profile',
+    'wallet',
+    'payment',
 ]
 THIRD_PARTY_APPS = [
     'rest_framework',
