@@ -1,26 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, TouchableOpacity } from 'react-native';
 
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import BackgroundWrapper from '../../components/BackgroundWrapper';
-import YNHeaderTitle from '../../components/HeaderTitle';
+import BackgroundWrapper from '../../../components/BackgroundWrapper';
+import YNHeaderTitle from '../../../components/HeaderTitle';
 import { StyleService, useStyleSheet, useTheme } from '@ui-kitten/components';
-import YNButton from '../../components/YNButton';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import routes from '../../navigator/routes';
-import ArrowDownIcon from '../../assets/images/ArrowDownIcon';
-import FinancialCard from './FinancialCard';
-import YTTab from '../../components/YTTab';
+import routes from '../../../navigator/routes';
+import CardForm from './CardForm';
+import CloseIcon from '../../../assets/images/CloseIcon';
 
-const FinancialAccount = ({ navigation }) => {
+const AddNewCard = ({ navigation, handleSubmit, isLoading }) => {
   const theme = useTheme();
   const styles = useStyleSheet(themedStyles);
+  const [formText, setFormText] = useState('Add new card');
 
   return (
-    <BackgroundWrapper style={{ backgroundColor: 'white' }} showBackButton>
+    <BackgroundWrapper showBackButton>
       <View style={styles.container}>
         <YNHeaderTitle category="h3" title="Financial account" />
 
@@ -35,41 +33,21 @@ const FinancialAccount = ({ navigation }) => {
           >
             <YNHeaderTitle
               category="h6"
-              title="My cards"
+              title={formText}
               style={{ color: theme['color-primary-black'] }}
             />
             <TouchableOpacity
-              onPress={() => navigation.navigate(routes.addNewCard)}
+              onPress={() => navigation.navigate(routes.financialAccount)}
               style={[styles.row]}
             >
-              <Ionicons
-                name="add"
-                color={theme['color-primary-100']}
-                size={18}
-              />
-              <YNHeaderTitle
-                category="h10"
-                title="ADD NEW"
-                style={{ color: theme['color-primary-100'] }}
-              />
+              <CloseIcon />
             </TouchableOpacity>
           </View>
-          <FinancialCard />
-          <View
-            style={[
-              styles.flexOne,
-              styles.alignItemsCenter,
-              styles.viewMoreWrapper,
-            ]}
-          >
-            <ArrowDownIcon />
-          </View>
-        </View>
-        <View style={styles.mainWrapper}>
-          <YTTab />
-          <View style={styles.buttonsWrapper}>
-            <YNButton onPress={() => {}} title="CONFIRM" />
-          </View>
+          <CardForm
+            handleSubmit={handleSubmit}
+            isLoading={isLoading}
+            setFormText={setFormText}
+          />
         </View>
       </View>
     </BackgroundWrapper>
@@ -117,4 +95,4 @@ const themedStyles = StyleService.create({
   },
 });
 
-export default FinancialAccount;
+export default AddNewCard;

@@ -5,11 +5,11 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import VisaIcon from '../../assets/images/VisaIcon';
-import RadioButton from '../../components/Form/RadioButton';
-import YNHeaderTitle from '../../components/HeaderTitle';
+import CardIcon from '../../../components/CardIcon';
+import RadioButton from '../../../components/Form/RadioButton';
+import YNHeaderTitle from '../../../components/HeaderTitle';
 
-const FinancialCard = () => {
+const FinancialCard = ({ card, index }) => {
   const theme = useTheme();
   const styles = useStyleSheet(themedStyles);
   return (
@@ -23,19 +23,22 @@ const FinancialCard = () => {
     >
       <View style={[styles.row]}>
         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-          <RadioButton selected />
+          <RadioButton selected={index === 0} />
         </View>
 
         <View style={styles.cardContent}>
           <View style={[styles.row, styles.cardIcon]}>
             <Text style={{ color: theme['color-basic-600'] }}>
-              MY CARD 1{'  '}
+              MY CARD {index + 1}
+              {'  '}
             </Text>
-            <VisaIcon />
+            <CardIcon cardNumber={card?.number} style={{ top: 0 }} />
           </View>
           <YNHeaderTitle
             category="h7"
-            title="**** **** **** *234"
+            title={
+              '**** **** **** *' + card?.number?.slice(card?.number?.length - 3)
+            }
             style={{
               color: theme['color-primary-black'],
               fontSize: 18,

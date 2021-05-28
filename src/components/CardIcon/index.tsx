@@ -4,12 +4,14 @@ import cardValidator from 'card-validator'
 
 type Props = {
   cardNumber: string
+  style?: any
 }
 
 type Card = {
   icon: number
   animation: any
   alternativeAnimation?: any
+  
 }
 
 const CARDS: Record<string, Card> = {
@@ -40,7 +42,7 @@ const CardIcon: React.FC<Props> = (props) => {
 
   if (!data) return null
  
-    return <Image style={styles.icon} source={data.icon} />
+    return <Image style={[styles.icon, props?.style ? props.style: {}]} source={data.icon} />
   
 }
 

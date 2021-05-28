@@ -11,8 +11,8 @@ import routes from './routes';
 import Account from '../features/auth/Account';
 import SendMoney from '../features/home/SendMoney';
 import ReceiveMoney from '../features/home/ReceiveMoney';
-import FinancialAccount from '../features/Financial/FinancialAccount';
-import AddNewCard from '../features/Financial/AddNewCard';
+import FinancialAccount from '../features/Financial/containers/FinancialAccountContainer';
+import AddNewCard from '../features/Financial/containers/AddNewCardContainers';
 const Stack = createStackNavigator();
 
 const AppStackNavigator = () => {
