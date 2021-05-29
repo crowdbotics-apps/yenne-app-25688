@@ -9,3 +9,11 @@ export function getCards() {
 export function addCard(payload) {
   return request.post(CARD_API, payload);
 }
+
+export function deleteCard(payload) {
+  return request.delete(CARD_API + payload.id + '/');
+}
+
+export function updateCard(payload) {
+  return request.put(CARD_API + payload.id + '/', payload);
+}

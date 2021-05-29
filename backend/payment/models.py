@@ -17,5 +17,8 @@ class PaymentCard(TimestampModel):
     is_primary = models.BooleanField(default=False)
     objects = PaymentQuerySet.as_manager()
 
+    class Meta:
+        ordering = ('-is_primary',)
+
     def __str__(self):
         return self.holder

@@ -1,5 +1,5 @@
 import { StyleService, useStyleSheet, useTheme } from '@ui-kitten/components';
-import React from 'react';
+import React, { useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import {
   widthPercentageToDP as wp,
@@ -9,9 +9,10 @@ import CardIcon from '../../../components/CardIcon';
 import RadioButton from '../../../components/Form/RadioButton';
 import YNHeaderTitle from '../../../components/HeaderTitle';
 
-const FinancialCard = ({ card, index }) => {
+const FinancialCard = ({ card, index, handleDelete, handleUpdateCard }) => {
   const theme = useTheme();
   const styles = useStyleSheet(themedStyles);
+  const [isPrimary, setIsPrimary] = useState(card.is_primary);
   return (
     <View
       style={[
@@ -23,7 +24,14 @@ const FinancialCard = ({ card, index }) => {
     >
       <View style={[styles.row]}>
         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-          <RadioButton selected={index === 0} />
+          <TouchableOpacity
+            onPress={() => {
+              setIsPrimary(!isPrimary);
+              handleUpdateCard({ ...card, is_primary: !isPrimary });
+            }}
+          >
+            <RadioButton selected={isPrimary} />
+          </TouchableOpacity>
         </View>
 
         <View style={styles.cardContent}>
@@ -47,7 +55,10 @@ const FinancialCard = ({ card, index }) => {
           />
         </View>
       </View>
-      <TouchableOpacity onPress={() => {}} style={[styles.row]}>
+      <TouchableOpacity
+        onPress={() => handleDelete(card.id)}
+        style={[styles.row]}
+      >
         <YNHeaderTitle
           category="h10"
           title="Delete"

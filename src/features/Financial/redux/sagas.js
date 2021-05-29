@@ -2,7 +2,7 @@ import { put, call, takeEvery } from 'redux-saga/effects';
 
 import * as actions from './actions';
 import * as constants from './constants';
-import { getCards, addCard } from './api';
+import { getCards, addCard, deleteCard, updateCard } from './api';
 
 function* handleGetCards(payload) {
   try {
@@ -24,7 +24,30 @@ function* handleAddCard({ data, onSuccess, onError }) {
   }
 }
 
+function* handleDeleteCard({ data, onSuccess, onError }) {
+  try {
+    const result = yield call(deleteCard, data);
+    yield put(actions.deleteCardSuccess(result.data));
+    onSuccess(result);
+  } catch (error) {
+    yield put(actions.addCardFail(error));
+    onError(error);
+  }
+}
+
+function* handleUpdateCard({ data, onSuccess, onError }) {
+  try {
+    const result = yield call(updateCard, data);
+    yield put(actions.updateCardSuccess(result.data));
+    onSuccess(result);
+  } catch (error) {
+    yield put(actions.updateCardFail(error));
+    onError(error);
+  }
+}
 export default [
   takeEvery(constants.LIST_CARDS, handleGetCards),
   takeEvery(constants.ADD_CARD, handleAddCard),
+  takeEvery(constants.DELETE_CARD, handleDeleteCard),
+  takeEvery(constants.UPDATE_CARD, handleUpdateCard),
 ];

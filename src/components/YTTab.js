@@ -31,16 +31,11 @@ const YTTab = ({ navigation }) => {
       title: ' DEPOSIT',
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
     },
-    {
-      active: false,
-      title: 'WITHDRAW',
-      description: 'Iporem ipsum dolor sit amet, consectetur adipiscing elit',
-    },
   ]);
   const updateTab = idx => {
     setTabData(
       [...tabData].map((item, index) => {
-        if (index == idx) {
+        if (index === idx) {
           return {
             ...item,
             active: true,
@@ -101,7 +96,7 @@ const themedStyles = StyleService.create({
     borderBottomWidth: 3,
     borderBottomColor: 'color-primary-100',
   },
-  spaceBetween: { justifyContent: 'space-between' },
+  spaceBetween: { justifyContent: 'center' },
   alignItemsCenter: { alignItems: 'center' },
   row: { flexDirection: 'row' },
   flexOne: { flex: 1 },

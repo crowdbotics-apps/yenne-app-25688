@@ -28,3 +28,33 @@ export const addCardFail = payload => ({
   type: constant.ADD_CARD_FAIL,
   payload,
 });
+
+// DELETE card
+export const deleteCard = ({ data, onSuccess, onError }) => {
+  return { type: constant.DELETE_CARD, data, onSuccess, onError };
+};
+
+export const deleteCardSuccess = payload => ({
+  type: constant.DELETE_CARD_SUCCESS,
+  payload,
+});
+
+export const deleteCardFail = payload => ({
+  type: constant.DELETE_CARD_FAIL,
+  payload,
+});
+
+// UPDATE card
+export const updateCard = ({ data, onSuccess, onError }) => {
+  return { type: constant.UPDATE_CARD, data, onSuccess, onError };
+};
+
+export const updateCardSuccess = payload => ({
+  type: constant.UPDATE_CARD_SUCCESS,
+  payload,
+});
+
+export const updateCardFail = payload => ({
+  type: constant.UPDATE_CARD_FAIL,
+  payload,
+});

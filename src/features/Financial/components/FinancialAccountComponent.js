@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TouchableOpacity, FlatList, Text } from 'react-native';
+import { View, TouchableOpacity, Text } from 'react-native';
 
 import {
   widthPercentageToDP as wp,
@@ -14,9 +14,13 @@ import ArrowDownIcon from '../../../assets/images/ArrowDownIcon';
 import FinancialCard from './FinancialCard';
 import YTTab from '../../../components/YTTab';
 import YNButton from '../../../components/YNButton';
-import { mapping } from '@eva-design/eva';
 
-const FinancialAccountComponent = ({ navigation, cards }) => {
+const FinancialAccountComponent = ({
+  navigation,
+  cards,
+  handleDelete,
+  handleUpdateCard,
+}) => {
   const theme = useTheme();
   const styles = useStyleSheet(themedStyles);
 
@@ -57,7 +61,11 @@ const FinancialAccountComponent = ({ navigation, cards }) => {
               />
             </TouchableOpacity>
           </View>
-          {cards.length === 0 ? <Text>No Record Found!</Text> : null}
+          {cards.length === 0 ? (
+            <Text style={{ textAlign: 'center', padding: 24 }}>
+              No Record Found!
+            </Text>
+          ) : null}
           {cards.map((item, index) => {
             if (!showAll && index !== 0) return null;
             return (
@@ -65,6 +73,8 @@ const FinancialAccountComponent = ({ navigation, cards }) => {
                 key={'list-card-' + index}
                 index={index}
                 card={item}
+                handleDelete={handleDelete}
+                handleUpdateCard={handleUpdateCard}
               />
             );
           })}

@@ -27,6 +27,33 @@ export const financialReducer = (state = initialState, action) => {
         listCardsLoading: false,
         serverError: action.payload.error,
       };
+
+    case constants.DELETE_CARD:
+      return { ...state, listCardsLoading: true, serverError: undefined };
+
+    case constants.DELETE_CARD_SUCCESS:
+      return { ...state, listCardsLoading: false, serverError: undefined };
+
+    case constants.DELETE_CARD_FAIL:
+      return {
+        ...state,
+        listCardsLoading: false,
+        serverError: action.payload.error,
+      };
+
+    case constants.UPDATE_CARD:
+      return { ...state, listCardsLoading: true, serverError: undefined };
+
+    case constants.UPDATE_CARD_SUCCESS:
+      return { ...state, listCardsLoading: false, serverError: undefined };
+
+    case constants.UPDATE_CARD_FAIL:
+      return {
+        ...state,
+        listCardsLoading: false,
+        serverError: action.payload.error,
+      };
+
     default:
       return state;
   }
