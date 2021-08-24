@@ -198,15 +198,15 @@ EMAIL_HOST_USER = env.str("SENDGRID_USERNAME", "apikey")
 EMAIL_HOST_PASSWORD = env.str("SENDGRID_PASSWORD", "")
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-SENDGRID_API_KEY=EMAIL_HOST_PASSWORD
+SENDGRID_API_KEY = EMAIL_HOST_PASSWORD
 EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
-SENDGRID_SANDBOX_MODE_IN_DEBUG=True
+SENDGRID_SANDBOX_MODE_IN_DEBUG = True
 # AWS S3 config
 AWS_ACCESS_KEY_ID = env.str("AWS_ACCESS_KEY_ID", "")
 AWS_SECRET_ACCESS_KEY = env.str("AWS_SECRET_ACCESS_KEY", "")
 AWS_STORAGE_BUCKET_NAME = env.str("AWS_STORAGE_BUCKET_NAME", "")
 AWS_STORAGE_REGION = env.str("AWS_STORAGE_REGION", "")
-SENDGRID_ECHO_TO_STDOUT=True
+SENDGRID_ECHO_TO_STDOUT = True
 USE_S3 = (
         AWS_ACCESS_KEY_ID and
         AWS_SECRET_ACCESS_KEY and
@@ -238,8 +238,22 @@ SWAGGER_SETTINGS = {
     "DEFAULT_INFO": f"{ROOT_URLCONF}.api_info",
 }
 
+PLAID = {
+    'clientId': env.str("PLAID_CLIENT_ID", ""),
+    'secret': env.str("PLAID_SECRET", ""),
+    'plaidVersion': '2020-09-14',
+    'environment': env.str('PLAID_ENV', 'sandbox'),
+    'url': env.str('PLAID_URL', "https://sandbox.plaid.com/")
+}
+
+DWOLLA = {
+    'app_key': env.str("DWOLLA_APP_KEY", ""),
+    'app_secret': env.str("DWOLLA_APP_SECRET", ""),
+    'environment': env.str('DWOLLA_ENV', 'sandbox'),
+    'url': env.str('DWOLLA_URL', "https://api-sandbox.dwolla.com")
+}
+
 if DEBUG or not (EMAIL_HOST_USER and EMAIL_HOST_PASSWORD):
-    print(EMAIL_HOST_PASSWORD, EMAIL_HOST_PASSWORD, '*'*123)
     # output email to console instead of sending
     if not DEBUG:
         logging.warning("You should setup `SENDGRID_USERNAME` and `SENDGRID_PASSWORD` env vars to send emails.")

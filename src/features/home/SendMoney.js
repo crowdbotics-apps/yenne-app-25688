@@ -12,6 +12,7 @@ import Input from '../../components/Form/Input';
 import { Formik } from 'formik';
 import { validateRegistration } from '../../utils/validation';
 import SelectField from '../../components/Form/SelectField';
+import { PlaidLink, LinkSuccess, LinkExit } from 'react-native-plaid-link-sdk';
 
 const SendMoney = ({ navigation }) => {
   const theme = useTheme();
@@ -27,6 +28,20 @@ const SendMoney = ({ navigation }) => {
         <Text style={styles.helperText}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit
         </Text>
+        <PlaidLink
+          tokenConfig={{
+            token: 'link-sandbox-b49da303-090f-41ba-97d5-32df0291d82a',
+          }}
+          onSuccess={success => {
+            console.log(JSON.stringify(success));
+            alert(JSON.stringify(success))
+          }}
+          onExit={exit => {
+            console.log(exit);
+          }}
+        >
+          <Text>Add Account</Text>
+        </PlaidLink>
         <Formik
           initialValues={{
             username: '',

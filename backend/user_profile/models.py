@@ -20,6 +20,9 @@ class Profile(TimestampModel):
         on_delete=models.CASCADE,
         related_name="profile",
     )
+    dwolla_customer_id = models.CharField(max_length=120, default='', null=True,)
+    dwolla_funding_source_id = models.CharField(max_length=120, default='', null=True,)
+
     objects = ProfileQueryset.as_manager()
 
     def fullname(self):
