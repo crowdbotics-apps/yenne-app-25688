@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import {
   widthPercentageToDP as wp,
@@ -10,15 +10,13 @@ import { StyleService, useStyleSheet, useTheme } from '@ui-kitten/components';
 import Input from '../../components/Form/Input';
 import { Formik } from 'formik';
 import { validateRegistration } from '../../utils/validation';
-import { useDispatch, useSelector } from 'react-redux';
-import { updateUserAccount } from '../auth/redux/actions';
-import { request, setAuthorizationToken } from '../../utils/http';
+import { useSelector } from 'react-redux';
+import { request } from '../../utils/http';
 import { errorsToString } from '../../utils/helpers';
 
 const Account = ({ navigation }) => {
   const theme = useTheme();
   const styles = useStyleSheet(themedStyles);
-  const dispatch = useDispatch();
   const user = useSelector(state => state.auth?.user || {});
 
   const [showPassword, setShowPassword] = useState(true);

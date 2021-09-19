@@ -146,6 +146,7 @@ export const authReducer = (state = initialState, action) => {
     case constants.GET_LOGGED_USER:
       return { ...state, appLoading: true };
     case constants.GET_LOGGED_USER_SUCCESS:
+      // alert(JSON.stringify(action.user))
       return {
         ...state,
         appLoading: false,

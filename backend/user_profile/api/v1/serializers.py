@@ -7,10 +7,19 @@ from core.utils import update_object
 
 class ProfileSerializer(serializers.ModelSerializer):
     fullname = serializers.CharField(required=False)
+    user = serializers.SerializerMethodField()
 
     class Meta:
         model = Profile
         fields = "__all__"
+
+    def get_user(self, instance):
+        user = instance.user
+        return {
+            "id": user.id,
+            "email": user.email,
+            "username": user.username
+        }
 
     def _get_request(self):
         request = self.context.get("request")

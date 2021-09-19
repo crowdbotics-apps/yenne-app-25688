@@ -8,9 +8,9 @@ PLAID_SETTINGS = settings.PLAID or {}
 
 class Plaid(object):
     def __init__(self):
-        self.client = plaid.Client(client_id=PLAID_SETTINGS.get('clientId'),
-                                   secret=PLAID_SETTINGS.get('secret'),
-                                   environment=PLAID_SETTINGS.get('environment'))
+        # self.client = plaid.Client(client_id=PLAID_SETTINGS.get('clientId'),
+        #                            secret=PLAID_SETTINGS.get('secret'),
+        #                            environment=PLAID_SETTINGS.get('environment'))
         self.configuration: dict = {
             "client_id": PLAID_SETTINGS.get('clientId'),
             "secret": PLAID_SETTINGS.get('secret'),
@@ -45,6 +45,13 @@ class PlaidProcessor(Plaid):
         return cls()._token_create(access_token, account_id)
 
     def _token_create(self, access_token, account_id):
+        """
+        # Create a processor token for a specific account id.
+        returns {
+          "processor_token": "processor-sandbox-0asd1-a92nc",
+          "request_id": "[Unique request ID]"
+        }
+        """
         url = 'processor/token/create'
         payload = {
             'access_token': access_token,
@@ -80,6 +87,14 @@ class PlaidItems(Plaid):
         return response
 
     def _exchange_token(self, public_token):
+        """
+        Exchange this public_token for a Plaid access_token using the /item/public_token/exchange API endpoint.
+        returns: {
+          "access_token": "access-sandbox-3f3181d2-76de-40c2-8f3b-152d2c6726d7",
+          "item_id": "wnVRXPmk3mt3wepjXEeXsbN4NWe5V9FrNeEN1",
+          "request_id": "WAH4B"
+        }
+        """
         url = 'item/public_token/exchange'
         payload = {"public_token": public_token}
         response = self.api_requester("POST", url, payload=payload)
@@ -92,6 +107,10 @@ class PlaidLink(Plaid):
         return cls()._create_link_token(user_id)
 
     def _create_link_token(self, user_id=None):
+        """
+        https://plaid.com/docs/auth/partnerships/dwolla/#create-a-link_token
+        A link_token is a short-lived, one-time use token that is used to authenticate your app with Link.
+        """
         # Create a link_token for the given user
         url = 'link/token/create'
 

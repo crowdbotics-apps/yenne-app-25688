@@ -2,6 +2,14 @@ import { request } from 'utils/http';
 
 const CARD_API = 'api/v1/cards/';
 
+export const getLinkToken = () => {
+  return request.get('api/v1/payment/token/link_token');
+};
+
+export const postPublicToken = payload => {
+  return request.post('api/v1/payment/token/link_token', payload);
+};
+
 export function getCards() {
   return request.get(CARD_API);
 }

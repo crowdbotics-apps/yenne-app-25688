@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleService, useStyleSheet, useTheme } from '@ui-kitten/components';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Platform } from 'react-native';
 import YNHeaderTitle from './HeaderTitle';
 import TextInputField from './Form/TextInputField';
 
@@ -23,13 +23,13 @@ const YNTabItem = ({ active, title, updateTab, index }) => {
   );
 };
 
-const YTTab = ({ navigation }) => {
+const YTTab = ({ navigation, amount, setAmount }) => {
   const styles = useStyleSheet(themedStyles);
   const [tabData, setTabData] = React.useState([
     {
       active: true,
       title: ' DEPOSIT',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+      description: 'Select your card and deposit money to Yenne balance',
     },
   ]);
   const updateTab = idx => {
@@ -65,12 +65,17 @@ const YTTab = ({ navigation }) => {
       </View>
       <View style={styles.contentWrapper}>
         <View>
-          <Text>{tabData[0].description}</Text>
+          <Text style={{ textAlign: 'center', color: '#666' }}>
+            {tabData[0].description}
+          </Text>
           <View style={styles.inputWrapper}>
             <TextInputField
-              onChangeText={text => {}}
-              label="Amount"
+              onChangeText={text => setAmount(text)}
+              label="Amount in USD"
               autoCapitalize="none"
+              keyboardType={
+                Platform.OS === 'android' ? 'numeric' : 'number-pad'
+              }
             />
           </View>
         </View>

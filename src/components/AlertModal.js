@@ -1,15 +1,54 @@
 import React from 'react';
-import { Alert, Modal, StyleSheet, Text, View } from 'react-native';
+import {
+  Alert,
+  Modal,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+} from 'react-native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import YNSmallButton from './YNSmallButton';
+
+const renderSuccessIcon = () => {
+  return (
+    <View style={{ alignItems: 'center' }}>
+      <AntDesign name="checkcircle" color="#6FCF97" size={20} />
+    </View>
+  );
+};
+
+const renderActionButtons = ({ onOkyPress, setModalVisible }) => {
+  return (
+    <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+      <YNSmallButton
+        onPress={() => setModalVisible(false)}
+        title="No"
+        textStyle={{ color: '#F1C80D' }}
+        style={{ backgroundColor: 'transparent', width: '50%' }}
+      />
+      <YNSmallButton
+        style={{ padding: 5, width: '50%' }}
+        onPress={onOkyPress}
+        title="Yes"
+      />
+    </View>
+  );
+};
 
 const AlertModal = ({
   modalVisible = true,
   setModalVisible,
   children,
   description,
+  success = false,
+  actionable = false,
+  onOkyPress = () => {},
 }) => {
   return (
     <View style={styles.centeredView}>
@@ -17,17 +56,37 @@ const AlertModal = ({
         animationType="slide"
         transparent={true}
         visible={modalVisible}
+        onBackButtonPress={() => setModalVisible(false)}
         onRequestClose={() => {
           Alert.alert('Modal has been closed.');
           setModalVisible(!modalVisible);
         }}
       >
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Text style={styles.modalText}>{description}</Text>
-            {children}
+        <TouchableOpacity
+          style={[
+            styles.centeredView,
+            { backgroundColor: 'transparent', padding: 0, margin: 0 },
+          ]}
+          activeOpacity={1}
+          onPressOut={() => {
+            setModalVisible(false);
+          }}
+        >
+          <View style={styles.centeredView}>
+            <TouchableWithoutFeedback>
+              <View style={styles.modalView}>
+                {description ? (
+                  <Text style={styles.modalText}>{description}</Text>
+                ) : null}
+                {children}
+                {success ? renderSuccessIcon() : null}
+                {actionable
+                  ? renderActionButtons({ onOkyPress, setModalVisible })
+                  : null}
+              </View>
+            </TouchableWithoutFeedback>
           </View>
-        </View>
+        </TouchableOpacity>
       </Modal>
     </View>
   );
@@ -38,12 +97,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 22,
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    backgroundColor: 'rgba(0,0,0,0.4)',
+    padding: 0,
+    width: '100%',
   },
   modalView: {
     marginHorizontal: wp('15%'),
-    margin: 20,
+    // margin: 20,
     backgroundColor: 'white',
     borderRadius: 20,
     paddingHorizontal: 45,

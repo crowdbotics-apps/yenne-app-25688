@@ -3,8 +3,17 @@ import React from 'react';
 
 const YNHeaderTitle = ({ title, category = 'h5', style = {} }) => {
   const styles = useStyleSheet(themedStyles);
+  let customStyle = {};
+  let h = category;
+
+  if (category === 'h10') {
+    h = 'h6';
+    customStyle = {
+      fontSize: 15,
+    };
+  }
   return (
-    <Text category={category} style={[styles.headerTitle, style]}>
+    <Text category={h} style={[styles.headerTitle, customStyle, style]}>
       {title}
     </Text>
   );

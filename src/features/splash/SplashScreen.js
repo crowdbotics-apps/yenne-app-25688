@@ -9,19 +9,19 @@ import routes from '../../navigator/routes';
 const SplashScreen = ({ navigation }) => {
   const styles = useStyleSheet(themedStyles);
   const nextScreen = async () => {
-    const { hasToken, verified, termsAgreed } = await isLoggedIn();
+    // const { hasToken, verified, termsAgreed } = await isLoggedIn();
 
-    if (!hasToken) {
-      return navigation.navigate(routes.authOption);
-    }
+    // if (!hasToken) {
+    //   return navigation.navigate(routes.authOption);
+    // }
 
-    if (!verified) {
-      return navigation.navigate(routes.verifyCode);
-    } else if (!termsAgreed) {
-      return navigation.navigate(routes.termsAndConditions);
-    }
+    // if (!verified) {
+    //   return navigation.navigate(routes.verifyCode);
+    // } else if (!termsAgreed) {
+    //   return navigation.navigate(routes.termsAndConditions);
+    // }
 
-    return navigation.navigate(routes.home);
+    // return navigation.navigate(routes.home);
   };
   useEffect(() => {
     setTimeout(() => {

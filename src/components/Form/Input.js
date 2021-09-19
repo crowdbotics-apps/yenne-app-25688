@@ -31,13 +31,13 @@ const Input = ({
     <View>
       {label ? (
         <View>
-          <Text style={styles.label}>{label}</Text>
+          <Text style={inputStyles.label}>{label}</Text>
         </View>
       ) : null}
-      <View style={styles.inputContainer}>
+      <View style={inputStyles.inputContainer}>
         <TextInput
           secureTextEntry={secureTextEntry}
-          style={styles.input}
+          style={inputStyles.input}
           placeholderTextColor={'#D5AEF8'}
           placeholder={placeholder}
           keyboardType={keyboardType}
@@ -61,7 +61,7 @@ const Input = ({
   );
 };
 
-const styles = ScaledSheet.create({
+export const inputStyles = ScaledSheet.create({
   inputContainer: {
     backgroundColor: '#9636ED',
     paddingLeft: '15@s',

@@ -1,140 +1,57 @@
-import React from 'react';
-import { View, Text } from 'react-native';
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from 'react-native-responsive-screen';
-import BackgroundWrapper from '../../components/BackgroundWrapper';
-import YNHeaderTitle from '../../components/HeaderTitle';
-import { StyleService, useStyleSheet, useTheme } from '@ui-kitten/components';
-import YNButton from '../../components/YNButton';
-import Input from '../../components/Form/Input';
-import { Formik } from 'formik';
-import { validateRegistration } from '../../utils/validation';
-import SelectField from '../../components/Form/SelectField';
-import { PlaidLink, LinkSuccess, LinkExit } from 'react-native-plaid-link-sdk';
+import React, { useEffect, useState } from 'react';
+
+import { useDispatch, useSelector } from 'react-redux';
+import * as actions from './redux/actions';
+import * as accountActions from '../Accounts/redux/actions';
+import SendMoneyComponent from './components/SendMoneyComponent';
+import { errorsToString } from '../../utils/helpers';
 
 const SendMoney = ({ navigation }) => {
-  const theme = useTheme();
-  const styles = useStyleSheet(themedStyles);
+  const dispatch = useDispatch();
+  const profiles = useSelector(state => state.profile.profiles);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+
+  useEffect(() => {
+    dispatch(actions.getProfiles({ payload: { params: 'with_balance=true' } }));
+  }, []);
+
+  const handleSendMoney = ({ amount, fundingSourceId, callBack }) => {
+    if (!amount) {
+      alert('Amount required');
+      return;
+    }
+    if (!fundingSourceId) {
+      alert('Source email required!');
+      return;
+    }
+
+    dispatch(
+      accountActions.depositToBalance({
+        payload: {
+          source_id: 'self',
+          amount,
+          destination_id: fundingSourceId,
+        },
+        onSuccess: data => {
+          setShowSuccessModal(true);
+          callBack && callBack();
+          dispatch(accountActions.getBalance());
+        },
+        onError: error => {
+          alert(errorsToString(error?.response?.data));
+        },
+      }),
+    );
+  };
 
   return (
-    <BackgroundWrapper
-      style={{ backgroundColor: theme['header-background-color'] }}
-      showBackButton
-    >
-      <View style={styles.container}>
-        <YNHeaderTitle category="h3" title="Send money" />
-        <Text style={styles.helperText}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit
-        </Text>
-        <PlaidLink
-          tokenConfig={{
-            token: 'link-sandbox-b49da303-090f-41ba-97d5-32df0291d82a',
-          }}
-          onSuccess={success => {
-            console.log(JSON.stringify(success));
-            alert(JSON.stringify(success))
-          }}
-          onExit={exit => {
-            console.log(exit);
-          }}
-        >
-          <Text>Add Account</Text>
-        </PlaidLink>
-        <Formik
-          initialValues={{
-            username: '',
-            amount: '',
-          }}
-          validate={validateRegistration}
-          onSubmit={values => console.warn(values)}
-        >
-          {({
-            handleChange,
-            handleSubmit,
-            values,
-            errors,
-            touched,
-            setFieldValue,
-          }) => (
-            <View style={styles.formWrapper}>
-              <Input
-                secureTextEntry={false}
-                iconShow={false}
-                placeholder="Money Recipient"
-                name="username"
-                onChange={value => {
-                  handleChange('username');
-                  setFieldValue('username', value);
-                }}
-                value={values.username}
-              />
-              {errors.username && touched.username && (
-                <View>
-                  <Text style={styles.errorText}>{errors.username}</Text>
-                </View>
-              )}
-
-              <View style={styles.row}>
-                <View style={{ flex: 1, marginRight: 4 }}>
-                  <SelectField />
-                </View>
-                <View style={{ flex: 1.5 }}>
-                  <Input
-                    secureTextEntry={false}
-                    iconShow={false}
-                    placeholder="Amount"
-                    name="email"
-                    onChange={value => {
-                      handleChange('email');
-                      setFieldValue('email', value);
-                    }}
-                    value={values.email}
-                  />
-                  {errors.email && touched.email && (
-                    <View>
-                      <Text style={styles.errorText}>{errors.email}</Text>
-                    </View>
-                  )}
-                </View>
-              </View>
-
-              <View style={styles.buttonsWrapper}>
-                <YNButton onPress={handleSubmit} title="CONFIRM" />
-              </View>
-            </View>
-          )}
-        </Formik>
-      </View>
-    </BackgroundWrapper>
+    <SendMoneyComponent
+      profiles={profiles}
+      showSuccessModal={showSuccessModal}
+      setShowSuccessModal={setShowSuccessModal}
+      handleSendMoney={handleSendMoney}
+    />
   );
 };
-
-const themedStyles = StyleService.create({
-  row: { flexDirection: 'row', marginTop: hp('2%') },
-  column: { flexDirection: 'column' },
-  helperText: { color: '#D5AEF8', marginTop: hp('10%'), fontSize: 18 },
-  container: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    flex: 1,
-    marginVertical: hp('3%'),
-    marginHorizontal: wp('5%'),
-  },
-  formWrapper: {
-    marginTop: hp('10%'),
-  },
-  buttonsWrapper: {
-    marginTop: hp('2%'),
-    justifyContent: 'center',
-  },
-  saveBtn: {
-    fontSize: 20,
-    color: 'color-primary-500',
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-});
 
 export default SendMoney;

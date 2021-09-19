@@ -1,43 +1,37 @@
 import React, { useEffect } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { useDispatch } from 'react-redux';
-
+import { useDispatch, useSelector } from 'react-redux';
+import SplashScreen from 'react-native-splash-screen';
 import AuthStackNavigator from './AuthStackNavigator';
-// import TabNavigator from './TabNavigator';
 import { getLoggedUser } from 'features/auth/redux/actions';
-import TermsAndConditions from '../features/TermsAndConditions/TermsAndConditionsScreen';
-import HomeScreen from '../features/home';
 import routes from './routes';
-import Account from '../features/auth/Account';
-import SendMoney from '../features/home/SendMoney';
-import ReceiveMoney from '../features/home/ReceiveMoney';
-import FinancialAccount from '../features/Financial/containers/FinancialAccountContainer';
-import AddNewCard from '../features/Financial/containers/AddNewCardContainers';
+import AppTabNavigator from './AppTabNavigator/index';
+import PlaidConnect from '../features/Accounts/screens/PlaidConnect';
+import BankAccounts from '../features/Accounts/screens/BankAccounts';
 const Stack = createStackNavigator();
 
 const AppStackNavigator = () => {
   const dispatch = useDispatch();
-
+  const selector = useSelector(state => state.auth);
   useEffect(() => {
+    SplashScreen.hide();
     dispatch(getLoggedUser());
   }, []);
 
   return (
     <Stack.Navigator headerMode="none">
-      <Stack.Screen name={routes.auth} component={AuthStackNavigator} />
-      <Stack.Screen
-        name={routes.termsAndConditions}
-        component={TermsAndConditions}
-      />
-      <Stack.Screen name={routes.home} component={HomeScreen} />
-      <Stack.Screen name={routes.account} component={Account} />
-      <Stack.Screen name={routes.sendMoney} component={SendMoney} />
-      <Stack.Screen name={routes.receiveMoney} component={ReceiveMoney} />
-      <Stack.Screen name={routes.addNewCard} component={AddNewCard} />
-      <Stack.Screen
-        name={routes.financialAccount}
-        component={FinancialAccount}
-      />
+      {!selector.loggedIn || selector?.user?.verified !== 'true' ? (
+        <>
+          <Stack.Screen name={routes.auth} component={AuthStackNavigator} />
+          <Stack.Screen name={routes.home} component={AppTabNavigator} />
+        </>
+      ) : (
+        <>
+          <Stack.Screen name={routes.home} component={AppTabNavigator} />
+          <Stack.Screen name={routes.BankAccounts} component={BankAccounts} />
+          <Stack.Screen name={routes.plaidConnect} component={PlaidConnect} />
+        </>
+      )}
     </Stack.Navigator>
   );
 };

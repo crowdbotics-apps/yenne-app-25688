@@ -6,14 +6,21 @@ const StarIcon = props => <Icon {...props} name="star" />;
 
 const LoadingIndicator = props => (
   <View style={[props.style, styles.indicator]}>
-    <Spinner size="small" />
+    <Spinner size="medium" status="info" />
   </View>
 );
 
-export const YNButton = ({ title, loading, AccessorIcon, onPress }) => (
+export const YNButton = ({
+  title,
+  loading,
+  AccessorIcon,
+  onPress,
+  style = {},
+}) => (
   <Button
-    style={styles.button}
+    style={[styles.button, style]}
     status="primary"
+    disabled={loading}
     onPress={onPress}
     accessoryLeft={
       loading ? LoadingIndicator : AccessorIcon ? AccessorIcon : null

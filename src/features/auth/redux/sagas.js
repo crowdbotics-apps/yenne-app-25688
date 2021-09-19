@@ -64,7 +64,6 @@ function resetCode() {
     .post('api/v1/account/resend/code/')
     .then(res => res)
     .catch(err => {
-      alert(JSON.stringify(err.response));
       if (JSON.stringify(err?.response?.data).includes('Invalid token')) {
         StorageUtils.removeValue(constants.TOKEN_KEY);
       }
@@ -183,6 +182,11 @@ function* handleLogin({ auth }) {
     );
     StorageUtils.setStringValue(constants.EMAIL, result.data.email.toString());
     StorageUtils.setStringValue(
+      constants.USER_ID,
+      result.data?.profile?.toString(),
+    );
+
+    StorageUtils.setStringValue(
       constants.username,
       result.data.username.toString(),
     );
@@ -207,15 +211,31 @@ function* handleLogin({ auth }) {
   }
 }
 
+function getMyProfileApi({ token }) {
+  return request.get('api/v1/me/');
+}
+
 function* handleLoggedInUser() {
   try {
     let token = yield call(StorageUtils.getStringValue, constants.TOKEN_KEY);
-
+    let termsAgreed = yield call(
+      StorageUtils.getStringValue,
+      constants.TERMS_AGREED,
+    );
+    let verified = yield call(
+      StorageUtils.getStringValue,
+      constants.USER_VERIFIED,
+    );
     let user;
     if (token) {
       setAuthorizationToken(token);
     }
-    yield put(actions.getLoggedUserSuccess(user));
+
+    let result = yield call(getMyProfileApi, {
+      token,
+    });
+    user = result.data?.result || {};
+    yield put(actions.getLoggedUserSuccess({ ...user, termsAgreed, verified }));
   } catch (e) {
     console.log(e);
   }

@@ -11,9 +11,9 @@ import { StyleService, useStyleSheet, useTheme } from '@ui-kitten/components';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import routes from '../../../navigator/routes';
 import ArrowDownIcon from '../../../assets/images/ArrowDownIcon';
-import FinancialCard from './FinancialCard';
 import YTTab from '../../../components/YTTab';
 import YNButton from '../../../components/YNButton';
+import FinancialCard from './FinancialCard';
 
 const FinancialAccountComponent = ({
   navigation,
