@@ -6,6 +6,7 @@ const usePlaidLink = () => {
   const [loading, setLoading] = useState(false);
 
   const fetchToken = async () => {
+    console.warn('hello world');
     if (!loading) {
       setLoading(true);
       getLinkToken()
@@ -21,18 +22,12 @@ const usePlaidLink = () => {
   };
 
   useEffect(() => {
-    if (!linkToken && !loading) {
-      fetchToken();
-    }
-  }, []);
-
-  useEffect(() => {
     if (linkToken) {
       setLinkToken(linkToken);
     }
   }, [linkToken]);
 
-  return linkToken;
+  return { linkToken, fetchToken, loading };
 };
 
 export default usePlaidLink;

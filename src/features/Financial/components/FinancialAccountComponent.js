@@ -20,6 +20,11 @@ const FinancialAccountComponent = ({
   cards,
   handleDelete,
   handleUpdateCard,
+  setSelectedCard,
+  selectedCard,
+  amount,
+  setAmount,
+  handleDepositFromCard,
 }) => {
   const theme = useTheme();
   const styles = useStyleSheet(themedStyles);
@@ -47,7 +52,7 @@ const FinancialAccountComponent = ({
             />
             <TouchableOpacity
               onPress={() => navigation.navigate(routes.addNewCard)}
-              style={[styles.row]}
+              style={[styles.row, { height: 0, width: 0 }]}
             >
               <Ionicons
                 name="add"
@@ -75,6 +80,8 @@ const FinancialAccountComponent = ({
                 card={item}
                 handleDelete={handleDelete}
                 handleUpdateCard={handleUpdateCard}
+                selectedCard={selectedCard}
+                setSelectedCard={setSelectedCard}
               />
             );
           })}
@@ -91,9 +98,9 @@ const FinancialAccountComponent = ({
           </View>
         </View>
         <View style={styles.mainWrapper}>
-          <YTTab />
+          <YTTab amount={amount} setAmount={setAmount} />
           <View style={styles.buttonsWrapper}>
-            <YNButton onPress={() => {}} title="CONFIRM" />
+            <YNButton onPress={handleDepositFromCard} title="CONFIRM" />
           </View>
         </View>
       </View>

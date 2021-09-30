@@ -58,3 +58,18 @@ export const updateCardFail = payload => ({
   type: constant.UPDATE_CARD_FAIL,
   payload,
 });
+
+// DEPOSIT FROM CARD
+export const depositFromCard = ({ data, onSuccess, onError }) => {
+  return { type: constant.DEPOSIT_FROM_CARD, data, onSuccess, onError };
+};
+
+export const depositFromCardSuccess = payload => ({
+  type: constant.DEPOSIT_FROM_CARD_SUCCESS,
+  payload,
+});
+
+export const depositFromCardFail = payload => ({
+  type: constant.DEPOSIT_FROM_CARD_FAIL,
+  payload,
+});

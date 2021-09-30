@@ -29,7 +29,7 @@ const YTTab = ({ navigation, amount, setAmount }) => {
     {
       active: true,
       title: ' DEPOSIT',
-      description: 'Select your card and deposit money to Yenne balance',
+      description: 'Select your account and deposit money to Yenne balance',
     },
   ]);
   const updateTab = idx => {

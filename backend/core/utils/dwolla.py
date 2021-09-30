@@ -1,11 +1,17 @@
-import dwollav2
 import json
+import logging
+import hmac
+from hashlib import sha256
+import dwollav2
+
 from django.conf import settings
 
 DWOLLA_SETTINGS = settings.DWOLLA or {}
 
 app_key = 'zxGnHh7zCO2exfnE6QGNr9WNDiwf39x6rrA0aVXraRm2wIkfiY'
 app_secret = 'HL3F2XgkXHhMzyOJyI5rieLVRIgR9NMFw640zQN5vT9aLbHuE1'
+
+logger = logging.getLogger(__name__)
 
 
 class Dwolla(object):
@@ -17,11 +23,26 @@ class Dwolla(object):
         )
         self.url = DWOLLA_SETTINGS.get('url')
         self.token = self.client.Auth.client()
+        self.webhook_secret = settings.SECRET_KEY
 
     def create_url(self, *args):
         url = f"{self.url}"
         for a in args: url += f'/{a}'
         return url
+
+    def verify_gateway_signature(self, proposed_signature, payload_body):
+        payload_body = json.dumps(payload_body, separators=(',', ':'))
+        try:
+            signature = hmac.new(
+                self.webhook_secret.encode('utf-8'),
+                payload_body.encode('utf-8'),
+                sha256
+            ).hexdigest()
+
+            return hmac.compare_digest(signature, proposed_signature)
+        except Exception as e:
+            logger.warning(e)
+            return False
 
 
 class FundingSource(Dwolla):
@@ -185,3 +206,30 @@ class Transfer(Dwolla):
         print(request_body)
 
         return self.token.post('transfers', request_body)
+
+
+class WebHooks(Dwolla):
+    @classmethod
+    def list(cls):
+        return cls()._list()
+
+    def _list(self):
+        return self.token.get('webhook-subscriptions')
+
+    @classmethod
+    def verify_request(cls, signature, payload):
+        return cls()._verify_request(signature, payload)
+
+    def _verify_request(self, signature, payload):
+        return self.verify_gateway_signature(signature, payload)
+
+    @classmethod
+    def create(cls, url):
+        return cls()._create(url)
+
+    def _create(self, url):
+        request_body = {
+            'url': url,
+            'secret': self.webhook_secret
+        }
+        return self.token.post('webhook-subscriptions', request_body)

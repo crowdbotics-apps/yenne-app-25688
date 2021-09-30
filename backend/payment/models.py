@@ -16,6 +16,7 @@ class PaymentCard(TimestampModel):
     expiry = models.CharField(max_length=7)
     is_primary = models.BooleanField(default=False)
     objects = PaymentQuerySet.as_manager()
+    tilled_payment_method_id = models.CharField(max_length=120, default='', null=True, blank=True)
 
     class Meta:
         ordering = ('-is_primary',)

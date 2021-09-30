@@ -25,7 +25,7 @@ const ReceiveMoney = ({ navigation }) => {
       <View style={styles.container}>
         <YNHeaderTitle category="h3" title="Receive money" />
         <Text style={styles.helperText}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit
+          Request and recieve money to your Yenne balance
         </Text>
         <Formik
           initialValues={{
@@ -47,7 +47,7 @@ const ReceiveMoney = ({ navigation }) => {
               <Input
                 secureTextEntry={false}
                 iconShow={false}
-                placeholder="Sender email or username"
+                placeholder="Email"
                 name="username"
                 onChange={value => {
                   handleChange('username');

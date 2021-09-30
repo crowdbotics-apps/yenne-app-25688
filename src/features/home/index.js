@@ -11,22 +11,31 @@ import {
   StyleService,
   useStyleSheet,
   useTheme,
-  Spinner,
+  Spinner as KTSpinner,
 } from '@ui-kitten/components';
+import PlaidLink from 'react-native-plaid-link-sdk';
+import Spinner from 'react-native-loading-spinner-overlay';
 import YNButton from '../../components/YNButton';
 import SendIcon from '../../assets/images/SendIcon';
 import ReceiveIcon from '../../assets/images/RecieveIcon';
 import AlertModal from '../../components/AlertModal';
+import YNModal from '../../components/YNModal';
 import { ACCOUNT_SOURCE } from '../../constants';
 import RadioButton from '../../components/Form/RadioButton';
 import YNSmallButton from '../../components/YNSmallButton';
 import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../Accounts/redux/actions';
+import usePlaidLink from '../../hooks/usePlaidLink';
+import { postPublicToken } from '../Financial/redux/api';
 
 const Home = ({ navigation }) => {
   const theme = useTheme();
   const styles = useStyleSheet(themedStyles);
   const [modalVisible, setModalVisible] = React.useState(false);
+  const [connectPlaidModalVisible, setConnectPlaidModalVisible] =
+    useState(false);
+  const [loadingText, setLoadingText] = useState('Loading...');
+  const [creatingSource, setCreatingSource] = useState(false);
   const [source, setSource] = useState(ACCOUNT_SOURCE.bank_account);
   const dispatch = useDispatch();
   const userSelector = useSelector(state => state.auth);
@@ -34,6 +43,7 @@ const Home = ({ navigation }) => {
   const fundingLoading = useSelector(
     state => state.fundingSource.isLoadingBalance,
   );
+  const { linkToken, fetchToken, loading } = usePlaidLink();
 
   useState(() => {
     dispatch(actions.getBalance());
@@ -42,9 +52,10 @@ const Home = ({ navigation }) => {
   const nextScreen = () => {
     setModalVisible(false);
     if (source === ACCOUNT_SOURCE.bank_account) {
-      navigation.navigate(routes.plaidConnect);
+      setConnectPlaidModalVisible(true);
+      fetchToken();
     } else {
-      navigation.navigate(routes.financialAccount);
+      navigation.navigate(routes.addNewCard);
     }
   };
 
@@ -70,7 +81,7 @@ const Home = ({ navigation }) => {
             category="h3"
             title={
               fundingLoading ? (
-                <Spinner size="tiny" />
+                <KTSpinner size="tiny" />
               ) : (
                 fundingSelector?.balance
               )
@@ -133,6 +144,69 @@ const Home = ({ navigation }) => {
           <YNSmallButton style={{}} onPress={nextScreen} title="NEXT" />
         </View>
       </AlertModal>
+      {connectPlaidModalVisible ? (
+        <YNModal
+          modalVisible={connectPlaidModalVisible}
+          setModalVisible={() =>
+            setConnectPlaidModalVisible(!connectPlaidModalVisible)
+          }
+          description=""
+        >
+          {linkToken ? (
+            <PlaidLink
+              tokenConfig={{
+                token: linkToken,
+              }}
+              onSuccess={success => {
+                console.log(JSON.stringify(success));
+                // alert(JSON.stringify(success));
+                setConnectPlaidModalVisible(false);
+                setCreatingSource(true);
+                setLoadingText('Creating a funding source...');
+                postPublicToken(success)
+                  .then(res => {
+                    alert('Account connected successfully');
+                    setLoadingText('Loading...');
+                    setCreatingSource(false);
+                    navigation.navigate(routes.BankAccounts);
+                  })
+                  .catch(err => {
+                    alert(JSON.stringify(err?.response?.data));
+                    setLoadingText('Loading...');
+                    setCreatingSource(false);
+                  });
+              }}
+              onExit={exit => {
+                console.log(exit);
+              }}
+            >
+              <View style={[styles.button, { backgroundColor: '#F1C80D' }]}>
+                <Text style={styles.text}>Connect Bank Account</Text>
+              </View>
+            </PlaidLink>
+          ) : (
+            <View
+              style={[
+                styles.button,
+                { justifyContent: 'center', aligtems: 'center' },
+              ]}
+            >
+              <Text style={styles.text}>Loading...</Text>
+            </View>
+          )}
+          <YNSmallButton
+            style={[styles.button]}
+            textStyle={styles.text}
+            onPress={nextScreen}
+            title="Cancel"
+          />
+        </YNModal>
+      ) : null}
+      <Spinner
+        visible={loading || creatingSource}
+        textContent={loadingText}
+        textStyle={styles.spinnerTextStyle}
+      />
     </BackgroundWrapper>
   );
 };
@@ -152,7 +226,6 @@ const themedStyles = StyleService.create({
     flex: 1,
     minWidth: wp('70%'),
     marginVertical: hp('3%'),
-    // justifyContent: 'center'
   },
   currencyWrapper: { alignContent: 'center', alignSelf: 'center' },
   currencyText: {
@@ -169,6 +242,23 @@ const themedStyles = StyleService.create({
     flexDirection: 'row',
     marginVertical: 12,
     marginTop: hp('10%'),
+  },
+  spinnerTextStyle: {
+    color: '#FFF',
+  },
+  button: {
+    margin: 2,
+    borderRadius: 50,
+    marginTop: 20,
+    justifyContent: 'center',
+    paddingVertical: 5,
+    width: 210,
+  },
+  text: {
+    color: 'black',
+    textAlign: 'center',
+    fontWeight: '600',
+    margin: 10,
   },
 });
 

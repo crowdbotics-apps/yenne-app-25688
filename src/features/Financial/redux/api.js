@@ -25,3 +25,7 @@ export function deleteCard(payload) {
 export function updateCard(payload) {
   return request.put(CARD_API + payload.id + '/', payload);
 }
+
+export function cardPaymentIntent(payload) {
+  return request.post('api/v1/payment/card-payment-intent', payload)
+}

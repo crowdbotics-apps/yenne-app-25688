@@ -39,7 +39,7 @@ const PlaidConnect = ({ navigation }) => {
               setLoadingText('Creating a funding source...');
               postPublicToken(success)
                 .then(res => {
-                  alert('successful');
+                  alert('Bank connected successfully');
                   setLoadingText('Loading...');
                   setLoading(false);
                 })

@@ -28,6 +28,7 @@ class Profile(TimestampModel):
     dwolla_customer_id = models.CharField(max_length=120, default='', null=True, blank=True)
     dwolla_customer_url = models.CharField(max_length=120, default='', null=True, blank=True)
     dwolla_balance_funding_source_id = models.CharField(max_length=120, default='', null=True, blank=True)
+    tilled_customer_id = models.CharField(max_length=120, default='', null=True, blank=True)
 
     objects = ProfileQueryset.as_manager()
 

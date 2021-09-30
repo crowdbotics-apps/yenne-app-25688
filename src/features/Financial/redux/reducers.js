@@ -4,6 +4,7 @@ const initialState = {
   listCardsLoading: false,
   cards: [],
   serverError: undefined,
+  depositLoading: false,
 };
 
 export const financialReducer = (state = initialState, action) => {
@@ -14,6 +15,13 @@ export const financialReducer = (state = initialState, action) => {
       return { ...state, listCardsLoading: false, cards: action.payload };
     case constants.LIST_CARDS_FAIL:
       return { ...state, listCardsLoading: false, serverError: action.payload };
+
+    case constants.DEPOSIT_FROM_CARD:
+      return { ...state, depositLoading: true };
+    case constants.DEPOSIT_FROM_CARD_SUCCESS:
+      return { ...state, depositLoading: false };
+    case constants.DEPOSIT_FROM_CARD_FAIL:
+      return { ...state, depositLoading: false };
 
     case constants.ADD_CARD:
       return { ...state, listCardsLoading: true, serverError: undefined };

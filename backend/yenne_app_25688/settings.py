@@ -250,7 +250,14 @@ DWOLLA = {
     'app_key': env.str("DWOLLA_APP_KEY", ""),
     'app_secret': env.str("DWOLLA_APP_SECRET", ""),
     'environment': env.str('DWOLLA_ENV', 'sandbox'),
+    'balance_funding_source_id': env.str('DWOLLA_BALANCE_FUNDING_SOURCE_ID', ''),
     'url': env.str('DWOLLA_URL', "https://api-sandbox.dwolla.com")
+}
+
+TILLED = {
+    'api_key': env.str('TILLED_API_KEY', ''),
+    'account_id': env.str('TILLED_ACCOUNT_ID', ''),
+    'url': env.str('TILLED_ENDPOINT', 'https://sandbox-api.tilled.com/v1/')
 }
 
 if DEBUG or not (EMAIL_HOST_USER and EMAIL_HOST_PASSWORD):

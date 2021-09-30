@@ -9,7 +9,14 @@ import CardIcon from '../../../components/CardIcon';
 import RadioButton from '../../../components/Form/RadioButton';
 import YNHeaderTitle from '../../../components/HeaderTitle';
 
-const FinancialCard = ({ card, index, handleDelete, handleUpdateCard }) => {
+const FinancialCard = ({
+  card,
+  index,
+  handleDelete,
+  handleUpdateCard,
+  selectedCard,
+  setSelectedCard,
+}) => {
   const theme = useTheme();
   const styles = useStyleSheet(themedStyles);
   const [isPrimary, setIsPrimary] = useState(card.is_primary);
@@ -23,14 +30,15 @@ const FinancialCard = ({ card, index, handleDelete, handleUpdateCard }) => {
       ]}
     >
       <View style={[styles.row]}>
-        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+        <View style={styles.centered}>
           <TouchableOpacity
             onPress={() => {
               setIsPrimary(!isPrimary);
-              handleUpdateCard({ ...card, is_primary: !isPrimary });
+              // handleUpdateCard({ ...card, is_primary: !isPrimary });
+              setSelectedCard(index);
             }}
           >
-            <RadioButton selected={isPrimary} />
+            <RadioButton selected={index === selectedCard} />
           </TouchableOpacity>
         </View>
 
@@ -70,6 +78,7 @@ const FinancialCard = ({ card, index, handleDelete, handleUpdateCard }) => {
 };
 
 const themedStyles = StyleService.create({
+  centered: { justifyContent: 'center', alignItems: 'center' },
   cardHeader: { paddingTop: hp('2%') },
   cardContent: { marginLeft: 10 },
   cardIcon: {

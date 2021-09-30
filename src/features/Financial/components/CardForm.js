@@ -26,15 +26,18 @@ const CardForm = ({ handleSubmit, isLoading, setFormText }) => {
     }
     const { card } = cardValidator.number(cardNumber);
     const isAmex = card?.type === 'american-express';
-    const cvvLength = isAmex ? 4 : 3;
-    if (cardValidator.cvv(cvv, cvvLength).isValid) {
-      errors.cvv = 'Invalid CVV';
-    }
+    // const cvvLength = isAmex ? 4 : 3;
+    // if (cardValidator.cvv(cvv, cvvLength).isValid) {
+    //   errors.cvv = 'Invalid CVV';
+    // }
     setErrors(errors);
+    if (Object.keys(errors).length !== 0) {
+      return;
+    }
     /**
      *  "number": "4263982640269299",
     "holder": "Paul K.",
-    "cvv": "123",
+    "cvv": "837",
     "expiry": "06/24",
      */
     handleSubmit({
@@ -50,7 +53,7 @@ const CardForm = ({ handleSubmit, isLoading, setFormText }) => {
   const [cardExpiry, setCardExpiry] = useState('');
   const [cvv, setCvv] = useState();
   const [errors, setErrors] = useState({});
-  const [modalVisible, setModalVisible] = useState(true);
+  const [modalVisible, setModalVisible] = useState(false);
   const [is_primary, setIsPrimary] = useState(false);
 
   return (

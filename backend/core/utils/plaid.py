@@ -83,8 +83,7 @@ class PlaidItems(Plaid):
                 "webhook": "https://www.genericwebhookurl.com/webhook"
             }
         }
-        response = self.api_requester("POST", url, payload=payload)
-        return response
+        return self.api_requester("POST", url, payload=payload)
 
     def _exchange_token(self, public_token):
         """
