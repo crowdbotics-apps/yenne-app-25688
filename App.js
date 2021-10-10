@@ -6,8 +6,10 @@ import RootNavigator from './src/navigator/RootNavigator';
 import { store } from './src/store';
 import { crowdboticsTheme } from './src/config/crowdboticsTheme';
 import { default as customMapping } from './src/config/mapping.json';
+import { useOneSignal } from './src/hooks/useOnesignal';
 
 export default function App() {
+  const id = useOneSignal();
   return (
     <ReduxProvider store={store}>
       <ApplicationProvider

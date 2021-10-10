@@ -45,6 +45,7 @@ export const EMAIL = '@email';
 export const HAS_USERNAME = '@hasUsername';
 export const APPLE_ID_EMAIL = '@appleidemail';
 export const USER_ID = '@userId';
+export const ONE_SIGNAL_USER_ID = '@onesignalUserId';
 
 export const VERIFY_CODE = 'VERIFY_CODE';
 export const VERIFY_CODE_SUCCESS = 'VERIFY_CODE_SUCCESS';
