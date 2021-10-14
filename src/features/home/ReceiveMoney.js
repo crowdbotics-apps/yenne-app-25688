@@ -1,98 +1,59 @@
-import React from 'react';
-import { View, Text } from 'react-native';
+import React, { useEffect, useState } from 'react';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import BackgroundWrapper from '../../components/BackgroundWrapper';
-import YNHeaderTitle from '../../components/HeaderTitle';
-import { StyleService, useStyleSheet, useTheme } from '@ui-kitten/components';
-import YNButton from '../../components/YNButton';
-import Input from '../../components/Form/Input';
-import { Formik } from 'formik';
-import { validateRegistration } from '../../utils/validation';
-import SelectField from '../../components/Form/SelectField';
+import { StyleService } from '@ui-kitten/components';
+import { useDispatch, useSelector } from 'react-redux';
+import * as actions from './redux/actions';
+import { requestMoney } from '../Accounts/redux/api';
+import * as notificationActions from '../Notification/redux/actions';
+import { errorsToString } from '../../utils/helpers';
+import SendMoneyComponent from './components/SendMoneyComponent';
 
 const ReceiveMoney = ({ navigation }) => {
-  const theme = useTheme();
-  const styles = useStyleSheet(themedStyles);
+  const dispatch = useDispatch();
+  const profiles = useSelector(state => state.profile.profiles);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+
+  useEffect(() => {
+    dispatch(
+      actions.getProfiles({ payload: { params: 'with_balance_remove=true' } }),
+    );
+  }, []);
+
+  const handleRequestMoney = ({ amount, recipient, callBack }) => {
+    if (!amount) {
+      alert('Amount required');
+      return;
+    }
+    if (!recipient) {
+      alert('Source email required!');
+      return;
+    }
+
+    requestMoney({
+      source_id: 'self',
+      amount: amount * 100, // convert to cents
+      recipient,
+    })
+      .then(res => {
+        setShowSuccessModal(true);
+        callBack && callBack();
+        dispatch(notificationActions.getNotifications());
+      })
+      .catch(error => {
+        alert(errorsToString(error?.response?.data));
+      });
+  };
 
   return (
-    <BackgroundWrapper
-      style={{ backgroundColor: theme['header-background-color'] }}
-      showBackButton
-    >
-      <View style={styles.container}>
-        <YNHeaderTitle category="h3" title="Receive money" />
-        <Text style={styles.helperText}>
-          Request and recieve money to your Yenne balance
-        </Text>
-        <Formik
-          initialValues={{
-            username: '',
-            amount: '',
-          }}
-          validate={validateRegistration}
-          onSubmit={values => console.warn(values)}
-        >
-          {({
-            handleChange,
-            handleSubmit,
-            values,
-            errors,
-            touched,
-            setFieldValue,
-          }) => (
-            <View style={styles.formWrapper}>
-              <Input
-                secureTextEntry={false}
-                iconShow={false}
-                placeholder="Email"
-                name="username"
-                onChange={value => {
-                  handleChange('username');
-                  setFieldValue('username', value);
-                }}
-                value={values.username}
-              />
-              {errors.username && touched.username && (
-                <View>
-                  <Text style={styles.errorText}>{errors.username}</Text>
-                </View>
-              )}
-
-              <View style={styles.row}>
-                <View style={{ flex: 1, marginRight: 4 }}>
-                  <SelectField />
-                </View>
-                <View style={{ flex: 1.5 }}>
-                  <Input
-                    secureTextEntry={false}
-                    iconShow={false}
-                    placeholder="Amount"
-                    name="email"
-                    onChange={value => {
-                      handleChange('email');
-                      setFieldValue('email', value);
-                    }}
-                    value={values.email}
-                  />
-                  {errors.email && touched.email && (
-                    <View>
-                      <Text style={styles.errorText}>{errors.email}</Text>
-                    </View>
-                  )}
-                </View>
-              </View>
-
-              <View style={styles.buttonsWrapper}>
-                <YNButton onPress={handleSubmit} title="CONFIRM" />
-              </View>
-            </View>
-          )}
-        </Formik>
-      </View>
-    </BackgroundWrapper>
+    <SendMoneyComponent
+      profiles={profiles}
+      showSuccessModal={showSuccessModal}
+      setShowSuccessModal={setShowSuccessModal}
+      handleSendMoney={handleRequestMoney}
+    />
   );
 };
 

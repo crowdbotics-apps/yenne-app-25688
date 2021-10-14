@@ -34,7 +34,6 @@ const PlaidConnect = ({ navigation }) => {
             }}
             onSuccess={success => {
               console.log(JSON.stringify(success));
-              // alert(JSON.stringify(success));
               setLoading(true);
               setLoadingText('Creating a funding source...');
               postPublicToken(success)

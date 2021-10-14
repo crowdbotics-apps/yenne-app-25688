@@ -6,6 +6,7 @@ import * as constants from './constants';
 import { navigate } from 'navigator/service';
 import { getServerError, errorsToString } from 'utils/helpers';
 import { StorageUtils } from 'utils/storage';
+import { updateProfile } from '../../home/redux/api';
 
 function signUp(auth) {
   return request
@@ -36,7 +37,6 @@ function updateUsername(data) {
     .post('api/v1/account/update-username/', data)
     .then(res => res)
     .catch(err => {
-      alert(err.response.data);
       throw err.response.data;
     });
 }
@@ -236,13 +236,24 @@ function* handleLoggedInUser() {
     });
     user = result.data?.result || {};
     yield put(actions.getLoggedUserSuccess({ ...user, termsAgreed, verified }));
+    if (!result?.data?.result?.profile?.onesignal_user_id) {
+      let deviceUserId = yield call(
+        StorageUtils.getStringValue,
+        constants.ONE_SIGNAL_USER_ID,
+      );
+      if (deviceUserId) {
+        updateProfile(user?.profile?.id, {
+          onesignal_user_id: deviceUserId,
+        });
+      }
+    }
   } catch (e) {
     console.log(e);
   }
 }
 
-function updateProfileApi(id, profile) {
-  return request.patch(`/user/${id}/`, profile);
+function updateProfileApi(id, payload) {
+  return request.patch(`/user/${id}/`, payload);
 }
 
 function* handleUpdateProfile({ id, profile, onSuccess }) {
@@ -339,7 +350,6 @@ function appleIdSignUp(auth) {
     .post('api/v1/account/appleid-auth/token', auth)
     .then(res => res)
     .catch(err => {
-      alert(JSON.stringify(err.response.data));
       throw err.response.data.join();
     });
 }

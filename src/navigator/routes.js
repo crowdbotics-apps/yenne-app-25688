@@ -16,6 +16,7 @@ export const routes = {
   addNewCard: 'AddNewCard',
   BankAccounts: 'BankAccounts',
   plaidConnect: 'PlaidConnect',
+  notification: 'Notification',
 };
 
 export default routes;

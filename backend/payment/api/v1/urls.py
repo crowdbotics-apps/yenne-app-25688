@@ -7,7 +7,8 @@ from .viewsets import (
     PlaidLinkAPIView,
     PlaidProcessorAPIView,
     CreateFundingSource,
-    FundingSourceAPIView, TransferAPIView, TilledAccountsAPIView, tilled_webhook, CardPaymentAPIView, dwolla_webhook
+    FundingSourceAPIView, TransferAPIView, TilledAccountsAPIView, tilled_webhook, CardPaymentAPIView, dwolla_webhook,
+    SendMoneyAPIView, ReceiveMoneyAPIView
 )
 
 router = DefaultRouter()
@@ -20,6 +21,8 @@ urlpatterns = [
     path("payment/create-source-funding", CreateFundingSource.as_view()),
     path('payment/funding-source/<str:source_id>', FundingSourceAPIView.as_view()),
     path("payment/deposit", TransferAPIView.as_view()),
+    path("payment/send-money", SendMoneyAPIView.as_view()),
+    path("payment/request-money", ReceiveMoneyAPIView.as_view()),
     path("payment/tilled/accounts", TilledAccountsAPIView.as_view()),
     path("payment/tilled-webhook", tilled_webhook),
     path("payment/dwolla-webhook", dwolla_webhook),

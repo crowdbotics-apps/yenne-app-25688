@@ -15,3 +15,11 @@ export const deleteFundingSource = payload => {
 export const deposit = payload => {
   return request.post('api/v1/payment/deposit', payload);
 };
+
+export const sendMoney = payload => {
+  return request.post('api/v1/payment/send-money', payload);
+};
+
+export const requestMoney = payload => {
+  return request.post('api/v1/payment/request-money', payload);
+};

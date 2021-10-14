@@ -4,15 +4,17 @@ import { useState, useEffect } from 'react';
 import { ONE_SIGNAL_APP_ID } from '@env';
 import { StorageUtils } from '../utils/storage';
 import { ONE_SIGNAL_USER_ID } from '../features/auth/redux/constants';
+import { useDispatch } from 'react-redux';
+import * as actions from '../features/Notification/redux/actions';
 
 export const useOneSignal = () => {
   const [isSubscribed, setIsSubscribed] = useState(false);
+  const dispatch = useDispatch();
   useEffect(() => {
     async function getDeviceState() {
       const deviceState = await OneSignal.getDeviceState();
-      // alert(JSON.stringify(deviceState))
       if (deviceState.userId) {
-        StorageUtils.setStringValue(ONE_SIGNAL_USER_ID);
+        StorageUtils.setStringValue(ONE_SIGNAL_USER_ID, deviceState.userId);
       }
       setIsSubscribed(deviceState.isSubscribed);
     }
@@ -32,6 +34,7 @@ export const useOneSignal = () => {
         notifReceivedEvent,
       );
       let notif = notifReceivedEvent.getNotification();
+      dispatch(actions.getNotifications());
       const button1 = {
         text: 'Cancel',
         onPress: () => {

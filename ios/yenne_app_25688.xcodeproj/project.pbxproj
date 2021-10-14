@@ -14,6 +14,8 @@
 		2A7D5024262AAA1E00B2F364 /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2A7D4FAD262AA81100B2F364 /* Poppins-Medium.ttf */; };
 		2A7D5029262AAC1300B2F364 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2A7D5028262AAC0B00B2F364 /* Poppins-SemiBold.ttf */; };
 		2A7D502A262AAC1300B2F364 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2A7D5027262AAC0100B2F364 /* Poppins-Regular.ttf */; };
+		2A91478627167DEA00654E8C /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A91478527167DEA00654E8C /* NotificationService.swift */; };
+		2A91478A27167DEA00654E8C /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 2A91478327167DEA00654E8C /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		2AD095E42628634F00A7BFAD /* fontawesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2AD095BB2628634E00A7BFAD /* fontawesome.ttf */; };
 		2AD095E52628634F00A7BFAD /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2AD095BC2628634E00A7BFAD /* Lato-Regular.ttf */; };
 		2AD095E62628634F00A7BFAD /* PlayfairDisplay-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2AD095BD2628634E00A7BFAD /* PlayfairDisplay-Regular.ttf */; };
@@ -63,6 +65,7 @@
 		595C16F82AF435875D152191 /* libPods-yenne_app_25688.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2084194BB09B5BBEE8364F94 /* libPods-yenne_app_25688.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		98C2EDA0747015980A47C2FD /* libPods-yenne_app_25688-yenne_app_25688Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 223F7E5DFD9C78AD878B00C3 /* libPods-yenne_app_25688-yenne_app_25688Tests.a */; };
+		AB3AB084F80E682DA81D9027 /* libPods-OneSignalNotificationServiceExtension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F4076C07B0C970A86DC17EF /* libPods-OneSignalNotificationServiceExtension.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,7 +76,28 @@
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
 			remoteInfo = yenne_app_25688;
 		};
+		2A91478827167DEA00654E8C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2A91478227167DEA00654E8C;
+			remoteInfo = OneSignalNotificationServiceExtension;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		2A91478E27167DEA00654E8C /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				2A91478A27167DEA00654E8C /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		00E356EE1AD99517003FC87E /* yenne_app_25688Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = yenne_app_25688Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -92,6 +116,9 @@
 		2A7D4FAD262AA81100B2F364 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Medium.ttf"; path = "../../../../Downloads/Poppins/Poppins-Medium.ttf"; sourceTree = "<group>"; };
 		2A7D5027262AAC0100B2F364 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Regular.ttf"; path = "../src/assets/fonts/Poppins-Regular.ttf"; sourceTree = "<group>"; };
 		2A7D5028262AAC0B00B2F364 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-SemiBold.ttf"; path = "../src/assets/fonts/Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
+		2A91478327167DEA00654E8C /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		2A91478527167DEA00654E8C /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		2A91478727167DEA00654E8C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2AD095BB2628634E00A7BFAD /* fontawesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = fontawesome.ttf; path = ../src/assets/fonts/fontawesome.ttf; sourceTree = "<group>"; };
 		2AD095BC2628634E00A7BFAD /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Regular.ttf"; path = "../src/assets/fonts/Lato-Regular.ttf"; sourceTree = "<group>"; };
 		2AD095BD2628634E00A7BFAD /* PlayfairDisplay-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "PlayfairDisplay-Regular.ttf"; path = "../src/assets/fonts/PlayfairDisplay-Regular.ttf"; sourceTree = "<group>"; };
@@ -141,10 +168,13 @@
 		2AD2720B264B23C00032AAAF /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		2AD272D0264B28BB0032AAAF /* GoogleSignIn.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleSignIn.framework; path = "../../../../Downloads/google_signin_sdk_5_0_2 3/GoogleSignIn.framework"; sourceTree = "<group>"; };
 		2AD4041B26287EEA00E6A900 /* libswiftWebKit.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libswiftWebKit.tbd; path = usr/lib/swift/libswiftWebKit.tbd; sourceTree = SDKROOT; };
+		3F4076C07B0C970A86DC17EF /* libPods-OneSignalNotificationServiceExtension.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OneSignalNotificationServiceExtension.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		70524876AD26A5DFA55196A3 /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
 		7718BA26529E9AFB4BF9B7C2 /* Pods-yenne_app_25688.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yenne_app_25688.release.xcconfig"; path = "Target Support Files/Pods-yenne_app_25688/Pods-yenne_app_25688.release.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = yenne_app_25688/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B71DE9BD21837A31629D830F /* Pods-yenne_app_25688-yenne_app_25688Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yenne_app_25688-yenne_app_25688Tests.release.xcconfig"; path = "Target Support Files/Pods-yenne_app_25688-yenne_app_25688Tests/Pods-yenne_app_25688-yenne_app_25688Tests.release.xcconfig"; sourceTree = "<group>"; };
 		DA477B82E2E25FB47D4501D7 /* Pods-yenne_app_25688.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yenne_app_25688.debug.xcconfig"; path = "Target Support Files/Pods-yenne_app_25688/Pods-yenne_app_25688.debug.xcconfig"; sourceTree = "<group>"; };
+		DB41801C062054BE91778BF3 /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -167,6 +197,14 @@
 				2AD271BD264B21840032AAAF /* libRNGoogleSignin.a in Frameworks */,
 				2AD4041C26287EEA00E6A900 /* libswiftWebKit.tbd in Frameworks */,
 				595C16F82AF435875D152191 /* libPods-yenne_app_25688.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2A91478027167DEA00654E8C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AB3AB084F80E682DA81D9027 /* libPods-OneSignalNotificationServiceExtension.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,6 +240,15 @@
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
 			name = yenne_app_25688;
+			sourceTree = "<group>";
+		};
+		2A91478427167DEA00654E8C /* OneSignalNotificationServiceExtension */ = {
+			isa = PBXGroup;
+			children = (
+				2A91478527167DEA00654E8C /* NotificationService.swift */,
+				2A91478727167DEA00654E8C /* Info.plist */,
+			);
+			path = OneSignalNotificationServiceExtension;
 			sourceTree = "<group>";
 		};
 		2AD40495262888B800E6A900 /* Resources */ = {
@@ -269,6 +316,7 @@
 				2AD27205264B231C0032AAAF /* GoogleSignInDependencies.framework */,
 				2084194BB09B5BBEE8364F94 /* libPods-yenne_app_25688.a */,
 				223F7E5DFD9C78AD878B00C3 /* libPods-yenne_app_25688-yenne_app_25688Tests.a */,
+				3F4076C07B0C970A86DC17EF /* libPods-OneSignalNotificationServiceExtension.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -280,6 +328,8 @@
 				7718BA26529E9AFB4BF9B7C2 /* Pods-yenne_app_25688.release.xcconfig */,
 				214CE14E1BFC59B538C66D6C /* Pods-yenne_app_25688-yenne_app_25688Tests.debug.xcconfig */,
 				B71DE9BD21837A31629D830F /* Pods-yenne_app_25688-yenne_app_25688Tests.release.xcconfig */,
+				DB41801C062054BE91778BF3 /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */,
+				70524876AD26A5DFA55196A3 /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -298,6 +348,7 @@
 				13B07FAE1A68108700A75B9A /* yenne_app_25688 */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* yenne_app_25688Tests */,
+				2A91478427167DEA00654E8C /* OneSignalNotificationServiceExtension */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				30E247087D3B80C174E140A5 /* Pods */,
@@ -312,6 +363,7 @@
 			children = (
 				13B07F961A680F5B00A75B9A /* yenne_app_25688.app */,
 				00E356EE1AD99517003FC87E /* yenne_app_25688Tests.xctest */,
+				2A91478327167DEA00654E8C /* OneSignalNotificationServiceExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -352,15 +404,35 @@
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				9A504D415C60F670B92F92D5 /* [CP] Embed Pods Frameworks */,
 				B23701101DE9E6CE46BF212E /* [CP] Copy Pods Resources */,
+				2A91478E27167DEA00654E8C /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				2A91478927167DEA00654E8C /* PBXTargetDependency */,
 			);
 			name = yenne_app_25688;
 			productName = yenne_app_25688;
 			productReference = 13B07F961A680F5B00A75B9A /* yenne_app_25688.app */;
 			productType = "com.apple.product-type.application";
+		};
+		2A91478227167DEA00654E8C /* OneSignalNotificationServiceExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2A91478B27167DEA00654E8C /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */;
+			buildPhases = (
+				4946808D937A8D8EF2B75478 /* [CP] Check Pods Manifest.lock */,
+				2A91477F27167DEA00654E8C /* Sources */,
+				2A91478027167DEA00654E8C /* Frameworks */,
+				2A91478127167DEA00654E8C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OneSignalNotificationServiceExtension;
+			productName = OneSignalNotificationServiceExtension;
+			productReference = 2A91478327167DEA00654E8C /* OneSignalNotificationServiceExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -368,6 +440,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 1210;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
@@ -376,6 +449,9 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						LastSwiftMigration = 1120;
+					};
+					2A91478227167DEA00654E8C = {
+						CreatedOnToolsVersion = 12.4;
 					};
 				};
 			};
@@ -394,6 +470,7 @@
 			targets = (
 				13B07F861A680F5B00A75B9A /* yenne_app_25688 */,
 				00E356ED1AD99517003FC87E /* yenne_app_25688Tests */,
+				2A91478227167DEA00654E8C /* OneSignalNotificationServiceExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -459,6 +536,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2A91478127167DEA00654E8C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -491,6 +575,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-yenne_app_25688-yenne_app_25688Tests/Pods-yenne_app_25688-yenne_app_25688Tests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4946808D937A8D8EF2B75478 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-OneSignalNotificationServiceExtension-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		61A6DD443F86DBCE4A999D88 /* [CP] Embed Pods Frameworks */ = {
@@ -627,6 +733,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2A91477F27167DEA00654E8C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2A91478627167DEA00654E8C /* NotificationService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -634,6 +748,11 @@
 			isa = PBXTargetDependency;
 			target = 13B07F861A680F5B00A75B9A /* yenne_app_25688 */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
+		};
+		2A91478927167DEA00654E8C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2A91478227167DEA00654E8C /* OneSignalNotificationServiceExtension */;
+			targetProxy = 2A91478827167DEA00654E8C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -693,6 +812,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DA477B82E2E25FB47D4501D7 /* Pods-yenne_app_25688.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = yenne_app_25688/yenne_app_25688.entitlements;
@@ -726,6 +846,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7718BA26529E9AFB4BF9B7C2 /* Pods-yenne_app_25688.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = yenne_app_25688/yenne_app_25688.entitlements;
@@ -750,6 +871,72 @@
 				PRODUCT_NAME = yenne_app_25688;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Release;
+		};
+		2A91478C27167DEA00654E8C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DB41801C062054BE91778BF3 /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 6YKR59QXKM;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.crowdbotics.yenne.OneSignalNotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2A91478D27167DEA00654E8C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 70524876AD26A5DFA55196A3 /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 6YKR59QXKM;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.crowdbotics.yenne.OneSignalNotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -893,6 +1080,15 @@
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
 				13B07F951A680F5B00A75B9A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2A91478B27167DEA00654E8C /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2A91478C27167DEA00654E8C /* Debug */,
+				2A91478D27167DEA00654E8C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

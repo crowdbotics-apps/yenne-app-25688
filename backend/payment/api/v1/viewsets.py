@@ -11,6 +11,8 @@ from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 
 from core import printer
+from notification.models import Notification
+from notification.signal import notification_saved
 from payment.models import PaymentCard
 from wallet.models import Transfer, Wallet
 from core.utils.plaid import PlaidLink, PlaidItems, PlaidProcessor
@@ -20,9 +22,10 @@ from core.utils.dwolla import (
 )
 from core.utils.tilled import Accounts, PaymentIntent
 from user_profile.utils import update_customer_details
+from user_profile.models import Profile
 from wallet.utils import amount_to_cents, amount_to_decimal
 from .serializers import (
-    PaymentCardSerializer
+    PaymentCardSerializer, SendMoneySerializer
 )
 
 logger = logging.getLogger(__name__)
@@ -163,10 +166,10 @@ class FundingSourceAPIView(APIView):
         profile = request.user.profile
         if source_id == 'balance':
             try:
-                wallet = request.user.profile.wallets
+                wallet = request.user.profile.wallet
             except Exception as e:
                 print(e)
-            if not hasattr(profile, 'wallets'):
+            if not hasattr(profile, 'wallet'):
                 wallet = Wallet.objects.create(profile=profile, )
             # balance_account_id = profile.dwolla_balance_funding_source_id
             # if not profile.dwolla_balance_funding_source_id and profile.dwolla_customer_id:
@@ -232,6 +235,119 @@ class CreateFundingSource(APIView):
             )
             print('CREATED FUNDING SOURCE: ', res.body)
             return Response({'message': "success"})
+
+
+class ReceiveMoneyAPIView(APIView):
+    authentication_classes = [authentication.TokenAuthentication]
+    permission_classes = [IsAuthenticated, ]
+
+    @transaction.atomic()
+    def post(self, request, format=None):
+        user = request.user
+        profile = user.profile
+        serializer = SendMoneySerializer(data=request.data)
+        if not serializer.is_valid():
+            raise serializers.ValidationError(serializer.errors)
+
+        recipient_qs = Profile.objects.filter(id=serializer.validated_data.get('recipient'))
+        if not recipient_qs.exists():
+            raise serializers.ValidationError('Recipient does not exist.')
+        recipient = recipient_qs.first()
+        amount = serializer.validated_data.get('amount')
+
+        note = f"${recipient.user.email} has requested ${amount_to_decimal(amount)}"
+        logger.warning(note)
+
+        # send notification to sender
+        notification = Notification.objects.create(
+            title='Request',
+            description=note,
+            recipient=recipient,
+            sender=profile,
+            level='request'
+        )
+        notification_saved.send(sender=Notification, notification=notification)
+
+        # send notification to receiver
+        note = f"You requested ${amount_to_decimal(amount)} from ${recipient.user.email}"
+
+        Notification.objects.create(
+            title='Request',
+            description=note,
+            recipient=profile,
+            sender=profile,
+            level='request'
+        )
+
+        return Response(request.data)
+
+
+class SendMoneyAPIView(APIView):
+    authentication_classes = [authentication.TokenAuthentication]
+    permission_classes = [IsAuthenticated, ]
+
+    @transaction.atomic()
+    def post(self, request, format=None):
+        user = request.user
+        profile = user.profile
+        serializer = SendMoneySerializer(data=request.data)
+        if not serializer.is_valid():
+            raise serializers.ValidationError(serializer.errors)
+
+        recipient_qs = Profile.objects.filter(id=serializer.validated_data.get('recipient'))
+        if not recipient_qs.exists():
+            raise serializers.ValidationError('Recipient does not exist.')
+        recipient = recipient_qs.first()
+        amount = serializer.validated_data.get('amount')
+
+        if profile.wallet.amount < amount:
+            raise serializers.ValidationError('You do not have enough funds in your account')
+        note = f"You transferred ${amount_to_decimal(amount)} to ${recipient.user.email}"
+        logger.warning(note)
+        Transfer.objects.create(
+            profile=user.profile,
+            type='dwolla',
+            note=note,
+            status='completed',
+            amount=amount_to_cents(amount),
+        )
+
+        if not hasattr(profile, 'wallet'):
+            Wallet.objects.create(profile=profile, )
+
+        if not hasattr(recipient, 'wallet'):
+            wallet = Wallet.objects.create(profile=recipient, )
+        else:
+            wallet = recipient.wallet
+
+        profile.wallet.amount -= amount
+        profile.wallet.save()
+        wallet.amount = wallet.amount + amount
+        wallet.save()
+
+        # send notification to sender
+        notification = Notification.objects.create(
+            title='Transfer',
+            description=note,
+            recipient=profile,
+            sender=profile,
+            level='transfer'
+        )
+        notification_saved.send(sender=Notification, notification=notification)
+
+        # send notification to receiver
+        note = f"You received ${amount_to_decimal(amount)} from ${recipient.user.email}"
+
+        notification = Notification.objects.create(
+            title='Receive',
+            description=note,
+            recipient=recipient,
+            sender=profile,
+            level='receive'
+        )
+        notification_saved.send(sender=Notification, notification=notification)
+
+        return Response(request.data)
 
 
 class TransferAPIView(APIView):

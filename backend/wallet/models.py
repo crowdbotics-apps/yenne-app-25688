@@ -30,20 +30,23 @@ class TransferQuerySet(models.QuerySet):
             logger.warning(
                 f'Transfer state for {transfer.id} {transfer.type} {transfer.external_id} changed to {status}')
             if status == 'completed':
-                wallet = transfer.profile.wallets
+                wallet = transfer.profile.wallet
                 wallet.amount = wallet.amount + transfer.amount
                 wallet.save()
 
             return transfer
         else:
-            logger.warning(f'Tranfer with external_id {external_id} does not exist.')
+            logger.warning(f'Transfer with external_id {external_id} does not exist.')
             return False
 
 
 class Transfer(TimestampModel):
     TYPE_CHOICES = (
         ('dwolla', 'Dwolla'),
-        ('tilled', 'Tilled'))
+        ('yenne', 'Yenne'),
+        ('tilled', 'Tilled')
+    )
+
     STATUS_CHOICES = (
         ('created', 'Created'),
         ('cancelled', 'Cancelled'),
@@ -66,7 +69,7 @@ class WalletQuerySet(models.QuerySet):
 
 
 class Wallet(TimestampModel):
-    profile = models.OneToOneField('user_profile.Profile', related_name='wallets', on_delete=models.CASCADE,
+    profile = models.OneToOneField('user_profile.Profile', related_name='wallet', on_delete=models.CASCADE,
                                    unique=True)
     amount = models.IntegerField(
         verbose_name='Account balance',

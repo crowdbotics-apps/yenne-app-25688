@@ -52,6 +52,7 @@ LOCAL_APPS = [
     'user_profile',
     'wallet',
     'payment',
+    'notification',
 ]
 THIRD_PARTY_APPS = [
     'rest_framework',
@@ -190,6 +191,20 @@ REST_AUTH_REGISTER_SERIALIZERS = {
     "REGISTER_SERIALIZER": "home.api.v1.serializers.SignupSerializer",
 }
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication'
+    ),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 100,
+    'DEFAULT_PARSER_CLASSES': (
+        'rest_framework.parsers.JSONParser',
+        'rest_framework.parsers.FormParser',
+        'rest_framework.parsers.MultiPartParser',
+    ),
+}
+
 # Custom user model
 AUTH_USER_MODEL = "users.User"
 
@@ -258,6 +273,12 @@ TILLED = {
     'api_key': env.str('TILLED_API_KEY', ''),
     'account_id': env.str('TILLED_ACCOUNT_ID', ''),
     'url': env.str('TILLED_ENDPOINT', 'https://sandbox-api.tilled.com/v1/')
+}
+
+ONESIGNAL = {
+    'app_id': env.str('ONE_SIGNAL_APP_ID'),
+    'rest_api_key': env.str('ONE_SIGNAL_REST_API_KEY'),
+    'user_auth_key': env.str('ONE_SIGNAL_USER_AUTH_KEY')
 }
 
 if DEBUG or not (EMAIL_HOST_USER and EMAIL_HOST_PASSWORD):

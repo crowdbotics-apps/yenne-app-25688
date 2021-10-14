@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, TouchableOpacity, StatusBar } from 'react-native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -27,6 +27,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../Accounts/redux/actions';
 import usePlaidLink from '../../hooks/usePlaidLink';
 import { postPublicToken } from '../Financial/redux/api';
+import NotificationOn from '../../assets/images/NotificationOn';
+import NotificationOff from '../../assets/images/NotificationOff';
 
 const Home = ({ navigation }) => {
   const theme = useTheme();
@@ -37,9 +39,13 @@ const Home = ({ navigation }) => {
   const [loadingText, setLoadingText] = useState('Loading...');
   const [creatingSource, setCreatingSource] = useState(false);
   const [source, setSource] = useState(ACCOUNT_SOURCE.bank_account);
+
+  const [hasNewNotifcation, setHasNewNotification] = useState(false);
+
   const dispatch = useDispatch();
   const userSelector = useSelector(state => state.auth);
   const fundingSelector = useSelector(state => state.fundingSource);
+  const notifications = useSelector(state => state.notifications.data || []);
   const fundingLoading = useSelector(
     state => state.fundingSource.isLoadingBalance,
   );
@@ -48,6 +54,12 @@ const Home = ({ navigation }) => {
   useState(() => {
     dispatch(actions.getBalance());
   }, []);
+
+  useEffect(() => {
+    if (notifications.filter(item => item.unread).length !== 0) {
+      setHasNewNotification(true);
+    }
+  }, [notifications]);
 
   const nextScreen = () => {
     setModalVisible(false);
@@ -63,7 +75,16 @@ const Home = ({ navigation }) => {
     <BackgroundWrapper
       style={{ backgroundColor: theme['header-background-color'] }}
     >
+      <StatusBar backgroundColor="#7C03E9" barStyle="light-content" />
       <View style={styles.container}>
+        <View style={styles.notification}>
+          <View />
+          <TouchableOpacity
+            onPress={() => navigation.navigate(routes.notification)}
+          >
+            {hasNewNotifcation ? <NotificationOn /> : <NotificationOff />}
+          </TouchableOpacity>
+        </View>
         <YNHeaderTitle
           category="h3"
           title={`Hi, ${userSelector?.user?.username}`}
@@ -217,6 +238,12 @@ const themedStyles = StyleService.create({
     alignItems: 'center',
     flex: 1,
     marginVertical: hp('10%'),
+  },
+  notification: {
+    alignItems: 'flex-end',
+    justifyContent: 'flex-end',
+    minWidth: wp('70%'),
+    marginHorizontal: hp('10%'),
   },
   amountWrapper: {
     flexDirection: 'row',

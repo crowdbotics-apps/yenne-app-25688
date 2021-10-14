@@ -7,7 +7,8 @@ import * as constants from './constants';
 function* handleGetProfiles({ payload }) {
   try {
     const results = yield call(getProfiles, payload);
-    yield put(actions.getProfilesSuccess(results?.data));
+
+    yield put(actions.getProfilesSuccess(results?.data?.results || []));
   } catch (error) {
     yield put(actions.getProfilesFail(error));
   }

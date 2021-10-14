@@ -30,7 +30,7 @@ class WalletSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         request = self.context.get("request")
-        wallet = request.user.profile.wallets
+        wallet = request.user.profile.wallet
         if wallet:
             return wallet
         return update_object(Wallet(profile=request.user.profile), validated_data)

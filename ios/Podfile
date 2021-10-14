@@ -27,3 +27,7 @@ target 'yenne_app_25688' do
     react_native_post_install(installer)
   end
 end
+
+target 'OneSignalNotificationServiceExtension' do
+  pod 'OneSignal', '>= 3.0', '< 4.0'
+end

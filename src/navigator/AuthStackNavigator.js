@@ -24,6 +24,9 @@ const AuthStackNavigator = () => {
       <Stack.Screen name={routes.emailSignup} component={EmailSignUpScreen} />
       <Stack.Screen name={routes.forgotPassword} component={ForgotPassword} />
       <Stack.Screen name={routes.createUsername} component={CreateUsername} />
+      {selector.loggedIn && selector?.user?.verified === 'true' ? (
+        <Stack.Screen name={routes.verifyCode} component={VerifyCode} />
+      ) : null}
     </Stack.Navigator>
   );
 };

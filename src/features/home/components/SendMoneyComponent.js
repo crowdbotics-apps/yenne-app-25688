@@ -30,6 +30,7 @@ const SendMoneyComponent = ({
         email: '',
         amount: '',
         fundingSourceId: '',
+        recipient: '',
       }}
       validate={validateSendMoney}
       onSubmit={(values, { resetForm }) =>
@@ -38,6 +39,7 @@ const SendMoneyComponent = ({
           callBack: () =>
             resetForm({
               email: '',
+              recipient: '',
               amount: '',
               fundingSourceId: '',
             }),
@@ -73,6 +75,7 @@ const SendMoneyComponent = ({
                 <SearchableDropDown
                   onItemSelect={item => {
                     setFieldValue('email', item.name);
+                    setFieldValue('recipient', item.id);
                   }}
                   // containerStyle={{ padding: 5 }}
                   itemStyle={{

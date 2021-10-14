@@ -9,7 +9,12 @@ import BackButton from './BackButton';
 import BgLogo from '../assets/images/bg.png';
 import { ScrollView } from 'react-native';
 
-const BackgroundWrapper = ({ showBackButton, children, style }) => {
+const BackgroundWrapper = ({
+  showBackButton,
+  children,
+  style,
+  withScroll = true,
+}) => {
   const styles = useStyleSheet(themedStyles);
   return (
     <View style={[styles.overlay, style]}>
@@ -18,7 +23,11 @@ const BackgroundWrapper = ({ showBackButton, children, style }) => {
       </View>
 
       {showBackButton && <BackButton />}
-      <ScrollView style={{ flex: 7, height: '100%' }}>{children}</ScrollView>
+      {withScroll ? (
+        <ScrollView style={{ flex: 7, height: '100%' }}>{children}</ScrollView>
+      ) : (
+        <>{children}</>
+      )}
     </View>
   );
 };

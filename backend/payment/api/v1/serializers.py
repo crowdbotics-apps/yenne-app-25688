@@ -13,6 +13,11 @@ from payment.models import PaymentCard
 logger = logging.getLogger(__name__)
 
 
+class SendMoneySerializer(serializers.Serializer):
+    recipient = serializers.CharField(max_length=200)
+    amount = serializers.IntegerField()
+
+
 class PaymentCardSerializer(serializers.ModelSerializer):
     profile = serializers.SerializerMethodField(required=False)
 
@@ -86,7 +91,7 @@ class PaymentCardSerializer(serializers.ModelSerializer):
                     "zip": "string",
                     "country": "US"
                 },
-                "email":  profile.user.email,
+                "email": profile.user.email,
                 "name": profile.user.first_name or profile.user.username,
             },
         )
