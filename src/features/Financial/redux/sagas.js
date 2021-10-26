@@ -7,7 +7,7 @@ import { getCards, addCard, deleteCard, updateCard, cardPaymentIntent } from './
 function* handleGetCards(payload) {
   try {
     const result = yield call(getCards, payload);
-    yield put(actions.listCardsSuccess(result.data));
+    yield put(actions.listCardsSuccess(result.data?.results || []));
   } catch (error) {
     yield put(actions.listCardsFail({ error }));
   }

@@ -20,6 +20,7 @@ const SendMoneyComponent = ({
   setShowSuccessModal,
   showSuccessModal,
   handleSendMoney,
+  receive = false,
 }) => {
   const theme = useTheme();
   const styles = useStyleSheet(themedStyles);
@@ -66,7 +67,10 @@ const SendMoneyComponent = ({
             showBackButton
           >
             <View style={styles.container}>
-              <YNHeaderTitle category="h3" title="Send money" />
+              <YNHeaderTitle
+                category="h3"
+                title={receive ? 'Receive Money' : 'Send money'}
+              />
               <Text style={styles.helperText}>
                 Send money from your Yenne balance
               </Text>

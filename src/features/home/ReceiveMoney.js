@@ -53,6 +53,7 @@ const ReceiveMoney = ({ navigation }) => {
       showSuccessModal={showSuccessModal}
       setShowSuccessModal={setShowSuccessModal}
       handleSendMoney={handleRequestMoney}
+      receive={true}
     />
   );
 };
