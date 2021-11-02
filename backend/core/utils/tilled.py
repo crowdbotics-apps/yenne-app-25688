@@ -14,6 +14,25 @@ def _warn(msg):
     logger.warning(f'TILLED :: {msg}')
 
 
+def pretty_print_POST(req):
+    req = req.prepare()
+    """
+    At this point it is completely built and ready
+    to be fired; it is "prepared".
+
+    However pay attention at the formatting used in
+    this function because it is programmed to be pretty
+    printed and may differ from the actual request.
+    """
+    print('{}\n{}\r\n{}\r\n\r\n{}\n{}\n'.format(
+        '-----------START-----------',
+        req.method + ' ' + req.url,
+        '\r\n'.join('{}: {}'.format(k, v) for k, v in req.headers.items()),
+        req.body,
+        '-----------END-----------',
+    ))
+
+
 class Tilled(object):
     def __init__(self):
 
@@ -36,6 +55,8 @@ class Tilled(object):
         print(f'{self.url}{url_path}', TILLED_SETTINGS.get('account_id'))
 
         response = requests.request(method, f'{self.url}{url_path}', headers=self.headers, data=payload)
+        req = requests.Request(method, f'{self.url}{url_path}', headers=self.headers, data=payload)
+        pretty_print_POST(req)
         if response.status_code not in [200, 201]:
             error = {'message': response}
         else:
@@ -148,7 +169,7 @@ class PaymentMethods(Tilled):
             "type": "card",
             "card": card,
             "nick_name": nick_name,
-            # "billing_details": billing_details
+            "billing_details": billing_details
         }
         return self.api_requester('POST', 'payment-methods', payload)
 
@@ -199,7 +220,7 @@ class PaymentMethods(Tilled):
         return cls()._attach(payment_id, customer_id)
 
     def _attach(self, payment_id, customer_id):
-        return self.api_requester('PUT', f'payment-methods/{payment_id}/attach', customer_id)
+        return self.api_requester('PUT', f'payment-methods/{payment_id}/attach', {'customer_id': customer_id})
 
     @classmethod
     def detach(cls, payment_id):

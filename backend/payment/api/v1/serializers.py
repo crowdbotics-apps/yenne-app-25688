@@ -84,11 +84,11 @@ class PaymentCardSerializer(serializers.ModelSerializer):
             nick_name=validated_data.get('holder'),
             billing_details={
                 "address": {
-                    "street": "string",
+                    "street": "865 Grand Street",
                     "street2": "string",
-                    "city": "string",
-                    "state": "string",
-                    "zip": "string",
+                    "city": "Brooklyn",
+                    "state": "NY",
+                    "zip": "11211",
                     "country": "US"
                 },
                 "email": profile.user.email,
@@ -99,9 +99,12 @@ class PaymentCardSerializer(serializers.ModelSerializer):
         if error:
             logger.warning(error)
             raise serializers.ValidationError(error)
-        printer('no card errrors')
         printer(result)
         instance = update_object(PaymentCard(profile_id=profile.id), validated_data)
         instance.tilled_payment_method_id = result.get('id')
         instance.save()
+        res, err = PaymentMethods.attach(result.get('id'), profile.tilled_customer_id)
+        if err:
+            logger.warning(
+                f'Error attaching a payment {result.get("id")} method to profile with Id {profile.tilled_customer_id}')
         return instance
