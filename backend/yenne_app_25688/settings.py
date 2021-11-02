@@ -276,9 +276,9 @@ TILLED = {
 }
 
 ONESIGNAL = {
-    'app_id': env.str('ONE_SIGNAL_APP_ID'),
-    'rest_api_key': env.str('ONE_SIGNAL_REST_API_KEY'),
-    'user_auth_key': env.str('ONE_SIGNAL_USER_AUTH_KEY')
+    'app_id': env.str('ONE_SIGNAL_APP_ID', ''),
+    'rest_api_key': env.str('ONE_SIGNAL_REST_API_KEY', ''),
+    'user_auth_key': env.str('ONE_SIGNAL_USER_AUTH_KEY', '')
 }
 
 if DEBUG or not (EMAIL_HOST_USER and EMAIL_HOST_PASSWORD):
