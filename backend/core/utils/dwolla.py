@@ -233,3 +233,7 @@ class WebHooks(Dwolla):
             'secret': self.webhook_secret
         }
         return self.token.post('webhook-subscriptions', request_body)
+
+# Create webhook url
+# WebHooks.create('https://yenne-app-25688.botics.co/api/v1/payment/dwolla-webhook')
+# res = WebHooks.list()

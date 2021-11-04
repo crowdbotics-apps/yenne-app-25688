@@ -1,12 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  SectionList,
-  StatusBar,
-  SafeAreaView,
-} from 'react-native';
+import { View, Text, SectionList, StatusBar, SafeAreaView } from 'react-native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -15,6 +8,7 @@ import BackgroundWrapper from '../../components/BackgroundWrapper';
 import YNHeaderTitle from '../../components/HeaderTitle';
 import { StyleService, useStyleSheet, useTheme } from '@ui-kitten/components';
 import { useDispatch, useSelector } from 'react-redux';
+import { markAllAsRead } from './redux/api';
 import * as actions from './redux/actions';
 
 const Notification = ({ navigation }) => {
@@ -26,6 +20,10 @@ const Notification = ({ navigation }) => {
 
   useEffect(() => {
     dispatch(actions.getNotifications());
+
+    return () => {
+      markAllAsRead();
+    };
   }, []);
 
   useEffect(() => {
@@ -45,6 +43,7 @@ const Notification = ({ navigation }) => {
       });
     });
     setSectionData(_sectionData);
+    markAllAsRead();
   }, [notifications]);
 
   const renderItem = ({ item }) => {

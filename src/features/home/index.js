@@ -25,6 +25,7 @@ import RadioButton from '../../components/Form/RadioButton';
 import YNSmallButton from '../../components/YNSmallButton';
 import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../Accounts/redux/actions';
+import * as notifActions from '../Notification/redux/actions';
 import usePlaidLink from '../../hooks/usePlaidLink';
 import { postPublicToken } from '../Financial/redux/api';
 import NotificationOn from '../../assets/images/NotificationOn';
@@ -33,6 +34,7 @@ import NotificationOff from '../../assets/images/NotificationOff';
 const Home = ({ navigation }) => {
   const theme = useTheme();
   const styles = useStyleSheet(themedStyles);
+  // const isFocused = useIsFocused();
   const [modalVisible, setModalVisible] = React.useState(false);
   const [connectPlaidModalVisible, setConnectPlaidModalVisible] =
     useState(false);
@@ -52,14 +54,19 @@ const Home = ({ navigation }) => {
   const { linkToken, fetchToken, loading } = usePlaidLink();
 
   useState(() => {
-    dispatch(actions.getBalance());
-  }, []);
+    const unsubscribe = navigation.addListener('focus', () => {
+      dispatch(actions.getBalance());
+      dispatch(notifActions.getNotifications());
+    });
+
+    return unsubscribe;
+  }, [navigation]);
 
   useEffect(() => {
     if (notifications.filter(item => item.unread).length !== 0) {
       setHasNewNotification(true);
     }
-  }, [notifications]);
+  }, [notifications, navigation]);
 
   const nextScreen = () => {
     setModalVisible(false);
@@ -76,13 +83,18 @@ const Home = ({ navigation }) => {
       style={{ backgroundColor: theme['header-background-color'] }}
     >
       <StatusBar backgroundColor="#7C03E9" barStyle="light-content" />
+
       <View style={styles.container}>
         <View style={styles.notification}>
           <View />
           <TouchableOpacity
             onPress={() => navigation.navigate(routes.notification)}
           >
-            {hasNewNotifcation ? <NotificationOn /> : <NotificationOff />}
+            {notifications.filter(item => item.unread).length !== 0 ? (
+              <NotificationOn />
+            ) : (
+              <NotificationOff />
+            )}
           </TouchableOpacity>
         </View>
         <YNHeaderTitle
@@ -202,7 +214,7 @@ const Home = ({ navigation }) => {
               }}
             >
               <View style={[styles.button, { backgroundColor: '#F1C80D' }]}>
-                <Text style={styles.text}>Connect Bank Account</Text>
+                <Text style={styles.text}>CONNECT BANK ACCOUNT</Text>
               </View>
             </PlaidLink>
           ) : (

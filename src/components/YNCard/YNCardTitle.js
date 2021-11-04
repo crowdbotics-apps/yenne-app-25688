@@ -22,11 +22,7 @@ const YNCardTitle = ({ navigation, title, onActionPress = () => {} }) => {
         styles.cardHeader,
       ]}
     >
-      <YNHeaderTitle
-        category="h6"
-        title={title}
-        style={{ color: theme['color-primary-black'] }}
-      />
+      <YNHeaderTitle category="h6" title={title} style={{ color: '#0C0C0C' }} />
       <TouchableOpacity
         onPress={onActionPress}
         style={[styles.row]}

@@ -53,7 +53,7 @@ const PlaidConnect = ({ navigation }) => {
             }}
           >
             <View style={[styles.button, { backgroundColor: '#F1C80D' }]}>
-              <Text style={styles.text}>Connect Bank Account</Text>
+              <Text style={styles.text}>CONNECT BANK ACCOUNT</Text>
             </View>
           </PlaidLink>
         ) : null}

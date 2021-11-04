@@ -16,6 +16,7 @@ import java.util.List;
 
 import co.apptailor.googlesignin.RNGoogleSigninPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
+import com.plaid.PlaidPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -34,6 +35,7 @@ public class MainApplication extends Application implements ReactApplication {
           // packages.add(new MyReactNativePackage());
 //            packages.add(new RNGoogleSigninPackage());
 //            packages.add(new SplashScreenReactPackage());
+            packages.add(new PlaidPackage());
           return packages;
         }
 

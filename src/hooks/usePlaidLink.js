@@ -6,7 +6,6 @@ const usePlaidLink = () => {
   const [loading, setLoading] = useState(false);
 
   const fetchToken = async () => {
-    console.warn('hello world');
     if (!loading) {
       setLoading(true);
       getLinkToken()

@@ -23,7 +23,6 @@ class NotificationViewSet(viewsets.ModelViewSet):
     queryset = Notification.objects.all()
 
     def get_queryset(self, **args):
-        print(self.request.user.profile.id, self.request.user.id, self.request.user.email, self.request.user.username)
         queryset = Notification.objects.filter(recipient=self.request.user.profile)
         return queryset
 

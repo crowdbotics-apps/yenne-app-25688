@@ -113,7 +113,7 @@ const BankAccountsComponent = ({
               ]}
             >
               <TouchableOpacity onPress={() => setShowAll(!showAll)}>
-                <ArrowDownIcon />
+                {/* <ArrowDownIcon /> */}
               </TouchableOpacity>
             </View>
           </YNCard>

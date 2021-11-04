@@ -132,7 +132,7 @@ const SendMoneyComponent = ({
                       secureTextEntry={false}
                       keyboardType="numeric"
                       iconShow={false}
-                      placeholder="Amount"
+                      placeholder="Type amount"
                       name="amount"
                       onChange={value => {
                         handleChange('amount');
