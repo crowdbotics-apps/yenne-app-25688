@@ -48,9 +48,9 @@ export const useOneSignal = () => {
           notifReceivedEvent.complete(notif);
         },
       };
-      Alert.alert('Complete notification?', 'Test', [button1, button2], {
-        cancelable: true,
-      });
+      // Alert.alert('Complete notification?', 'Test', [button1, button2], {
+      //   cancelable: true,
+      // });
     });
     OneSignal.setNotificationOpenedHandler(notification => {
       console.log('OneSignal: notification opened:', notification);

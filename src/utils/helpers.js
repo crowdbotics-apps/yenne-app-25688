@@ -10,8 +10,8 @@ export const userDetails = async () => {
   };
 };
 export const isLoggedIn = async () => {
-  StorageUtils.removeValue(constants.TOKEN_KEY)
-  StorageUtils.removeValue(constants.USER_VERIFIED)
+  // StorageUtils.removeValue(constants.TOKEN_KEY)
+  // StorageUtils.removeValue(constants.USER_VERIFIED)
 
   const token = await StorageUtils.getStringValue(constants.TOKEN_KEY);
   const verified = await StorageUtils.getStringValue(constants.USER_VERIFIED);

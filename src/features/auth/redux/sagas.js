@@ -108,18 +108,28 @@ function* handleVerifyCode(payload) {
 function* handleSignUp({ auth }) {
   try {
     const result = yield call(signUp, auth);
-    StorageUtils.setStringValue(constants.TOKEN_KEY, result.data.token);
-    StorageUtils.removeValue(constants.TERMS_AGREED);
-    StorageUtils.setStringValue(
+    yield call(
+      StorageUtils.setStringValue,
+      constants.TOKEN_KEY,
+      result.data.token,
+    );
+    yield call(StorageUtils.removeValue, constants.TERMS_AGREED);
+    yield call(
+      StorageUtils.setStringValue,
       constants.USER_VERIFIED,
       result.data.verified.toString(),
     );
-    StorageUtils.setStringValue(constants.EMAIL, result.data.email.toString());
-    StorageUtils.setStringValue(
-      constants.username,
+    yield call(
+      StorageUtils.setStringValue,
+      constants.EMAIL,
+      result.data.email.toString(),
+    );
+    yield call(
+      StorageUtils.setStringValue,
+      constants.USERNAME,
       result.data.username.toString(),
     );
-    setAuthorizationToken(result.data.token);
+    yield call(setAuthorizationToken, result.data.token);
     yield put(
       actions.loginSuccess({
         ...result.data,
@@ -175,27 +185,41 @@ function* handleLogin({ auth }) {
   try {
     const result = yield call(login, auth);
 
-    StorageUtils.setStringValue(constants.TOKEN_KEY, result.data.token);
-    StorageUtils.setStringValue(
+    yield call(
+      StorageUtils.setStringValue,
+      constants.TOKEN_KEY,
+      result.data?.token,
+    );
+    yield call(StorageUtils.getStringValue, constants.TOKEN_KEY);
+
+    yield call(
+      StorageUtils.setStringValue,
       constants.USER_VERIFIED,
       result.data.verified.toString(),
     );
-    StorageUtils.setStringValue(constants.EMAIL, result.data.email.toString());
-    StorageUtils.setStringValue(
+    yield call(
+      StorageUtils.setStringValue,
+      constants.EMAIL,
+      result.data.email.toString(),
+    );
+
+    yield call(
+      StorageUtils.setStringValue,
       constants.USER_ID,
       result.data?.profile?.toString(),
     );
 
-    StorageUtils.setStringValue(
-      constants.username,
+    yield call(
+      StorageUtils.setStringValue,
+      constants.USERNAME,
       result.data.username.toString(),
     );
-    StorageUtils.setStringValue(constants.TERMS_AGREED, 'true');
+    yield call(StorageUtils.setStringValue, constants.TERMS_AGREED, 'true');
     if (result.data.hasUsername !== 0) {
-      StorageUtils.setStringValue(constants.HAS_USERNAME, 'true');
+      yield call(StorageUtils.setStringValue, constants.HAS_USERNAME, 'true');
     }
 
-    setAuthorizationToken(result.data.token);
+    yield call(setAuthorizationToken, result.data.token);
     yield put(
       actions.loginSuccess({
         ...result.data,
@@ -218,6 +242,7 @@ function getMyProfileApi({ token }) {
 function* handleLoggedInUser() {
   try {
     let token = yield call(StorageUtils.getStringValue, constants.TOKEN_KEY);
+
     let termsAgreed = yield call(
       StorageUtils.getStringValue,
       constants.TERMS_AGREED,

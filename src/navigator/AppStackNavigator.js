@@ -16,7 +16,7 @@ const Stack = createStackNavigator();
 const AppStackNavigator = () => {
   const dispatch = useDispatch();
   const selector = useSelector(state => state.auth);
-  // isLoggedIn() // logout user
+   isLoggedIn() // logout user
   useEffect(() => {
     SplashScreen.hide();
     dispatch(getLoggedUser());

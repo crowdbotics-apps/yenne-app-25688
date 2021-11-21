@@ -17,7 +17,7 @@ import {
 } from '@ui-kitten/components';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { useRoute } from '@react-navigation/native';
-import { login, clearLoginError } from './redux/actions';
+import { login, clearLoginError, getLoggedUser } from './redux/actions';
 import AppHeader from '../../components/AppHeader';
 import TextInputField from '../../components/Form/TextInputField';
 import { isLoggedIn } from '../../utils/helpers';
@@ -31,15 +31,19 @@ const EmailLogin = ({ navigation, login, loading, serverError }) => {
   const selector = useSelector(state => state.auth);
   const theme = useTheme();
   const nextScreen = async () => {
-    const { termsAgreed, verified } = await isLoggedIn();
-    if (!verified) {
-      return navigation.navigate(routes.verifyCode);
-    }
-    if (!termsAgreed) {
-      return navigation.navigate(routes.termsAndConditions);
-    }
+    setTimeout(async () => {
+      await dispatch(getLoggedUser());
+      const { termsAgreed, verified } = await isLoggedIn();
+      // alert(JSON.stringify(termsAgreed, verified));
+      if (!verified) {
+        return navigation.navigate(routes.verifyCode);
+      }
+      if (!termsAgreed) {
+        return navigation.navigate(routes.termsAndConditions);
+      }
 
-    return navigation.navigate(routes.home);
+      return navigation.navigate(routes.home);
+    }, 1000);
   };
   React.useEffect(() => {
     if (selector.loggedIn) {
