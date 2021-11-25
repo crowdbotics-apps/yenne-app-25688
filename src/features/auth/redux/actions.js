@@ -58,9 +58,10 @@ export const verifyCodeError = payload => ({
   type: constant.VERIFY_CODE_ERROR,
   payload,
 });
-export const signUp = auth => ({
+export const signUp = (auth, onSuccess) => ({
   type: constant.SIGNUP,
   auth,
+  onSuccess,
 });
 
 export const signUpSuccess = user => ({
@@ -73,9 +74,10 @@ export const signUpError = error => ({
   error,
 });
 
-export const login = auth => ({
+export const login = (auth, onSuccess) => ({
   type: constant.LOGIN,
   auth,
+  onSuccess
 });
 
 export const loginSuccess = user => ({

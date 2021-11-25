@@ -45,11 +45,6 @@ const EmailLogin = ({ navigation, login, loading, serverError }) => {
       return navigation.navigate(routes.home);
     }, 1000);
   };
-  React.useEffect(() => {
-    if (selector.loggedIn) {
-      nextScreen();
-    }
-  }, [selector.loggedIn]);
 
   const onChangeText = (field, value) => {
     dispatch(clearLoginError());
@@ -71,8 +66,12 @@ const EmailLogin = ({ navigation, login, loading, serverError }) => {
     if (Object.keys(errors).length > 0) {
       setErrors(errors);
     } else {
-      dispatch(login(inputs));
+      dispatch(login(inputs, onSuccess));
     }
+  };
+
+  const onSuccess = data => {
+    nextScreen();
   };
 
   return (

@@ -230,7 +230,7 @@ const VerifyCode = ({
 };
 
 const mapStateToProps = state => ({
-  loading: state.auth.appLoading,
+  loading: state.auth.verifyLoading,
   serverError: state.auth.verifyError,
 });
 

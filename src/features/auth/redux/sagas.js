@@ -105,7 +105,7 @@ function* handleVerifyCode(payload) {
   }
 }
 
-function* handleSignUp({ auth }) {
+function* handleSignUp({ auth, onSuccess }) {
   try {
     const result = yield call(signUp, auth);
     yield call(
@@ -130,6 +130,7 @@ function* handleSignUp({ auth }) {
       result.data.username.toString(),
     );
     yield call(setAuthorizationToken, result.data.token);
+    onSuccess && onSuccess(result?.data)
     yield put(
       actions.loginSuccess({
         ...result.data,
@@ -181,7 +182,7 @@ function* handleUsernameExists({ payload }) {
   }
 }
 
-function* handleLogin({ auth }) {
+function* handleLogin({ auth, onSuccess }) {
   try {
     const result = yield call(login, auth);
 
@@ -225,6 +226,7 @@ function* handleLogin({ auth }) {
         ...result.data,
       }),
     );
+    onSuccess && onSuccess(result?.data)
   } catch (err) {
     console.warn(err);
     const error =

@@ -40,7 +40,7 @@ const AddNewCard = ({ navigation, handleSubmit, isLoading }) => {
               onPress={() => navigation.navigate(routes.financialAccount)}
               style={[styles.row]}
             >
-              <CloseIcon />
+              {/* <CloseIcon /> */}
             </TouchableOpacity>
           </View>
           <CardForm

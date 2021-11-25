@@ -230,7 +230,9 @@ const Home = ({ navigation }) => {
           <YNSmallButton
             style={[styles.button]}
             textStyle={styles.text}
-            onPress={nextScreen}
+            onPress={() =>
+              setConnectPlaidModalVisible(!connectPlaidModalVisible)
+            }
             title="Cancel"
           />
         </YNModal>

@@ -35,11 +35,7 @@ const EmailSignUp = ({
   const dispatch = useDispatch();
   const selector = useSelector(state => state.auth);
 
-  useEffect(() => {
-    if (selector.loggedIn && route.name === routes.emailSignup) {
-      setModalVisible(true);
-    }
-  }, [selector.loggedIn]);
+  
 
   const onChangeText = (field, value) => {
     dispatch(clearSignUpError());
@@ -79,8 +75,12 @@ const EmailSignUp = ({
     if (Object.keys(errors).length > 0) {
       setErrors(errors);
     } else {
-      signUp(inputs);
+      signUp(inputs, onSuccess);
     }
+  };
+
+  const onSuccess = data => {
+    setModalVisible(true);
   };
 
   const handleRedirect = () => {

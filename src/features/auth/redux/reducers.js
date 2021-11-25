@@ -6,6 +6,7 @@ const initialState = {
   signUpErrorMsg: undefined,
   loginError: undefined,
   appLoading: false,
+  verifyLoading: false,
   loggedIn: false,
   updateProfileLoading: false,
   updateProfileError: '',
@@ -61,11 +62,11 @@ export const authReducer = (state = initialState, action) => {
       };
 
     case constants.VERIFY_CODE:
-      return { ...state, appLoading: true, verified: false };
+      return { ...state, verifyLoading: true, verified: false };
     case constants.VERIFY_CODE_SUCCESS:
-      return { ...state, appLoading: false, verified: true };
+      return { ...state, verifyLoading: false, verified: true };
     case constants.VERIFY_CODE_ERROR:
-      return { ...state, appLoading: false, verifyError: action.payload };
+      return { ...state, verifyLoading: false, verifyError: action.payload };
 
     case constants.FORGOT_PASSWORD:
       return { ...state, forgotPasswordLoading: true, passwordSent: false };

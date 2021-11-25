@@ -18,12 +18,14 @@ export const isLoggedIn = async () => {
   const termsAgreed = await StorageUtils.getStringValue(constants.TERMS_AGREED);
   const username = await StorageUtils.getStringValue(constants.USERNAME);
   const hasUsername = await StorageUtils.getStringValue(constants.HAS_USERNAME);
+  const email = await StorageUtils.getStringValue(constants.EMAIL);
   return {
     hasToken: !!token,
     verified: verified === 'true',
     termsAgreed: termsAgreed === 'true',
     username,
     hasUsername,
+    email,
   };
 };
 export const getDisplayNameFromFieldName = name => {

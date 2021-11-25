@@ -5,7 +5,7 @@ function HomeIcon(props) {
   const color = props.color || '#fff';
   return (
     <Svg
-      width={25}
+      width={29}
       height={25}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
