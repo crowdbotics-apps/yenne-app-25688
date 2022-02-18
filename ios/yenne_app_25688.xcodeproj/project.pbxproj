@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* yenne_app_25688Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* yenne_app_25688Tests.m */; };
+		0C2043933178D7BDBB816A3F /* libPods-yenne_app_25688-yenne_app_25688Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F5F6A50050E7D1AEEFF200DC /* libPods-yenne_app_25688-yenne_app_25688Tests.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -62,10 +63,9 @@
 		2AD2720A264B23AF0032AAAF /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AD27209264B23AF0032AAAF /* SystemConfiguration.framework */; };
 		2AD2720C264B23C00032AAAF /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AD2720B264B23C00032AAAF /* libz.tbd */; };
 		2AD4041C26287EEA00E6A900 /* libswiftWebKit.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AD4041B26287EEA00E6A900 /* libswiftWebKit.tbd */; };
-		595C16F82AF435875D152191 /* libPods-yenne_app_25688.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2084194BB09B5BBEE8364F94 /* libPods-yenne_app_25688.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		98C2EDA0747015980A47C2FD /* libPods-yenne_app_25688-yenne_app_25688Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 223F7E5DFD9C78AD878B00C3 /* libPods-yenne_app_25688-yenne_app_25688Tests.a */; };
-		AB3AB084F80E682DA81D9027 /* libPods-OneSignalNotificationServiceExtension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F4076C07B0C970A86DC17EF /* libPods-OneSignalNotificationServiceExtension.a */; };
+		AC0FAC090F6ECDD5DD0D4434 /* libPods-yenne_app_25688.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3195C60A429FAB3FBD7BDEF9 /* libPods-yenne_app_25688.a */; };
+		F3A458EBF780CFD5119FCD77 /* libPods-OneSignalNotificationServiceExtension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 947DAEF32B8965A6EBE75519 /* libPods-OneSignalNotificationServiceExtension.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,9 +109,8 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = yenne_app_25688/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = yenne_app_25688/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = yenne_app_25688/main.m; sourceTree = "<group>"; };
-		2084194BB09B5BBEE8364F94 /* libPods-yenne_app_25688.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-yenne_app_25688.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		214CE14E1BFC59B538C66D6C /* Pods-yenne_app_25688-yenne_app_25688Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yenne_app_25688-yenne_app_25688Tests.debug.xcconfig"; path = "Target Support Files/Pods-yenne_app_25688-yenne_app_25688Tests/Pods-yenne_app_25688-yenne_app_25688Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		223F7E5DFD9C78AD878B00C3 /* libPods-yenne_app_25688-yenne_app_25688Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-yenne_app_25688-yenne_app_25688Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		22AB08D80696899E29558597 /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
+		2951F6DC9C6040E9AA4F14AA /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		2A5ECBD4263A65DF00B2A9FB /* yenne_app_25688.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = yenne_app_25688.entitlements; path = yenne_app_25688/yenne_app_25688.entitlements; sourceTree = "<group>"; };
 		2A7D4FAD262AA81100B2F364 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Medium.ttf"; path = "../../../../Downloads/Poppins/Poppins-Medium.ttf"; sourceTree = "<group>"; };
 		2A7D5027262AAC0100B2F364 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Regular.ttf"; path = "../src/assets/fonts/Poppins-Regular.ttf"; sourceTree = "<group>"; };
@@ -168,14 +167,32 @@
 		2AD2720B264B23C00032AAAF /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		2AD272D0264B28BB0032AAAF /* GoogleSignIn.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleSignIn.framework; path = "../../../../Downloads/google_signin_sdk_5_0_2 3/GoogleSignIn.framework"; sourceTree = "<group>"; };
 		2AD4041B26287EEA00E6A900 /* libswiftWebKit.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libswiftWebKit.tbd; path = usr/lib/swift/libswiftWebKit.tbd; sourceTree = SDKROOT; };
-		3F4076C07B0C970A86DC17EF /* libPods-OneSignalNotificationServiceExtension.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OneSignalNotificationServiceExtension.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		70524876AD26A5DFA55196A3 /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
-		7718BA26529E9AFB4BF9B7C2 /* Pods-yenne_app_25688.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yenne_app_25688.release.xcconfig"; path = "Target Support Files/Pods-yenne_app_25688/Pods-yenne_app_25688.release.xcconfig"; sourceTree = "<group>"; };
+		2F4A4DE9D978272931C6DA27 /* Pods-yenne_app_25688.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yenne_app_25688.debug.xcconfig"; path = "Target Support Files/Pods-yenne_app_25688/Pods-yenne_app_25688.debug.xcconfig"; sourceTree = "<group>"; };
+		3195C60A429FAB3FBD7BDEF9 /* libPods-yenne_app_25688.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-yenne_app_25688.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B5383BC93099F3D7216E17A /* Pods-yenne_app_25688.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yenne_app_25688.release.xcconfig"; path = "Target Support Files/Pods-yenne_app_25688/Pods-yenne_app_25688.release.xcconfig"; sourceTree = "<group>"; };
+		41EFD30E23CE4D1E97F55DEC /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
+		496E8E098B3F4BD9B35FF2C9 /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
+		501BE878A31B0CA2CA3DA0DC /* Pods-yenne_app_25688-yenne_app_25688Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yenne_app_25688-yenne_app_25688Tests.release.xcconfig"; path = "Target Support Files/Pods-yenne_app_25688-yenne_app_25688Tests/Pods-yenne_app_25688-yenne_app_25688Tests.release.xcconfig"; sourceTree = "<group>"; };
+		5D180D2398E24DD6AF68888E /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
+		5F33C61B47C4AA7ADC4A7C4C /* Pods-yenne_app_25688-yenne_app_25688Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yenne_app_25688-yenne_app_25688Tests.debug.xcconfig"; path = "Target Support Files/Pods-yenne_app_25688-yenne_app_25688Tests/Pods-yenne_app_25688-yenne_app_25688Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		60FF2C45F603470B8304FD78 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Medium.ttf"; path = "../src/assets/fonts/Poppins-Medium.ttf"; sourceTree = "<group>"; };
+		6E996E74DD3B4D039AA7AD0D /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = yenne_app_25688/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		B71DE9BD21837A31629D830F /* Pods-yenne_app_25688-yenne_app_25688Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yenne_app_25688-yenne_app_25688Tests.release.xcconfig"; path = "Target Support Files/Pods-yenne_app_25688-yenne_app_25688Tests/Pods-yenne_app_25688-yenne_app_25688Tests.release.xcconfig"; sourceTree = "<group>"; };
-		DA477B82E2E25FB47D4501D7 /* Pods-yenne_app_25688.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yenne_app_25688.debug.xcconfig"; path = "Target Support Files/Pods-yenne_app_25688/Pods-yenne_app_25688.debug.xcconfig"; sourceTree = "<group>"; };
-		DB41801C062054BE91778BF3 /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
+		824C6A59917D4A6BA9968F98 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
+		947DAEF32B8965A6EBE75519 /* libPods-OneSignalNotificationServiceExtension.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OneSignalNotificationServiceExtension.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9733218A9147763DA1528548 /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
+		9855F73982DB486CB8E44843 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
+		A91AFDE335D4488B881807D1 /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
+		B7C5820A87F84645A0869F14 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
+		C973FA89D299417E8B90DA74 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
+		CB3E14EA8D55455B8290F46E /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
+		CFF0A41984CD42E4A9E5DC68 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
+		DB7E91A7A7BD498D9C907A49 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
+		DC2231A574584DA0A2731F25 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
+		E5C04B41C2B34619A19F4BF6 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		F4A00A7DB11B456FB6C5B7E4 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
+		F5F6A50050E7D1AEEFF200DC /* libPods-yenne_app_25688-yenne_app_25688Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-yenne_app_25688-yenne_app_25688Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,7 +200,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				98C2EDA0747015980A47C2FD /* libPods-yenne_app_25688-yenne_app_25688Tests.a in Frameworks */,
+				0C2043933178D7BDBB816A3F /* libPods-yenne_app_25688-yenne_app_25688Tests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,7 +213,7 @@
 				2AD27208264B23A40032AAAF /* SafariServices.framework in Frameworks */,
 				2AD271BD264B21840032AAAF /* libRNGoogleSignin.a in Frameworks */,
 				2AD4041C26287EEA00E6A900 /* libswiftWebKit.tbd in Frameworks */,
-				595C16F82AF435875D152191 /* libPods-yenne_app_25688.a in Frameworks */,
+				AC0FAC090F6ECDD5DD0D4434 /* libPods-yenne_app_25688.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,7 +221,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB3AB084F80E682DA81D9027 /* libPods-OneSignalNotificationServiceExtension.a in Frameworks */,
+				F3A458EBF780CFD5119FCD77 /* libPods-OneSignalNotificationServiceExtension.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,6 +315,23 @@
 				2AD095C12628634E00A7BFAD /* RobotoMono-BoldItalic.ttf */,
 				2AD095C32628634E00A7BFAD /* RobotoMono-Italic.ttf */,
 				2AD095CF2628634E00A7BFAD /* RobotoMono-Regular.ttf */,
+				60FF2C45F603470B8304FD78 /* Poppins-Medium.ttf */,
+				496E8E098B3F4BD9B35FF2C9 /* AntDesign.ttf */,
+				F4A00A7DB11B456FB6C5B7E4 /* Entypo.ttf */,
+				DC2231A574584DA0A2731F25 /* EvilIcons.ttf */,
+				824C6A59917D4A6BA9968F98 /* Feather.ttf */,
+				C973FA89D299417E8B90DA74 /* FontAwesome.ttf */,
+				E5C04B41C2B34619A19F4BF6 /* FontAwesome5_Brands.ttf */,
+				DB7E91A7A7BD498D9C907A49 /* FontAwesome5_Regular.ttf */,
+				B7C5820A87F84645A0869F14 /* FontAwesome5_Solid.ttf */,
+				A91AFDE335D4488B881807D1 /* Fontisto.ttf */,
+				2951F6DC9C6040E9AA4F14AA /* Foundation.ttf */,
+				9855F73982DB486CB8E44843 /* Ionicons.ttf */,
+				41EFD30E23CE4D1E97F55DEC /* MaterialCommunityIcons.ttf */,
+				6E996E74DD3B4D039AA7AD0D /* MaterialIcons.ttf */,
+				CFF0A41984CD42E4A9E5DC68 /* Octicons.ttf */,
+				CB3E14EA8D55455B8290F46E /* SimpleLineIcons.ttf */,
+				5D180D2398E24DD6AF68888E /* Zocial.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -314,9 +348,9 @@
 				2AD4041B26287EEA00E6A900 /* libswiftWebKit.tbd */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				2AD27205264B231C0032AAAF /* GoogleSignInDependencies.framework */,
-				2084194BB09B5BBEE8364F94 /* libPods-yenne_app_25688.a */,
-				223F7E5DFD9C78AD878B00C3 /* libPods-yenne_app_25688-yenne_app_25688Tests.a */,
-				3F4076C07B0C970A86DC17EF /* libPods-OneSignalNotificationServiceExtension.a */,
+				947DAEF32B8965A6EBE75519 /* libPods-OneSignalNotificationServiceExtension.a */,
+				3195C60A429FAB3FBD7BDEF9 /* libPods-yenne_app_25688.a */,
+				F5F6A50050E7D1AEEFF200DC /* libPods-yenne_app_25688-yenne_app_25688Tests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -324,12 +358,12 @@
 		30E247087D3B80C174E140A5 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				DA477B82E2E25FB47D4501D7 /* Pods-yenne_app_25688.debug.xcconfig */,
-				7718BA26529E9AFB4BF9B7C2 /* Pods-yenne_app_25688.release.xcconfig */,
-				214CE14E1BFC59B538C66D6C /* Pods-yenne_app_25688-yenne_app_25688Tests.debug.xcconfig */,
-				B71DE9BD21837A31629D830F /* Pods-yenne_app_25688-yenne_app_25688Tests.release.xcconfig */,
-				DB41801C062054BE91778BF3 /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */,
-				70524876AD26A5DFA55196A3 /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */,
+				9733218A9147763DA1528548 /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */,
+				22AB08D80696899E29558597 /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */,
+				2F4A4DE9D978272931C6DA27 /* Pods-yenne_app_25688.debug.xcconfig */,
+				3B5383BC93099F3D7216E17A /* Pods-yenne_app_25688.release.xcconfig */,
+				5F33C61B47C4AA7ADC4A7C4C /* Pods-yenne_app_25688-yenne_app_25688Tests.debug.xcconfig */,
+				501BE878A31B0CA2CA3DA0DC /* Pods-yenne_app_25688-yenne_app_25688Tests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -375,12 +409,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "yenne_app_25688Tests" */;
 			buildPhases = (
-				A1FAB5289E7FA695BC9F556D /* [CP] Check Pods Manifest.lock */,
+				168161053E5BB249C8128F4B /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				61A6DD443F86DBCE4A999D88 /* [CP] Embed Pods Frameworks */,
-				0F49A6AE5F930835BB7A99E1 /* [CP] Copy Pods Resources */,
+				B09B511B23DC11DC6751893F /* [CP] Embed Pods Frameworks */,
+				BF3F1D0658504DAD92A41D8C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -396,15 +430,15 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "yenne_app_25688" */;
 			buildPhases = (
-				AFDDCF0AAAA6B035FC6F5E26 /* [CP] Check Pods Manifest.lock */,
+				7B01D677495DEA994429056E /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				9A504D415C60F670B92F92D5 /* [CP] Embed Pods Frameworks */,
-				B23701101DE9E6CE46BF212E /* [CP] Copy Pods Resources */,
 				2A91478E27167DEA00654E8C /* Embed App Extensions */,
+				527E09E751A34D9F8FA43516 /* [CP] Embed Pods Frameworks */,
+				EC5ED8B796343E095CFD8D90 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -420,7 +454,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2A91478B27167DEA00654E8C /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */;
 			buildPhases = (
-				4946808D937A8D8EF2B75478 /* [CP] Check Pods Manifest.lock */,
+				7F1C4EA1874E4CE764CAEF0C /* [CP] Check Pods Manifest.lock */,
 				2A91477F27167DEA00654E8C /* Sources */,
 				2A91478027167DEA00654E8C /* Frameworks */,
 				2A91478127167DEA00654E8C /* Resources */,
@@ -560,80 +594,7 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nexport NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
-		0F49A6AE5F930835BB7A99E1 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-yenne_app_25688-yenne_app_25688Tests/Pods-yenne_app_25688-yenne_app_25688Tests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-yenne_app_25688-yenne_app_25688Tests/Pods-yenne_app_25688-yenne_app_25688Tests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-yenne_app_25688-yenne_app_25688Tests/Pods-yenne_app_25688-yenne_app_25688Tests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		4946808D937A8D8EF2B75478 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-OneSignalNotificationServiceExtension-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		61A6DD443F86DBCE4A999D88 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-yenne_app_25688-yenne_app_25688Tests/Pods-yenne_app_25688-yenne_app_25688Tests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-yenne_app_25688-yenne_app_25688Tests/Pods-yenne_app_25688-yenne_app_25688Tests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-yenne_app_25688-yenne_app_25688Tests/Pods-yenne_app_25688-yenne_app_25688Tests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9A504D415C60F670B92F92D5 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-yenne_app_25688/Pods-yenne_app_25688-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-yenne_app_25688/Pods-yenne_app_25688-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-yenne_app_25688/Pods-yenne_app_25688-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A1FAB5289E7FA695BC9F556D /* [CP] Check Pods Manifest.lock */ = {
+		168161053E5BB249C8128F4B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -655,7 +616,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		AFDDCF0AAAA6B035FC6F5E26 /* [CP] Check Pods Manifest.lock */ = {
+		527E09E751A34D9F8FA43516 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-yenne_app_25688/Pods-yenne_app_25688-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-yenne_app_25688/Pods-yenne_app_25688-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-yenne_app_25688/Pods-yenne_app_25688-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7B01D677495DEA994429056E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -677,7 +655,63 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B23701101DE9E6CE46BF212E /* [CP] Copy Pods Resources */ = {
+		7F1C4EA1874E4CE764CAEF0C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-OneSignalNotificationServiceExtension-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B09B511B23DC11DC6751893F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-yenne_app_25688-yenne_app_25688Tests/Pods-yenne_app_25688-yenne_app_25688Tests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-yenne_app_25688-yenne_app_25688Tests/Pods-yenne_app_25688-yenne_app_25688Tests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-yenne_app_25688-yenne_app_25688Tests/Pods-yenne_app_25688-yenne_app_25688Tests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BF3F1D0658504DAD92A41D8C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-yenne_app_25688-yenne_app_25688Tests/Pods-yenne_app_25688-yenne_app_25688Tests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-yenne_app_25688-yenne_app_25688Tests/Pods-yenne_app_25688-yenne_app_25688Tests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-yenne_app_25688-yenne_app_25688Tests/Pods-yenne_app_25688-yenne_app_25688Tests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EC5ED8B796343E095CFD8D90 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -759,9 +793,11 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 214CE14E1BFC59B538C66D6C /* Pods-yenne_app_25688-yenne_app_25688Tests.debug.xcconfig */;
+			baseConfigurationReference = 5F33C61B47C4AA7ADC4A7C4C /* Pods-yenne_app_25688-yenne_app_25688Tests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				DEVELOPMENT_TEAM = N4KJC4QT8A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -786,10 +822,12 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B71DE9BD21837A31629D830F /* Pods-yenne_app_25688-yenne_app_25688Tests.release.xcconfig */;
+			baseConfigurationReference = 501BE878A31B0CA2CA3DA0DC /* Pods-yenne_app_25688-yenne_app_25688Tests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = N4KJC4QT8A;
 				INFOPLIST_FILE = yenne_app_25688Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -810,15 +848,15 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DA477B82E2E25FB47D4501D7 /* Pods-yenne_app_25688.debug.xcconfig */;
+			baseConfigurationReference = 2F4A4DE9D978272931C6DA27 /* Pods-yenne_app_25688.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = yenne_app_25688/yenne_app_25688.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 18;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 23;
 				DEVELOPMENT_TEAM = 6YKR59QXKM;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = yenne_app_25688/Info.plist;
@@ -838,7 +876,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.crowdbotics.yenne;
 				PRODUCT_NAME = yenne_app_25688;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = Yenne;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -847,15 +885,15 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7718BA26529E9AFB4BF9B7C2 /* Pods-yenne_app_25688.release.xcconfig */;
+			baseConfigurationReference = 3B5383BC93099F3D7216E17A /* Pods-yenne_app_25688.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = yenne_app_25688/yenne_app_25688.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 18;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 23;
 				DEVELOPMENT_TEAM = 6YKR59QXKM;
 				INFOPLIST_FILE = yenne_app_25688/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -874,7 +912,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.crowdbotics.yenne;
 				PRODUCT_NAME = yenne_app_25688;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = Yenne;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -882,7 +920,7 @@
 		};
 		2A91478C27167DEA00654E8C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DB41801C062054BE91778BF3 /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */;
+			baseConfigurationReference = 9733218A9147763DA1528548 /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -890,7 +928,8 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 18;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 6YKR59QXKM;
@@ -906,6 +945,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.crowdbotics.yenne.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "Yenne OneSignal";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -916,7 +956,7 @@
 		};
 		2A91478D27167DEA00654E8C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 70524876AD26A5DFA55196A3 /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */;
+			baseConfigurationReference = 22AB08D80696899E29558597 /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -924,7 +964,8 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 18;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -940,6 +981,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.crowdbotics.yenne.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "Yenne OneSignal";
 				SKIP_INSTALL = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -981,7 +1023,7 @@
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 ";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1046,7 +1088,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 ";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

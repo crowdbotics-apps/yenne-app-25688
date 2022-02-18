@@ -34,10 +34,15 @@ import routes from '../../navigator/routes';
 import * as constants from '../auth/redux/constants';
 import { StorageUtils } from '../../utils/storage';
 
-const Icon = ({ name }) => {
+const Icon = ({ name, customStyle }) => {
   return (
     <View style={{ position: 'absolute', left: wp('17%') }}>
-      <FontAwesome name={name} size={14} color="#000" />
+      <FontAwesome
+        name={name}
+        size={20}
+        color="#fff"
+        style={{ ...customStyle }}
+      />
     </View>
   );
 };
@@ -225,27 +230,33 @@ const AuthOptionScreen = ({
                 <Icon name="facebook-f" />
               )
             }
-            style={[styles.button, styles.socialButton]}
+            style={[styles.button, styles.fbButton]}
+            status="basic"
           >
-            {selectedPage === 0 ? 'Sign up' : 'Login'} via Facebook
+            Sign in with Facebook
+            {/* {selectedPage === 0 ? 'Sign up' : 'Login'} via Facebook */}
           </Button>
           {Platform.OS === 'ios' ? (
             <Button
-              style={[styles.button, styles.socialButton]}
+              style={[styles.button, styles.appleButton]}
               accessoryLeft={() => <Icon name="apple" />}
               onPress={onAppleButtonPress}
+              status="basic"
             >
-              {selectedPage === 0 ? 'Sign up' : 'Login'} via AppleID
+              Sign in with Apple
+              {/* {selectedPage === 0 ? 'Sign up' : 'Login'} via AppleID */}
             </Button>
           ) : null}
 
           <Button
             accessoryLeft={() => <Icon name="google" color="black" />}
-            style={[styles.button, styles.socialButton]}
+            style={[styles.button, styles.googleSocialButton]}
             onPress={signIn}
+            status="basic"
           >
             {loading ? <ActivityIndicator size="small" color="#ffff" /> : null}
-            {selectedPage === 0 ? 'Sign up' : 'Login'} via Google
+            {/* {selectedPage === 0 ? 'Sign up' : 'Login'} via Google */}
+            Sign in with Google
           </Button>
         </View>
       </View>
@@ -334,6 +345,24 @@ const themedStyles = StyleService.create({
     borderColor: 'color-info-900',
     borderRadius: 50,
   },
+  appleButton: {
+    backgroundColor: '#000',
+    borderColor: '#000',
+    borderRadius: 30,
+    color: '#fff',
+  },
+  fbButton: {
+    backgroundColor: '#3b5998',
+    borderColor: '#3b5998',
+    borderRadius: 30,
+    color: '#fff',
+  },
+  googleSocialButton: {
+    backgroundColor: '#db4a39',
+    borderColor: '#db4a39',
+    borderRadius: 30,
+    color: '#fff',
+  }, 
   ghostButton: {
     color: 'color-primary-100',
     fontWeight: '500',
